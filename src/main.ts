@@ -1,6 +1,55 @@
 import './style.css'
 import profilePicUrl from './assets/Thomas_Haiden.png'
 
+const codeSnippets = `
+// --- BINARY SEARCH TREE ---
+struct Node* search(struct Node* root, int key) {
+    if (root == NULL || root->key == key) return root;
+    if (root->key < key) return search(root->right, key);
+    return search(root->left, key);
+}
+
+// --- LINKED LIST ---
+void push(struct Node** head, int val) {
+    struct Node* new_node = malloc(sizeof(struct Node));
+    new_node->data = val;
+    new_node->next = (*head);
+    (*head) = new_node;
+}
+
+// --- STACK POP ---
+int pop(struct Stack* stack) {
+    if (isEmpty(stack)) return INT_MIN;
+    return stack->array[stack->top--];
+}
+
+// --- HASH FUNCTION ---
+unsigned int hash(char *str) {
+    unsigned int h = 5381;
+    int c;
+    while ((c = *str++)) h = ((h << 5) + h) + c;
+    return h;
+}
+
+// --- QUEUE ENQUEUE ---
+void enqueue(struct Queue* q, int k) {
+    struct QNode* temp = newNode(k);
+    if (q->rear == NULL) {
+        q->front = q->rear = temp;
+        return;
+    }
+    q->rear->next = temp;
+    q->rear = temp;
+}
+
+// --- REPEATING FOR WATERFALL EFFECT ---
+struct Node* search(struct Node* root, int key) {
+    if (root == NULL || root->key == key) return root;
+    if (root->key < key) return search(root->right, key);
+    return search(root->left, key);
+}
+`;
+
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div id="custom-cursor"></div>
   <canvas id="bg-canvas"></canvas>
@@ -39,9 +88,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         </div>
       </section>
 
+      <!-- EXPERIENCE SECTION - SPACEY -->
       <section id="about">
         <span class="section-tag">01 / EXPERIENCE & EDUCATION</span>
-        
         <div class="exp-container">
           <div class="card">
             <h2 style="margin-bottom: 4rem;">Education</h2>
@@ -53,7 +102,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             <div class="timeline-item">
               <span class="date">2019 — 2024</span>
               <p class="role">Tourism Management</p>
-              <p class="company">Tourism School Semmering — Focus on Event Management & Sales (Honors)</p>
+              <p class="company">Tourism School Semmering — Event Management & Sales (Honors)</p>
             </div>
             <div class="timeline-item">
               <span class="date">2015 — 2019</span>
@@ -83,6 +132,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         </div>
       </section>
 
+      <!-- SKILLS SECTION - 6 BOXES -->
       <section id="skills">
         <span class="section-tag">02 / AQUIRED SKILLS</span>
         <div class="skills-grid">
@@ -112,6 +162,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         </div>
       </section>
 
+      <!-- CONTACT SECTION - BOXED -->
       <section id="contact">
         <div class="contact-card">
           <span class="section-tag">03 / CONTACT</span>
@@ -123,10 +174,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           </div>
         </div>
 
-        <!-- DYNAMIC CODE SLIDESHOW -->
+        <!-- WATERFALL CODE SECTION -->
         <div class="code-section">
-          <div id="code-container">
-             <!-- Dynamic Content -->
+          <div class="waterfall-container">
+            <pre><code>${codeSnippets.replace(/<span/g, '&lt;span').replace(/<\/span>/g, '&lt;/span&gt;').replace(/struct/g, '<span class="keyword">struct</span>').replace(/int/g, '<span class="type">int</span>').replace(/void/g, '<span class="type">void</span>').replace(/\/\/.*/g, (m) => `<span class="comment">${m}</span>`)}</code></pre>
+            <pre><code>${codeSnippets.replace(/<span/g, '&lt;span').replace(/<\/span>/g, '&lt;/span&gt;').replace(/struct/g, '<span class="keyword">struct</span>').replace(/int/g, '<span class="type">int</span>').replace(/void/g, '<span class="type">void</span>').replace(/\/\/.*/g, (m) => `<span class="comment">${m}</span>`)}</code></pre>
           </div>
         </div>
       </section>
@@ -159,20 +211,14 @@ themeToggle.addEventListener('click', () => {
   isDark ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
 });
 
-// 2. SNAPPY BOUNCY CURSOR
+// 2. BOUNCY CURSOR
 const cursor = document.getElementById('custom-cursor')!;
 let cursorX = 0, cursorY = 0;
 let targetX = 0, targetY = 0;
-const speed = 0.25; // Snappier follow
-
-window.addEventListener('mousemove', (e) => {
-  targetX = e.clientX;
-  targetY = e.clientY;
-});
-
+const speed = 0.25;
+window.addEventListener('mousemove', (e) => { targetX = e.clientX; targetY = e.clientY; });
 window.addEventListener('mousedown', () => cursor.classList.add('clicking'));
 window.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
-
 function updateCursor() {
   cursorX += (targetX - cursorX) * speed;
   cursorY += (targetY - cursorY) * speed;
@@ -180,9 +226,7 @@ function updateCursor() {
   requestAnimationFrame(updateCursor);
 }
 updateCursor();
-
-const interactables = document.querySelectorAll('a, button, .card, .pop-bubble, .skill-box');
-interactables.forEach(el => {
+document.querySelectorAll('a, button, .card, .pop-bubble').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
 });
@@ -199,74 +243,12 @@ window.addEventListener('scroll', () => {
   scrollTop > 50 ? navbar.classList.add('scrolled') : navbar.classList.remove('scrolled');
 });
 
-// 4. CODE SLIDESHOW DATA
-const snippets = [
-  {
-    title: "Binary Search Tree",
-    file: "bst_search.c",
-    code: `<span class="keyword">struct</span> <span class="type">Node</span>* <span class="keyword">search</span>(<span class="keyword">struct</span> <span class="type">Node</span>* root, <span class="type">int</span> key) {
-    <span class="keyword">if</span> (root == <span class="keyword">NULL</span> || root->key == key) <span class="keyword">return</span> root;
-    <span class="keyword">if</span> (root->key < key) <span class="keyword">return</span> search(root->right, key);
-    <span class="keyword">return</span> search(root->left, key);
-}`
-  },
-  {
-    title: "Linked List Insertion",
-    file: "linked_list.c",
-    code: `<span class="type">void</span> <span class="keyword">push</span>(<span class="keyword">struct</span> <span class="type">Node</span>** head, <span class="type">int</span> val) {
-    <span class="keyword">struct</span> <span class="type">Node</span>* new_node = malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <span class="type">Node</span>));
-    new_node->data = val;
-    new_node->next = (*head);
-    (*head) = new_node;
-}`
-  },
-  {
-    title: "Stack Implementation",
-    file: "stack_pop.c",
-    code: `<span class="type">int</span> <span class="keyword">pop</span>(<span class="keyword">struct</span> <span class="type">Stack</span>* stack) {
-    <span class="keyword">if</span> (isEmpty(stack)) <span class="keyword">return</span> <span class="type">INT_MIN</span>;
-    <span class="keyword">return</span> stack->array[stack->top--];
-}`
-  },
-  {
-    title: "Simple Hash Function",
-    file: "hash_map.c",
-    code: `<span class="type">unsigned int</span> <span class="keyword">hash</span>(<span class="type">char</span> *str) {
-    <span class="type">unsigned int</span> h = 5381;
-    <span class="type">int</span> c;
-    <span class="keyword">while</span> ((c = *str++)) h = ((h << 5) + h) + c;
-    <span class="keyword">return</span> h;
-}`
-  }
-];
-
-let snippetIndex = 0;
-const codeContainer = document.getElementById('code-container')!;
-
-function updateSnippet() {
-  codeContainer.classList.add('fade');
-  setTimeout(() => {
-    const s = snippets[snippetIndex];
-    codeContainer.innerHTML = `
-      <div class="code-header">
-        <span>${s.file}</span>
-        <span>${s.title}</span>
-      </div>
-      <pre><code>${s.code}</code></pre>
-    `;
-    codeContainer.classList.remove('fade');
-    snippetIndex = (snippetIndex + 1) % snippets.length;
-  }, 400);
-}
-
-updateSnippet();
-setInterval(updateSnippet, 4000);
-
-// 5. CANVAS & FIDGET
+// 4. CANVAS BACKGROUND
 const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d')!;
 let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
+window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
 const dots: {x: number, y: number}[] = [];
 const spacing = 50;
 const mouse = { x: -1000, y: -1000 };
@@ -274,6 +256,7 @@ for (let x = 0; x < width + spacing; x += spacing) {
   for (let y = 0; y < height + spacing; y += spacing) dots.push({ x, y });
 }
 window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('touchmove', (e) => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; });
 function animate() {
   ctx.clearRect(0, 0, width, height);
   const isDarkTheme = document.body.getAttribute('data-theme') === 'dark';
@@ -289,6 +272,7 @@ function animate() {
 }
 animate();
 
+// 5. FIDGET & REVEAL
 const fidgetTrigger = document.getElementById('fidget-trigger')!;
 const fidgetModal = document.getElementById('fidget-modal')!;
 fidgetTrigger.addEventListener('click', () => fidgetModal.classList.toggle('active'));
