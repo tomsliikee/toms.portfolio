@@ -53,7 +53,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             <div class="timeline-item">
               <span class="date">2019 — 2024</span>
               <p class="role">Tourism Management</p>
-              <p class="company">Tourism School Semmering — Event Management & Sales (Honors)</p>
+              <p class="company">Tourism School Semmering — Focus on Event Management & Sales (Honors)</p>
             </div>
             <div class="timeline-item">
               <span class="date">2015 — 2019</span>
@@ -123,24 +123,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           </div>
         </div>
 
-        <!-- TECHNICAL SHOWCASE -->
+        <!-- DYNAMIC CODE SLIDESHOW -->
         <div class="code-section">
-          <div class="code-header">
-            <span>technical_showcase.c</span>
-            <span>Binary Search Tree</span>
+          <div id="code-container">
+             <!-- Dynamic Content -->
           </div>
-          <pre><code><span class="keyword">struct</span> <span class="type">Node</span>* <span class="keyword">search</span>(<span class="keyword">struct</span> <span class="type">Node</span>* root, <span class="type">int</span> key) {
-    <span class="comment">// Base Cases: root is null or key is at root</span>
-    <span class="keyword">if</span> (root == <span class="keyword">NULL</span> || root->key == key)
-       <span class="keyword">return</span> root;
-    
-    <span class="comment">// Key is greater than root's key</span>
-    <span class="keyword">if</span> (root->key < key)
-       <span class="keyword">return</span> search(root->right, key);
- 
-    <span class="comment">// Key is smaller than root's key</span>
-    <span class="keyword">return</span> search(root->left, key);
-}</code></pre>
         </div>
       </section>
     </main>
@@ -167,25 +154,26 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 const themeToggle = document.getElementById('theme-toggle-sidebar')!;
 let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 if (isDark) document.body.setAttribute('data-theme', 'dark');
-
 themeToggle.addEventListener('click', () => {
   isDark = !isDark;
   isDark ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
 });
 
-// 2. CUSTOM CURSOR WITH JIGGLE PHYSICS
+// 2. SNAPPY BOUNCY CURSOR
 const cursor = document.getElementById('custom-cursor')!;
 let cursorX = 0, cursorY = 0;
 let targetX = 0, targetY = 0;
-const speed = 0.15; // Easing speed for "jiggle" feel
+const speed = 0.25; // Snappier follow
 
 window.addEventListener('mousemove', (e) => {
   targetX = e.clientX;
   targetY = e.clientY;
 });
 
+window.addEventListener('mousedown', () => cursor.classList.add('clicking'));
+window.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
+
 function updateCursor() {
-  // Linear interpolation for smooth movement
   cursorX += (targetX - cursorX) * speed;
   cursorY += (targetY - cursorY) * speed;
   cursor.style.transform = `translate(${cursorX - 6}px, ${cursorY - 6}px)`;
@@ -193,8 +181,7 @@ function updateCursor() {
 }
 updateCursor();
 
-// Cursor Interaction (Scale up on hover)
-const interactables = document.querySelectorAll('a, button, .card, .pop-bubble');
+const interactables = document.querySelectorAll('a, button, .card, .pop-bubble, .skill-box');
 interactables.forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
@@ -203,98 +190,115 @@ interactables.forEach(el => {
 // 3. SCROLL PROGRESS
 const progressBar = document.getElementById('progress-bar')!;
 const navbar = document.getElementById('navbar')!;
-
 window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
-  
-  if (progressBar) {
-    const container = progressBar.parentElement!;
-    const scrollPercent = scrollTop / docHeight;
-    const maxTop = container.clientHeight - progressBar.clientHeight;
-    progressBar.style.top = `${scrollPercent * maxTop}px`;
-  }
-
-  if (scrollTop > 50) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
+  const scrollPercent = scrollTop / docHeight;
+  const maxTop = progressBar.parentElement!.clientHeight - progressBar.clientHeight;
+  progressBar.style.top = `${scrollPercent * maxTop}px`;
+  scrollTop > 50 ? navbar.classList.add('scrolled') : navbar.classList.remove('scrolled');
 });
 
-// 4. CANVAS BACKGROUND
+// 4. CODE SLIDESHOW DATA
+const snippets = [
+  {
+    title: "Binary Search Tree",
+    file: "bst_search.c",
+    code: `<span class="keyword">struct</span> <span class="type">Node</span>* <span class="keyword">search</span>(<span class="keyword">struct</span> <span class="type">Node</span>* root, <span class="type">int</span> key) {
+    <span class="keyword">if</span> (root == <span class="keyword">NULL</span> || root->key == key) <span class="keyword">return</span> root;
+    <span class="keyword">if</span> (root->key < key) <span class="keyword">return</span> search(root->right, key);
+    <span class="keyword">return</span> search(root->left, key);
+}`
+  },
+  {
+    title: "Linked List Insertion",
+    file: "linked_list.c",
+    code: `<span class="type">void</span> <span class="keyword">push</span>(<span class="keyword">struct</span> <span class="type">Node</span>** head, <span class="type">int</span> val) {
+    <span class="keyword">struct</span> <span class="type">Node</span>* new_node = malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <span class="type">Node</span>));
+    new_node->data = val;
+    new_node->next = (*head);
+    (*head) = new_node;
+}`
+  },
+  {
+    title: "Stack Implementation",
+    file: "stack_pop.c",
+    code: `<span class="type">int</span> <span class="keyword">pop</span>(<span class="keyword">struct</span> <span class="type">Stack</span>* stack) {
+    <span class="keyword">if</span> (isEmpty(stack)) <span class="keyword">return</span> <span class="type">INT_MIN</span>;
+    <span class="keyword">return</span> stack->array[stack->top--];
+}`
+  },
+  {
+    title: "Simple Hash Function",
+    file: "hash_map.c",
+    code: `<span class="type">unsigned int</span> <span class="keyword">hash</span>(<span class="type">char</span> *str) {
+    <span class="type">unsigned int</span> h = 5381;
+    <span class="type">int</span> c;
+    <span class="keyword">while</span> ((c = *str++)) h = ((h << 5) + h) + c;
+    <span class="keyword">return</span> h;
+}`
+  }
+];
+
+let snippetIndex = 0;
+const codeContainer = document.getElementById('code-container')!;
+
+function updateSnippet() {
+  codeContainer.classList.add('fade');
+  setTimeout(() => {
+    const s = snippets[snippetIndex];
+    codeContainer.innerHTML = `
+      <div class="code-header">
+        <span>${s.file}</span>
+        <span>${s.title}</span>
+      </div>
+      <pre><code>${s.code}</code></pre>
+    `;
+    codeContainer.classList.remove('fade');
+    snippetIndex = (snippetIndex + 1) % snippets.length;
+  }, 400);
+}
+
+updateSnippet();
+setInterval(updateSnippet, 4000);
+
+// 5. CANVAS & FIDGET
 const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d')!;
 let width = canvas.width = window.innerWidth;
 let height = canvas.height = window.innerHeight;
-
-window.addEventListener('resize', () => {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-});
-
 const dots: {x: number, y: number}[] = [];
 const spacing = 50;
 const mouse = { x: -1000, y: -1000 };
-
 for (let x = 0; x < width + spacing; x += spacing) {
-  for (let y = 0; y < height + spacing; y += spacing) {
-    dots.push({ x, y });
-  }
+  for (let y = 0; y < height + spacing; y += spacing) dots.push({ x, y });
 }
-
-window.addEventListener('mousemove', (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-
+window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
 function animate() {
   ctx.clearRect(0, 0, width, height);
   const isDarkTheme = document.body.getAttribute('data-theme') === 'dark';
   ctx.fillStyle = isDarkTheme ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.25)';
-
   dots.forEach(dot => {
     const dx = mouse.x - dot.x;
     const dy = mouse.y - dot.y;
     const dist = Math.sqrt(dx * dx + dy * dy);
-    const maxDist = 180;
-    let size = 1.2;
-
-    if (dist < maxDist) {
-      size = 1.2 + (maxDist - dist) / 20;
-    }
-
-    ctx.beginPath();
-    ctx.arc(dot.x, dot.y, size, 0, Math.PI * 2);
-    ctx.fill();
+    let size = (dist < 180) ? 1.2 + (180 - dist) / 20 : 1.2;
+    ctx.beginPath(); ctx.arc(dot.x, dot.y, size, 0, Math.PI * 2); ctx.fill();
   });
   requestAnimationFrame(animate);
 }
 animate();
 
-// 5. FIDGET & REVEAL
 const fidgetTrigger = document.getElementById('fidget-trigger')!;
 const fidgetModal = document.getElementById('fidget-modal')!;
-const fidgetClose = document.getElementById('fidget-close')!;
-const bubbles = document.querySelectorAll('.pop-bubble');
-
 fidgetTrigger.addEventListener('click', () => fidgetModal.classList.toggle('active'));
-fidgetClose.addEventListener('click', () => fidgetModal.classList.remove('active'));
-
-bubbles.forEach(bubble => {
-  bubble.addEventListener('click', () => {
-    bubble.classList.toggle('popped');
-    setTimeout(() => bubble.classList.remove('popped'), 2000);
-  });
-});
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') fidgetModal.classList.remove('active');
-});
-
+document.getElementById('fidget-close')!.addEventListener('click', () => fidgetModal.classList.remove('active'));
+document.querySelectorAll('.pop-bubble').forEach(b => b.addEventListener('click', () => {
+  b.classList.toggle('popped');
+  setTimeout(() => b.classList.remove('popped'), 2000);
+}));
+window.addEventListener('keydown', (e) => { if (e.key === 'Escape') fidgetModal.classList.remove('active'); });
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('section').forEach(sec => observer.observe(sec));
