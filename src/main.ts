@@ -2,6 +2,7 @@ import './style.css'
 import profilePicUrl from './assets/Thomas_Haiden.png'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+  <div id="custom-cursor"></div>
   <canvas id="bg-canvas"></canvas>
   
   <aside class="sidebar">
@@ -23,9 +24,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <a href="#about">EXP</a>
         <a href="#skills">SKILLS</a>
         <a href="#contact">CONTACT</a>
-        <button class="theme-toggle mobile-only" id="theme-toggle-nav" style="background:none; border:none; padding:0; cursor:pointer; color:var(--text-primary);">
-           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-        </button>
       </div>
     </nav>
 
@@ -124,6 +122,26 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             <span class="contact-link" style="border:none; cursor: default;">LOCATION: Near Wr. Neustadt, Austria</span>
           </div>
         </div>
+
+        <!-- TECHNICAL SHOWCASE -->
+        <div class="code-section">
+          <div class="code-header">
+            <span>technical_showcase.c</span>
+            <span>Binary Search Tree</span>
+          </div>
+          <pre><code><span class="keyword">struct</span> <span class="type">Node</span>* <span class="keyword">search</span>(<span class="keyword">struct</span> <span class="type">Node</span>* root, <span class="type">int</span> key) {
+    <span class="comment">// Base Cases: root is null or key is at root</span>
+    <span class="keyword">if</span> (root == <span class="keyword">NULL</span> || root->key == key)
+       <span class="keyword">return</span> root;
+    
+    <span class="comment">// Key is greater than root's key</span>
+    <span class="keyword">if</span> (root->key < key)
+       <span class="keyword">return</span> search(root->right, key);
+ 
+    <span class="comment">// Key is smaller than root's key</span>
+    <span class="keyword">return</span> search(root->left, key);
+}</code></pre>
+        </div>
       </section>
     </main>
 
@@ -145,20 +163,45 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </div>
 `
 
-// THEME TOGGLE
-const themeToggles = document.querySelectorAll('.theme-toggle');
+// 1. THEME TOGGLE
+const themeToggle = document.getElementById('theme-toggle-sidebar')!;
 let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 if (isDark) document.body.setAttribute('data-theme', 'dark');
 
-themeToggles.forEach(toggle => {
-  toggle.addEventListener('click', () => {
-    isDark = !isDark;
-    isDark ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
-  });
+themeToggle.addEventListener('click', () => {
+  isDark = !isDark;
+  isDark ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
 });
 
-// SCROLL INDICATORS
-const progressBar = document.getElementById('progress-bar');
+// 2. CUSTOM CURSOR WITH JIGGLE PHYSICS
+const cursor = document.getElementById('custom-cursor')!;
+let cursorX = 0, cursorY = 0;
+let targetX = 0, targetY = 0;
+const speed = 0.15; // Easing speed for "jiggle" feel
+
+window.addEventListener('mousemove', (e) => {
+  targetX = e.clientX;
+  targetY = e.clientY;
+});
+
+function updateCursor() {
+  // Linear interpolation for smooth movement
+  cursorX += (targetX - cursorX) * speed;
+  cursorY += (targetY - cursorY) * speed;
+  cursor.style.transform = `translate(${cursorX - 6}px, ${cursorY - 6}px)`;
+  requestAnimationFrame(updateCursor);
+}
+updateCursor();
+
+// Cursor Interaction (Scale up on hover)
+const interactables = document.querySelectorAll('a, button, .card, .pop-bubble');
+interactables.forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+});
+
+// 3. SCROLL PROGRESS
+const progressBar = document.getElementById('progress-bar')!;
 const navbar = document.getElementById('navbar')!;
 
 window.addEventListener('scroll', () => {
@@ -179,27 +222,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// FIDGET GAME LOGIC
-const fidgetTrigger = document.getElementById('fidget-trigger')!;
-const fidgetModal = document.getElementById('fidget-modal')!;
-const fidgetClose = document.getElementById('fidget-close')!;
-const bubbles = document.querySelectorAll('.pop-bubble');
-
-fidgetTrigger.addEventListener('click', () => fidgetModal.classList.toggle('active'));
-fidgetClose.addEventListener('click', () => fidgetModal.classList.remove('active'));
-
-bubbles.forEach(bubble => {
-  bubble.addEventListener('click', () => {
-    bubble.classList.toggle('popped');
-    setTimeout(() => bubble.classList.remove('popped'), 2000);
-  });
-});
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') fidgetModal.classList.remove('active');
-});
-
-// CANVAS BACKGROUND
+// 4. CANVAS BACKGROUND
 const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d')!;
 let width = canvas.width = window.innerWidth;
@@ -223,11 +246,6 @@ for (let x = 0; x < width + spacing; x += spacing) {
 window.addEventListener('mousemove', (e) => {
   mouse.x = e.clientX;
   mouse.y = e.clientY;
-});
-
-window.addEventListener('touchmove', (e) => {
-  mouse.x = e.touches[0].clientX;
-  mouse.y = e.touches[0].clientY;
 });
 
 function animate() {
@@ -254,7 +272,26 @@ function animate() {
 }
 animate();
 
-// REVEAL
+// 5. FIDGET & REVEAL
+const fidgetTrigger = document.getElementById('fidget-trigger')!;
+const fidgetModal = document.getElementById('fidget-modal')!;
+const fidgetClose = document.getElementById('fidget-close')!;
+const bubbles = document.querySelectorAll('.pop-bubble');
+
+fidgetTrigger.addEventListener('click', () => fidgetModal.classList.toggle('active'));
+fidgetClose.addEventListener('click', () => fidgetModal.classList.remove('active'));
+
+bubbles.forEach(bubble => {
+  bubble.addEventListener('click', () => {
+    bubble.classList.toggle('popped');
+    setTimeout(() => bubble.classList.remove('popped'), 2000);
+  });
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') fidgetModal.classList.remove('active');
+});
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('visible');

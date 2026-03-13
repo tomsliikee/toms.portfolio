@@ -7,7 +7,7 @@
   --accent-dim: rgba(125, 140, 125, 0.1);
   --border-color: #efefec;
   --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Playfair Display', serif; /* Thinner, more elegant serif */
+  --font-serif: 'Playfair Display', serif; 
   --font-mono: 'Space Mono', monospace;
   --border-radius: 40px; 
   --card-radius: 32px;
@@ -27,6 +27,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: none !important; /* Hide real cursor for custom one */
+}
+
+@media (max-width: 1024px) {
+  * { cursor: auto !important; } /* Use real cursor on mobile */
 }
 
 html {
@@ -46,6 +51,26 @@ a {
   text-decoration: none;
 }
 
+/* CUSTOM CURSOR */
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease-out;
+}
+
+#custom-cursor.hovering {
+  transform: scale(4);
+  background-color: var(--accent-dim);
+  border: 1px solid var(--accent-color);
+}
+
 #bg-canvas {
   position: fixed;
   top: 0;
@@ -63,11 +88,11 @@ a {
   min-height: 100vh;
 }
 
-/* SIDEBAR - Moved slightly inward */
+/* SIDEBAR */
 .sidebar {
   position: fixed;
   top: 0;
-  left: 10px; /* Moved slightly away from the edge */
+  left: 10px;
   width: var(--sidebar-width);
   height: 100vh;
   display: flex;
@@ -108,6 +133,21 @@ a {
   writing-mode: vertical-rl;
   text-transform: uppercase;
   opacity: 0.4;
+}
+
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
 }
 
 /* STICKY NAVBAR */
@@ -213,7 +253,7 @@ h1 {
   line-height: 0.85;
   letter-spacing: -5px;
   margin-bottom: 2.5rem;
-  font-weight: 400; /* Lighter weight for thin serif look */
+  font-weight: 400;
 }
 
 .profile-pic-container {
@@ -239,7 +279,7 @@ h1 {
   filter: grayscale(0%);
 }
 
-/* CARDS */
+/* CARDS WITH GLOW */
 section {
   padding: 12rem 0;
   opacity: 0;
@@ -270,11 +310,12 @@ section.visible {
   transition: all 0.4s ease;
   box-shadow: 0 10px 30px rgba(0,0,0,0.02);
   margin-bottom: 4rem;
+  position: relative;
 }
 
 .card:hover {
   border-color: var(--accent-color);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+  box-shadow: 0 0 40px var(--accent-dim); /* THE GLOW */
 }
 
 .timeline-item {
@@ -291,7 +332,7 @@ section.visible {
 
 .role {
   font-family: var(--font-serif);
-  font-weight: 500; /* Lighter weight */
+  font-weight: 500;
   font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom: 1rem;
   letter-spacing: -1px;
@@ -310,10 +351,10 @@ section.visible {
   display: block;
 }
 
-/* SKILLS GRID - 6 Boxes */
+/* SKILLS GRID */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Force 3 columns for 6 total boxes */
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
 
@@ -361,7 +402,40 @@ section.visible {
 .contact-link:hover {
   color: var(--accent-color) !important;
   padding-left: 1.5rem;
+  box-shadow: inset 0 -1px 0 var(--accent-color);
 }
+
+/* CODE SNIPPET SECTION */
+.code-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+  padding: 3rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.code-header {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+pre {
+  color: var(--text-secondary);
+}
+
+.keyword { color: #d97757; }
+.type { color: var(--accent-color); }
+.comment { opacity: 0.4; }
 
 /* FIDGET */
 .fidget-modal {
@@ -389,4 +463,5 @@ footer {
 @media (max-width: 600px) {
   .card { padding: 2.5rem; }
   .logo { display: none; }
+  #custom-cursor { display: none; }
 }
