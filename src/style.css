@@ -7,7 +7,7 @@
   --accent-dim: rgba(125, 140, 125, 0.1);
   --border-color: #efefec;
   --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Noto Serif', serif;
+  --font-serif: 'Playfair Display', serif; /* Thinner, more elegant serif */
   --font-mono: 'Space Mono', monospace;
   --border-radius: 40px; 
   --card-radius: 32px;
@@ -41,7 +41,6 @@ body {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* Ensure NO blue links appear */
 a {
   color: inherit;
   text-decoration: none;
@@ -64,11 +63,11 @@ a {
   min-height: 100vh;
 }
 
-/* SIDEBAR */
+/* SIDEBAR - Moved slightly inward */
 .sidebar {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 10px; /* Moved slightly away from the edge */
   width: var(--sidebar-width);
   height: 100vh;
   display: flex;
@@ -99,6 +98,16 @@ a {
   background: var(--accent-color);
   transition: top 0.1s linear;
   border-radius: 10px;
+}
+
+.sidebar-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 3px;
+  writing-mode: vertical-rl;
+  text-transform: uppercase;
+  opacity: 0.4;
 }
 
 /* STICKY NAVBAR */
@@ -172,11 +181,11 @@ nav.scrolled {
   transform: translateX(-50%) scale(1);
 }
 
-/* MAIN CONTENT - The "Spacey" Layout */
+/* MAIN CONTENT */
 .main-content {
   flex-grow: 1;
   padding: 0 4rem;
-  max-width: 1200px; /* Restored to be wider and more spacey */
+  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
 }
@@ -204,7 +213,7 @@ h1 {
   line-height: 0.85;
   letter-spacing: -5px;
   margin-bottom: 2.5rem;
-  font-weight: 600;
+  font-weight: 400; /* Lighter weight for thin serif look */
 }
 
 .profile-pic-container {
@@ -230,7 +239,7 @@ h1 {
   filter: grayscale(0%);
 }
 
-/* CARDS - Single Spacey Boxes */
+/* CARDS */
 section {
   padding: 12rem 0;
   opacity: 0;
@@ -255,7 +264,7 @@ section.visible {
 
 .card {
   background: var(--card-bg);
-  padding: 5rem; /* Massive padding for "breathability" */
+  padding: 5rem;
   border-radius: var(--card-radius);
   border: 1px solid var(--border-color);
   transition: all 0.4s ease;
@@ -282,7 +291,7 @@ section.visible {
 
 .role {
   font-family: var(--font-serif);
-  font-weight: 600;
+  font-weight: 500; /* Lighter weight */
   font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom: 1rem;
   letter-spacing: -1px;
@@ -301,18 +310,38 @@ section.visible {
   display: block;
 }
 
-/* SKILLS */
+/* SKILLS GRID - 6 Boxes */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* Force 3 columns for 6 total boxes */
   gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .skills-grid { grid-template-columns: 1fr; }
 }
 
 .skill-box {
   padding: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-/* CONTACT - NO BLUE TEXT */
+.skill-name {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* CONTACT */
 .contact-card {
   border: 1px solid var(--accent-color);
   padding: 6rem;
@@ -322,7 +351,7 @@ section.visible {
 .contact-link {
   font-family: var(--font-mono);
   font-size: 1rem;
-  color: var(--text-primary) !important; /* Force theme color */
+  color: var(--text-primary) !important;
   display: block;
   padding: 2rem 0;
   border-bottom: 1px solid var(--border-color);
@@ -332,17 +361,6 @@ section.visible {
 .contact-link:hover {
   color: var(--accent-color) !important;
   padding-left: 1.5rem;
-}
-
-.coming-soon {
-  opacity: 0.5;
-  text-align: center;
-  padding: 4rem;
-  border: 1px dashed var(--border-color);
-  border-radius: var(--card-radius);
-  font-family: var(--font-mono);
-  letter-spacing: 3px;
-  font-size: 0.8rem;
 }
 
 /* FIDGET */

@@ -82,36 +82,34 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
               <p class="company">Lake Restaurant Katamaran — 12-week placements</p>
             </div>
           </div>
-
-          <!-- COMING SOON -->
-          <div class="coming-soon">
-            MORE COMING SOON....
-          </div>
         </div>
       </section>
 
       <section id="skills">
-        <span class="section-tag">02 / TECHNICAL EXPERTISE</span>
+        <span class="section-tag">02 / AQUIRED SKILLS</span>
         <div class="skills-grid">
           <div class="card skill-box">
             <span class="skill-name">C / C++</span>
-            <p style="font-size: 1rem; opacity: 0.6; margin-top: 1.5rem;">Core systems and memory-efficient programming.</p>
+            <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 1rem;">Core systems and memory-efficient programming.</p>
           </div>
           <div class="card skill-box">
             <span class="skill-name">SQL</span>
-            <p style="font-size: 1rem; opacity: 0.6; margin-top: 1.5rem;">Database architecture and relational logic.</p>
+            <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 1rem;">Database architecture and relational logic.</p>
           </div>
           <div class="card skill-box">
             <span class="skill-name">Hardware</span>
-            <p style="font-size: 1rem; opacity: 0.6; margin-top: 1.5rem;">PC assembly, diagnostics, and component logic.</p>
+            <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 1rem;">PC assembly, diagnostics, and component logic.</p>
           </div>
           <div class="card skill-box">
             <span class="skill-name">English</span>
-            <p style="font-size: 1rem; opacity: 0.6; margin-top: 1.5rem;">C1/C2 Fluent — Negotiation level proficiency.</p>
+            <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 1rem;">C1/C2 Fluent — Negotiation level proficiency.</p>
           </div>
           <div class="card skill-box">
             <span class="skill-name">Spanish</span>
-            <p style="font-size: 1rem; opacity: 0.6; margin-top: 1.5rem;">A2 Basic — Foundational language skills.</p>
+            <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 1rem;">A2 Basic — Foundational language skills.</p>
+          </div>
+          <div class="card skill-box" style="border-style: dashed; opacity: 0.6;">
+            <span class="skill-name" style="font-size: 1.1rem; letter-spacing: 2px;">MORE COMING SOON...</span>
           </div>
         </div>
       </section>
@@ -119,7 +117,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <section id="contact">
         <div class="contact-card">
           <span class="section-tag">03 / CONTACT</span>
-          <h1 style="margin: 2rem 0; font-family: var(--font-serif); font-weight: 500;">Ready for the next <br>extraordinary challenge.</h1>
+          <h1 style="margin: 2rem 0; font-family: var(--font-serif); font-weight: 400;">Ready for the next <br>extraordinary challenge.</h1>
           <div class="contact-links">
             <a href="mailto:thomashaiden17@gmail.com" class="contact-link">EMAIL: thomashaiden17@gmail.com</a>
             <a href="https://github.com/tomsliikee" target="_blank" class="contact-link">GITHUB: tomsliikee</a>
