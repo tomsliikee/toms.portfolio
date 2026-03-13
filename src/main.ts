@@ -5,7 +5,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <canvas id="bg-canvas"></canvas>
   
   <aside class="sidebar">
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+    <button class="theme-toggle" id="theme-toggle-sidebar" aria-label="Toggle Theme">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
     </button>
     
@@ -20,9 +20,12 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <nav>
       <div class="logo">BUILDING EFFICIENT DIGITAL SYSTEMS.</div>
       <div class="nav-links">
-        <a href="#about">01/EXPERIENCE</a>
-        <a href="#skills">02/SKILLS</a>
-        <a href="#contact">03/CONTACT</a>
+        <a href="#about">EXP</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#contact">CONTACT</a>
+        <button class="theme-toggle mobile-only" id="theme-toggle-nav" style="background:none; border:none; padding:0; margin-left:1rem; cursor:pointer; color:var(--text-primary);">
+           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
       </div>
     </nav>
 
@@ -43,7 +46,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         
         <div class="exp-container">
           <div class="card">
-            <h2 style="margin-bottom: 5rem; font-size: 3rem;">Education</h2>
+            <h2 style="margin-bottom: 4rem;">Education</h2>
             <div class="timeline-item">
               <span class="date">Sept 2025 — 2027</span>
               <p class="role">BSc Computer Science</p>
@@ -62,7 +65,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           </div>
 
           <div class="card">
-            <h2 style="margin-bottom: 5rem; font-size: 3rem;">Professional Journey</h2>
+            <h2 style="margin-bottom: 4rem;">Professional Journey</h2>
             <div class="timeline-item">
               <span class="date">Oct 2024 — June 2025</span>
               <p class="role">Civil Service</p>
@@ -105,10 +108,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
             <span class="skill-name">Spanish</span>
             <p style="font-size: 1rem; opacity: 0.6; margin-top: 1.5rem;">A2 Basic — Foundational language skills.</p>
           </div>
-          <div class="card skill-box">
-            <span class="skill-name">Certificates</span>
-            <p style="font-size: 1rem; opacity: 0.6; margin-top: 1.5rem;">Jungsommelier, Jungbarista, Event Manager.</p>
-          </div>
         </div>
       </section>
 
@@ -137,32 +136,36 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
   <div id="fidget-modal" class="fidget-modal">
     <div class="fidget-grid" id="fidget-grid">
-      <!-- 16 Bubbles -->
       ${Array(16).fill('<div class="pop-bubble"></div>').join('')}
     </div>
     <div id="fidget-close" class="fidget-close">CLOSE [ESC]</div>
   </div>
 `
 
-// THEME TOGGLE
-const themeToggle = document.getElementById('theme-toggle')!;
+// THEME TOGGLE (Multiple Listeners for Mobile/Desktop)
+const themeToggles = document.querySelectorAll('.theme-toggle');
 let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 if (isDark) document.body.setAttribute('data-theme', 'dark');
-themeToggle.addEventListener('click', () => {
-  isDark = !isDark;
-  isDark ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
+
+themeToggles.forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    isDark = !isDark;
+    isDark ? document.body.setAttribute('data-theme', 'dark') : document.body.removeAttribute('data-theme');
+  });
 });
 
-// SCROLL INDICATOR
-const progressBar = document.getElementById('progress-bar')!;
-const container = progressBar.parentElement!;
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.body.scrollHeight - window.innerHeight;
-  const scrollPercent = scrollTop / docHeight;
-  const maxTop = container.clientHeight - progressBar.clientHeight;
-  progressBar.style.top = `${scrollPercent * maxTop}px`;
-});
+// SCROLL INDICATOR (Only for Desktop/Sidebar)
+const progressBar = document.getElementById('progress-bar');
+if (progressBar) {
+  const container = progressBar.parentElement!;
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = scrollTop / docHeight;
+    const maxTop = container.clientHeight - progressBar.clientHeight;
+    progressBar.style.top = `${scrollPercent * maxTop}px`;
+  });
+}
 
 // FIDGET GAME LOGIC
 const fidgetTrigger = document.getElementById('fidget-trigger')!;
@@ -176,7 +179,6 @@ fidgetClose.addEventListener('click', () => fidgetModal.classList.remove('active
 bubbles.forEach(bubble => {
   bubble.addEventListener('click', () => {
     bubble.classList.toggle('popped');
-    // Random reset after 2 seconds for infinite fidgeting
     setTimeout(() => bubble.classList.remove('popped'), 2000);
   });
 });
@@ -209,6 +211,12 @@ for (let x = 0; x < width + spacing; x += spacing) {
 window.addEventListener('mousemove', (e) => {
   mouse.x = e.clientX;
   mouse.y = e.clientY;
+});
+
+// Touch support for dots
+window.addEventListener('touchmove', (e) => {
+  mouse.x = e.touches[0].clientX;
+  mouse.y = e.touches[0].clientY;
 });
 
 function animate() {
