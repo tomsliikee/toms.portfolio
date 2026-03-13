@@ -17,7 +17,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </aside>
 
   <div class="main-content">
-    <nav>
+    <nav id="navbar">
       <div class="logo">BUILDING EFFICIENT DIGITAL SYSTEMS.</div>
       <div class="nav-links">
         <a href="#about">EXP</a>
@@ -136,13 +136,14 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
   <div id="fidget-modal" class="fidget-modal">
     <div class="fidget-grid" id="fidget-grid">
+      <!-- 16 Bubbles -->
       ${Array(16).fill('<div class="pop-bubble"></div>').join('')}
     </div>
     <div id="fidget-close" class="fidget-close">CLOSE [ESC]</div>
   </div>
 `
 
-// THEME TOGGLE (Multiple Listeners for Mobile/Desktop)
+// THEME TOGGLE
 const themeToggles = document.querySelectorAll('.theme-toggle');
 let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 if (isDark) document.body.setAttribute('data-theme', 'dark');
@@ -154,18 +155,29 @@ themeToggles.forEach(toggle => {
   });
 });
 
-// SCROLL INDICATOR (Only for Desktop/Sidebar)
+// SCROLL INDICATORS
 const progressBar = document.getElementById('progress-bar');
-if (progressBar) {
-  const container = progressBar.parentElement!;
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.body.scrollHeight - window.innerHeight;
+const navbar = document.getElementById('navbar')!;
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  
+  // Update Legend Bar
+  if (progressBar) {
+    const container = progressBar.parentElement!;
     const scrollPercent = scrollTop / docHeight;
     const maxTop = container.clientHeight - progressBar.clientHeight;
     progressBar.style.top = `${scrollPercent * maxTop}px`;
-  });
-}
+  }
+
+  // Update Sticky Nav Appearance
+  if (scrollTop > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
 
 // FIDGET GAME LOGIC
 const fidgetTrigger = document.getElementById('fidget-trigger')!;
@@ -213,7 +225,6 @@ window.addEventListener('mousemove', (e) => {
   mouse.y = e.clientY;
 });
 
-// Touch support for dots
 window.addEventListener('touchmove', (e) => {
   mouse.x = e.touches[0].clientX;
   mouse.y = e.touches[0].clientY;
