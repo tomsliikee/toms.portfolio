@@ -45,6 +45,8 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   transition: background-color 0.5s ease, color 0.5s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -52,7 +54,7 @@ a {
   text-decoration: none;
 }
 
-/* BOUNCY CURSOR */
+/* BOUNCY CURSOR - GPU ACCELERATED */
 #custom-cursor {
   position: fixed;
   top: 0;
@@ -64,6 +66,7 @@ a {
   pointer-events: none;
   z-index: 9999;
   transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: transform;
 }
 
 #custom-cursor.hovering {
@@ -128,6 +131,7 @@ a {
   background: var(--accent-color);
   transition: top 0.1s linear;
   border-radius: 10px;
+  will-change: top;
 }
 
 .sidebar-label {
@@ -162,6 +166,7 @@ a {
   background: #000 !important;
   position: relative;
   overflow: hidden;
+  contain: layout style;
 }
 
 .card::before, .contact-card::before, .code-section::before, nav::before, .theme-toggle::before, .profile-pic-container::before {
@@ -179,6 +184,7 @@ a {
   z-index: 1;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  will-change: opacity;
 }
 
 .card:hover::before, .contact-card:hover::before, .code-section:hover::before, nav:hover::before, .theme-toggle:hover::before, .profile-pic-container:hover::before {
@@ -333,6 +339,7 @@ section {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  contain: layout;
 }
 
 section.visible {
@@ -351,7 +358,7 @@ section.visible {
 }
 
 .card {
-  padding: 5rem; /* RESTORED BREATHING ROOM */
+  padding: 5rem;
   border-radius: var(--card-radius);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: var(--bounce-transition);
@@ -395,7 +402,7 @@ section.visible {
   display: block;
 }
 
-/* SKILLS - RESTORED SMALLER BOXES */
+/* SKILLS */
 .skills-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
 }
@@ -424,7 +431,7 @@ section.visible {
   margin-bottom: 0.5rem;
 }
 
-/* CONTACT CARD - RESTORED BOX */
+/* CONTACT CARD */
 .contact-card {
   padding: 6rem;
   border-radius: var(--card-radius);
@@ -464,12 +471,12 @@ body.focus-mode .theme-toggle {
   color: #fff;
 }
 
-/* WATERFALL CODE ANIMATION */
+/* WATERFALL CODE ANIMATION - GPU ACCELERATED */
 .code-section {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--card-radius);
   padding: 4rem;
-  height: 80vh; /* BIGGER */
+  height: 80vh;
   overflow: hidden;
   margin-top: 6rem;
   position: relative;
@@ -519,7 +526,11 @@ body.focus-mode .theme-toggle {
 }
 
 .waterfall-container {
-  display: flex; flex-direction: column; animation: waterfall 40s linear infinite; transition: transform 0.5s ease;
+  display: flex; 
+  flex-direction: column; 
+  animation: waterfall 40s linear infinite; 
+  transition: transform 0.5s ease;
+  will-change: transform;
 }
 
 @keyframes waterfall {
@@ -535,7 +546,7 @@ pre {
 .type { color: var(--accent-color); }
 .comment { opacity: 0.4; font-style: italic; }
 
-/* FIDGET FIX */
+/* FIDGET MODAL */
 .fidget-modal {
   position: fixed;
   bottom: 30px;
@@ -547,6 +558,7 @@ pre {
   display: none;
   z-index: 2000;
   box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+  contain: content;
 }
 
 .fidget-modal.active { display: block; }
@@ -567,6 +579,7 @@ pre {
   border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, background-color;
 }
 
 .pop-bubble:hover {
@@ -598,71 +611,5 @@ footer {
 @media (max-width: 600px) {
   .card, .contact-card { padding: 3rem; }
   footer { font-size: 1rem; }
-}
-
-
-.fidget-modal.active { display: block; }
-
-.fidget-close {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  text-align: center;
-  margin-top: 2rem;
-  cursor: pointer;
-  opacity: 0.6;
-  letter-spacing: 2px;
-}
-
-.fidget-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-}
-
-.pop-bubble {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--bg-color);
-  border: 2px solid var(--accent-dim);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.pop-bubble:hover {
-  border-color: var(--accent-color);
-  transform: scale(1.1);
-}
-
-.pop-bubble.popped {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
-  transform: scale(0.9);
-  box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
-}
-
-.fidget-trigger {
-  margin-left: 1rem;
-  color: var(--accent-color);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  transition: var(--bounce-transition);
-}
-
-.fidget-trigger:hover {
-  transform: scale(1.3) rotate(15deg);
-}
-
-/* FOOTER / IMPRINT */
-footer {
-  padding: 10rem 0 6rem;
-  font-family: var(--font-serif);
-  font-size: 1.2rem; /* BIGGER */
-  font-weight: 400;
-}
-
-@media (max-width: 600px) {
-  .card, .contact-card { padding: 3rem; }
-  footer { font-size: 1rem; }
+  .main-content { padding: 0 1.5rem; }
 }
