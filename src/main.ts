@@ -232,7 +232,19 @@ const cursor = document.getElementById('custom-cursor')!;
 let cursorX = 0, cursorY = 0;
 let targetX = 0, targetY = 0;
 const speed = 0.25;
-window.addEventListener('mousemove', (e) => { targetX = e.clientX; targetY = e.clientY; });
+window.addEventListener('mousemove', (e) => { 
+  targetX = e.clientX; 
+  targetY = e.clientY; 
+  
+  // Flashlight logic
+  document.querySelectorAll('.card, .contact-card, .code-section, nav, .theme-toggle, .profile-pic-container').forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    (el as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+    (el as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+  });
+});
 window.addEventListener('mousedown', () => cursor.classList.add('clicking'));
 window.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
 function updateCursor() {
