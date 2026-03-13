@@ -23,7 +23,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
         <a href="#about">EXP</a>
         <a href="#skills">SKILLS</a>
         <a href="#contact">CONTACT</a>
-        <button class="theme-toggle mobile-only" id="theme-toggle-nav" style="background:none; border:none; padding:0; margin-left:1rem; cursor:pointer; color:var(--text-primary);">
+        <button class="theme-toggle mobile-only" id="theme-toggle-nav" style="background:none; border:none; padding:0; cursor:pointer; color:var(--text-primary);">
            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         </button>
       </div>
@@ -82,6 +82,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
               <p class="company">Lake Restaurant Katamaran — 12-week placements</p>
             </div>
           </div>
+
+          <!-- COMING SOON -->
+          <div class="coming-soon">
+            MORE COMING SOON....
+          </div>
         </div>
       </section>
 
@@ -136,7 +141,6 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
   <div id="fidget-modal" class="fidget-modal">
     <div class="fidget-grid" id="fidget-grid">
-      <!-- 16 Bubbles -->
       ${Array(16).fill('<div class="pop-bubble"></div>').join('')}
     </div>
     <div id="fidget-close" class="fidget-close">CLOSE [ESC]</div>
@@ -163,7 +167,6 @@ window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
   
-  // Update Legend Bar
   if (progressBar) {
     const container = progressBar.parentElement!;
     const scrollPercent = scrollTop / docHeight;
@@ -171,7 +174,6 @@ window.addEventListener('scroll', () => {
     progressBar.style.top = `${scrollPercent * maxTop}px`;
   }
 
-  // Update Sticky Nav Appearance
   if (scrollTop > 50) {
     navbar.classList.add('scrolled');
   } else {
