@@ -30,7 +30,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <section class="hero visible">
         <div class="hero-text">
           <h1>Thomas <br>Haiden</h1>
-          <p class="hero-sub">Computer Science student at FH Wr. Neustadt. Born in Neunkirchen, focused on C, C++, and elegant system architecture.</p>
+          <p class="hero-sub">Computer Science student at FH Wr. Neustadt. Born in Austria, focused on C, C++, and elegant system architecture.</p>
           <a href="#contact" class="contact-link" style="margin-top: 3rem; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; display: inline-block;">Get in touch -></a>
         </div>
         <div class="profile-pic-container">
@@ -115,11 +115,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <section id="contact">
         <div class="contact-card">
           <span class="section-tag">03 / CONTACT</span>
-          <h1 style="margin: 3rem 0; font-family: var(--font-serif); font-weight: 500;">Ready for the next <br>extraordinary challenge.</h1>
+          <h1 style="margin: 2rem 0; font-family: var(--font-serif); font-weight: 500;">Ready for the next <br>extraordinary challenge.</h1>
           <div class="contact-links">
             <a href="mailto:thomashaiden17@gmail.com" class="contact-link">EMAIL: thomashaiden17@gmail.com</a>
             <a href="https://github.com/tomsliikee" target="_blank" class="contact-link">GITHUB: tomsliikee</a>
-            <span class="contact-link" style="border:none; cursor: default;">LOCATION: 2620 Hafning, Austria</span>
+            <span class="contact-link" style="border:none; cursor: default;">LOCATION: Near Wr. Neustadt, Austria</span>
           </div>
         </div>
       </section>
