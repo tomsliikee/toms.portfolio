@@ -168,15 +168,31 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <span class="section-tag">03 / CONTACT</span>
           <h1 style="margin: 2rem 0; font-family: var(--font-serif); font-weight: 400;">Ready for the next <br>extraordinary challenge.</h1>
           <div class="contact-links">
-            <a href="mailto:thomashaiden17@gmail.com" class="contact-link">EMAIL: thomashaiden17@gmail.com</a>
-            <a href="https://github.com/tomsliikee" target="_blank" class="contact-link">GITHUB: tomsliikee</a>
-            <span class="contact-link" style="border:none; cursor: default;">LOCATION: Near Wr. Neustadt, Austria</span>
+            <a href="mailto:thomashaiden17@gmail.com" class="contact-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 1rem; vertical-align: middle;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              EMAIL: thomashaiden17@gmail.com
+            </a>
+            <a href="https://github.com/tomsliikee" target="_blank" class="contact-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 1rem; vertical-align: middle;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GITHUB: tomsliikee
+            </a>
+            <span class="contact-link" style="border:none; cursor: default;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 1rem; vertical-align: middle;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              LOCATION: Near Wr. Neustadt, Austria
+            </span>
           </div>
         </div>
 
         <!-- WATERFALL CODE SECTION -->
-        <div class="code-section">
-          <div class="waterfall-container">
+        <div class="code-section" id="code-section">
+          <div class="code-chapters">
+            <div class="chapter-link" data-jump="0">BST [0]</div>
+            <div class="chapter-link" data-jump="150">LINKED LIST [1]</div>
+            <div class="chapter-link" data-jump="300">STACK [2]</div>
+            <div class="chapter-link" data-jump="450">HASH [3]</div>
+            <div class="chapter-link" data-jump="600">QUEUE [4]</div>
+          </div>
+          <div class="waterfall-container" id="waterfall-container">
             <pre><code>${codeSnippets.replace(/<span/g, '&lt;span').replace(/<\/span>/g, '&lt;/span&gt;').replace(/struct/g, '<span class="keyword">struct</span>').replace(/int/g, '<span class="type">int</span>').replace(/void/g, '<span class="type">void</span>').replace(/\/\/.*/g, (m) => `<span class="comment">${m}</span>`)}</code></pre>
             <pre><code>${codeSnippets.replace(/<span/g, '&lt;span').replace(/<\/span>/g, '&lt;/span&gt;').replace(/struct/g, '<span class="keyword">struct</span>').replace(/int/g, '<span class="type">int</span>').replace(/void/g, '<span class="type">void</span>').replace(/\/\/.*/g, (m) => `<span class="comment">${m}</span>`)}</code></pre>
           </div>
@@ -226,7 +242,7 @@ function updateCursor() {
   requestAnimationFrame(updateCursor);
 }
 updateCursor();
-document.querySelectorAll('a, button, .card, .pop-bubble').forEach(el => {
+document.querySelectorAll('a, button, .card, .pop-bubble, .chapter-link').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
 });
@@ -259,8 +275,15 @@ window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.c
 window.addEventListener('touchmove', (e) => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; });
 function animate() {
   ctx.clearRect(0, 0, width, height);
+  const isFocusMode = document.body.classList.contains('focus-mode');
   const isDarkTheme = document.body.getAttribute('data-theme') === 'dark';
-  ctx.fillStyle = isDarkTheme ? 'rgba(255, 255, 255, 0.25)' : 'rgba(0, 0, 0, 0.25)';
+  
+  if (isFocusMode) {
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.4)'; // Brighter dots on sage
+  } else {
+    ctx.fillStyle = isDarkTheme ? 'rgba(143, 160, 143, 0.35)' : 'rgba(125, 140, 125, 0.35)';
+  }
+  
   dots.forEach(dot => {
     const dx = mouse.x - dot.x;
     const dy = mouse.y - dot.y;
@@ -282,7 +305,37 @@ document.querySelectorAll('.pop-bubble').forEach(b => b.addEventListener('click'
   setTimeout(() => b.classList.remove('popped'), 2000);
 }));
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') fidgetModal.classList.remove('active'); });
+
+// --- FOCUS MODE OBSERVER ---
+const codeSection = document.getElementById('code-section')!;
+const waterfall = document.getElementById('waterfall-container')!;
+
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+  entries.forEach(entry => { 
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+    
+    // Detect if code section is taking over viewport
+    if (entry.target.id === 'code-section') {
+      if (entry.intersectionRatio > 0.6) {
+        entry.target.classList.add('focus-mode');
+        document.body.classList.add('focus-mode');
+      } else {
+        entry.target.classList.remove('focus-mode');
+        document.body.classList.remove('focus-mode');
+      }
+    }
+  });
+}, { threshold: [0, 0.2, 0.4, 0.6, 0.8, 1.0] });
+
+document.querySelectorAll('section, .code-section').forEach(sec => observer.observe(sec));
+
+// --- CHAPTER JUMPS ---
+document.querySelectorAll('.chapter-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const jump = (e.target as HTMLElement).dataset.jump;
+    waterfall.style.animation = 'none';
+    waterfall.style.transform = `translateY(-${jump}px)`;
+  });
+});
