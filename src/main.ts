@@ -307,7 +307,6 @@ document.querySelectorAll('.pop-bubble').forEach(b => b.addEventListener('click'
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') fidgetModal.classList.remove('active'); });
 
 // --- FOCUS MODE OBSERVER ---
-const codeSection = document.getElementById('code-section')!;
 const waterfall = document.getElementById('waterfall-container')!;
 
 const observer = new IntersectionObserver((entries) => {
