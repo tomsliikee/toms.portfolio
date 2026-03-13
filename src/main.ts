@@ -12,7 +12,6 @@ const fidgetTrigger = document.getElementById('fidget-trigger')!;
 const fidgetModal = document.getElementById('fidget-modal')!;
 const fidgetClose = document.getElementById('fidget-close')!;
 const waterfall = document.getElementById('waterfall-container')!;
-const codeSection = document.getElementById('code-section')!;
 
 // Elements for flashlight effect
 const flashlightElements = document.querySelectorAll('.card, .contact-card, .code-section, nav, .theme-toggle, .profile-pic-container');

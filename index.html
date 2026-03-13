@@ -160,7 +160,7 @@
 <span class="comment">// --- BINARY SEARCH TREE ---</span>
 <span class="keyword">struct</span> Node* search(<span class="keyword">struct</span> Node* root, <span class="type">int</span> key) {
     if (root == NULL || root->key == key) return root;
-    if (root->key < key) return search(root->right, key);
+    if (root->key &lt; key) return search(root->right, key);
     return search(root->left, key);
 }
 
@@ -200,7 +200,7 @@ unsigned <span class="type">int</span> hash(char *str) {
 <span class="comment">// --- REPEATING FOR WATERFALL EFFECT ---</span>
 <span class="keyword">struct</span> Node* search(<span class="keyword">struct</span> Node* root, <span class="type">int</span> key) {
     if (root == NULL || root->key == key) return root;
-    if (root->key < key) return search(root->right, key);
+    if (root->key &lt; key) return search(root->right, key);
     return search(root->left, key);
 }
                 </code></pre>
@@ -208,7 +208,7 @@ unsigned <span class="type">int</span> hash(char *str) {
 <span class="comment">// --- BINARY SEARCH TREE ---</span>
 <span class="keyword">struct</span> Node* search(<span class="keyword">struct</span> Node* root, <span class="type">int</span> key) {
     if (root == NULL || root->key == key) return root;
-    if (root->key < key) return search(root->right, key);
+    if (root->key &lt; key) return search(root->right, key);
     return search(root->left, key);
 }
 
@@ -248,7 +248,7 @@ unsigned <span class="type">int</span> hash(char *str) {
 <span class="comment">// --- REPEATING FOR WATERFALL EFFECT ---</span>
 <span class="keyword">struct</span> Node* search(<span class="keyword">struct</span> Node* root, <span class="type">int</span> key) {
     if (root == NULL || root->key == key) return root;
-    if (root->key < key) return search(root->right, key);
+    if (root->key &lt; key) return search(root->right, key);
     return search(root->left, key);
 }
                 </code></pre>
