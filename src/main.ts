@@ -2,7 +2,6 @@ import './style.css'
 
 // 1. CACHED ELEMENTS (Performance: Select once, use many)
 const body = document.body;
-const cursor = document.getElementById('custom-cursor')!;
 const progressBar = document.getElementById('progress-bar')!;
 const progressBarParent = progressBar.parentElement!;
 const navbar = document.getElementById('navbar')!;
@@ -26,15 +25,8 @@ themeToggle.addEventListener('click', () => {
   isDark ? body.setAttribute('data-theme', 'dark') : body.removeAttribute('data-theme');
 });
 
-// 3. BOUNCY CURSOR & FLASHLIGHT
-let cursorX = 0, cursorY = 0;
-let targetX = 0, targetY = 0;
-const speed = 0.25;
-
+// 3. FLASHLIGHT EFFECT
 window.addEventListener('mousemove', (e) => { 
-  targetX = e.clientX; 
-  targetY = e.clientY; 
-  
   // Optimized Flashlight (using cached elements)
   const xPercent = e.clientX;
   const yPercent = e.clientY;
@@ -46,32 +38,6 @@ window.addEventListener('mousemove', (e) => {
     el.style.setProperty('--mouse-y', `${yPercent - rect.top}px`);
   }
 }, { passive: true });
-
-window.addEventListener('mousedown', () => cursor.classList.add('clicking'));
-window.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
-
-function updateCursor() {
-  cursorX += (targetX - cursorX) * speed;
-  cursorY += (targetY - cursorY) * speed;
-  cursor.style.transform = `translate(${cursorX - 6}px, ${cursorY - 6}px)`;
-  requestAnimationFrame(updateCursor);
-}
-updateCursor();
-
-// Event Delegation for hover effects (Performance: One listener instead of many)
-body.addEventListener('mouseover', (e) => {
-  const target = e.target as HTMLElement;
-  if (target.closest('a, button, .card, .pop-bubble, .chapter-link')) {
-    cursor.classList.add('hovering');
-  }
-});
-
-body.addEventListener('mouseout', (e) => {
-  const target = e.target as HTMLElement;
-  if (target.closest('a, button, .card, .pop-bubble, .chapter-link')) {
-    cursor.classList.remove('hovering');
-  }
-});
 
 // 4. SCROLL PROGRESS
 let lastScrollTop = 0;
