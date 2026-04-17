@@ -33,7 +33,7 @@ const queries = [
 let currentQueryIndex = 0;
 
 // Elements for flashlight effect
-const flashlightElements = document.querySelectorAll('.card, .contact-card, .code-section, nav, .theme-toggle, .profile-pic-container');
+const flashlightElements = document.querySelectorAll('.card, .matrix-item, .code-section, nav, .theme-toggle, .profile-pic-container');
 
 // 2. THEME TOGGLE
 const themeToggle = document.getElementById('theme-toggle-sidebar')!;
@@ -240,15 +240,6 @@ const observer = new IntersectionObserver((entries) => {
   for (const entry of entries) {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      
-      // Mobile Scroll Bouncy Effect: Trigger active class when in center
-      if (window.innerWidth <= 1024 && entry.target.classList.contains('timeline-item')) {
-        if (entry.intersectionRatio > 0.5) {
-          entry.target.classList.add('scroll-active');
-        } else {
-          entry.target.classList.remove('scroll-active');
-        }
-      }
     }
     
     if (entry.target.id === 'code-section') {
@@ -265,8 +256,8 @@ const observer = new IntersectionObserver((entries) => {
   }
 }, observerOptions);
 
-// Observe sections, code blocks, and individual experience items
-document.querySelectorAll('section, .code-section, .timeline-item').forEach(sec => observer.observe(sec));
+// Observe sections, code blocks, and matrix items
+document.querySelectorAll('section, .code-section, .matrix-item').forEach(sec => observer.observe(sec));
 
 // 8. CHAPTER JUMPS
 document.querySelector('.code-chapters')?.addEventListener('click', (e) => {
@@ -297,25 +288,28 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// 10. UPLINK MATRIX INTERACTIONS
+// 10. UPLINK & EXPERIENCE MATRIX INTERACTIONS
 const matrixItems = document.querySelectorAll('.matrix-item');
 const hexChars = "0123456789ABCDEF";
 
 matrixItems.forEach(item => {
   const htmlItem = item as HTMLElement;
   const emailSpan = htmlItem.querySelector('#email-text') as HTMLElement;
+  const expDate = htmlItem.querySelector('.exp-date') as HTMLElement;
+  const expRole = htmlItem.querySelector('.exp-role') as HTMLElement;
   
-  if (emailSpan) {
-    const originalText = emailSpan.textContent || '';
+  const scrambleElements = [emailSpan, expDate, expRole].filter(el => el !== null);
+
+  scrambleElements.forEach(el => {
+    const originalText = el.textContent || '';
     let scrambleInterval: number | null = null;
 
     htmlItem.addEventListener('mouseenter', () => {
       let iteration = 0;
-      
       if (scrambleInterval) clearInterval(scrambleInterval);
       
       scrambleInterval = window.setInterval(() => {
-        emailSpan.innerText = originalText
+        el.innerText = originalText
           .split("")
           .map((_, index) => {
             if (index < iteration) return originalText[index];
@@ -326,15 +320,14 @@ matrixItems.forEach(item => {
         if (iteration >= originalText.length) {
           if (scrambleInterval) clearInterval(scrambleInterval);
         }
-        
         iteration += 1 / 3;
       }, 30);
     });
 
     htmlItem.addEventListener('mouseleave', () => {
       if (scrambleInterval) clearInterval(scrambleInterval);
-      emailSpan.innerText = originalText;
+      el.innerText = originalText;
     });
-  }
+  });
 });
 
