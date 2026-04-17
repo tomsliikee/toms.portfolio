@@ -28,6 +28,9 @@
       <div class="main-content">
         <nav id="navbar">
           <div class="logo">BUILDING EFFICIENT DIGITAL SYSTEMS.</div>
+          <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
           <div class="nav-links">
             <a href="#about">EXP</a>
             <a href="#skills">SKILLS</a>
@@ -44,8 +47,8 @@
             </div>
             <div class="profile-pic-container">
               <picture>
-                <source srcset="/Thomas_Haiden.webp" type="image/webp">
-                <img src="/Thomas_Haiden.png" alt="Thomas Haiden" class="profile-pic" loading="eager" decoding="async" />
+                <source srcset="./Thomas_Haiden.webp" type="image/webp">
+                <img src="./Thomas_Haiden.png" alt="Thomas Haiden" class="profile-pic" loading="eager" decoding="async" />
               </picture>
             </div>
           </section>
@@ -181,7 +184,7 @@
 unsigned <span class="type">int</span> hash(char *str) {
     unsigned <span class="type">int</span> h = 5381;
     <span class="type">int</span> c;
-    while ((c = *str++)) h = ((h << 5) + h) + c;
+    while ((c = *str++)) h = ((h &lt;&lt; 5) + h) + c;
     return h;
 }
 
@@ -229,7 +232,7 @@ unsigned <span class="type">int</span> hash(char *str) {
 unsigned <span class="type">int</span> hash(char *str) {
     unsigned <span class="type">int</span> h = 5381;
     <span class="type">int</span> c;
-    while ((c = *str++)) h = ((h << 5) + h) + c;
+    while ((c = *str++)) h = ((h &lt;&lt; 5) + h) + c;
     return h;
 }
 

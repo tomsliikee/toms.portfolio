@@ -148,3 +148,27 @@ document.querySelector('.code-chapters')?.addEventListener('click', (e) => {
     // waterfall.offsetHeight; 
   }
 });
+
+// 9. MOBILE MENU TOGGLE
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle')!;
+const navLinks = document.querySelector('.nav-links')!;
+
+mobileMenuToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  navLinks.classList.toggle('active');
+});
+
+// Close menu when clicking outside or on a link
+document.addEventListener('click', (e) => {
+  const target = e.target as HTMLElement;
+  if (!navLinks.contains(target) && !mobileMenuToggle.contains(target)) {
+    navLinks.classList.remove('active');
+  }
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+  });
+});
+
