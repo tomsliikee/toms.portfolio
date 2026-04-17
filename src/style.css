@@ -211,6 +211,10 @@ nav.scrolled {
 }
 
 @media (max-width: 768px) {
+  nav {
+    overflow: visible;
+  }
+
   .mobile-menu-toggle {
     display: block;
   }
@@ -341,6 +345,14 @@ h1 {
   letter-spacing: -5px;
   margin-bottom: 2.5rem;
   font-weight: 400;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: clamp(3rem, 15vw, 4rem);
+    letter-spacing: -2px;
+  }
 }
 
 .profile-pic-container {
