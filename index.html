@@ -108,52 +108,123 @@
 
           <!-- SKILLS SECTION -->
           <section id="skills">
-            <span class="section-tag">02 / AQUIRED SKILLS</span>
-            <div class="skills-grid">
-              <div class="card skill-box">
-                <span class="skill-name">C / C++</span>
-                <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 1rem;">Core systems and memory-efficient programming.</p>
+            <span class="section-tag">02 / SYSTEM CAPABILITIES</span>
+            <div class="skills-bento">
+              <!-- C / C++ - Core Module (2x2) -->
+              <div class="card bento-item bento-2x2" data-module="core">
+                <div class="bento-header">
+                  <span class="module-id">ID: 0x01</span>
+                  <span class="skill-name">C / C++</span>
+                </div>
+                <div class="visual-container memory-allocator" id="memory-visual">
+                  <div class="mem-bar"></div><div class="mem-bar"></div><div class="mem-bar"></div><div class="mem-bar"></div><div class="mem-bar"></div>
+                  <div class="mem-bar"></div><div class="mem-bar"></div><div class="mem-bar"></div><div class="mem-bar"></div><div class="mem-bar"></div>
+                </div>
+                <p class="module-desc">Core systems and memory-efficient programming. Architecting at the metal.</p>
               </div>
-              <div class="card skill-box">
-                <span class="skill-name">SQL</span>
-                <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 1rem;">Database architecture and relational logic.</p>
+
+              <!-- SQL - Data Module (2x1) -->
+              <div class="card bento-item bento-2x1" data-module="data">
+                <div class="bento-header">
+                  <span class="module-id">ID: 0x02</span>
+                  <span class="skill-name">SQL</span>
+                </div>
+                <div class="visual-container query-terminal">
+                  <code id="sql-query">SELECT * FROM architecture WHERE efficiency > 99;</code>
+                  <span class="cursor">_</span>
+                </div>
+                <p class="module-desc">Database architecture and relational logic. Complex query optimization.</p>
               </div>
-              <div class="card skill-box">
-                <span class="skill-name">Hardware</span>
-                <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 1rem;">PC assembly, diagnostics, and component logic.</p>
+
+              <!-- Hardware - Physical Module (1x1) -->
+              <div class="card bento-item bento-1x1" data-module="physical">
+                <div class="bento-header">
+                  <span class="module-id">ID: 0x03</span>
+                  <span class="skill-name">Hardware</span>
+                </div>
+                <div class="visual-container status-readout">
+                  <div class="status-led"></div>
+                  <span class="status-text">SYSTEM OK</span>
+                </div>
+                <p class="module-desc">PC diagnostics and component logic.</p>
               </div>
-              <div class="card skill-box">
-                <span class="skill-name">English</span>
-                <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 1rem;">C1/C2 Fluent — Negotiation level proficiency.</p>
+
+              <!-- English - Comm Module (1x1) -->
+              <div class="card bento-item bento-1x1" data-module="comm">
+                <div class="bento-header">
+                  <span class="module-id">ID: 0x04</span>
+                  <span class="skill-name">English</span>
+                </div>
+                <div class="visual-container signal-meter" id="english-signal">
+                  <div class="sig-bar active"></div><div class="sig-bar active"></div><div class="sig-bar active"></div><div class="sig-bar active"></div><div class="sig-bar active"></div>
+                </div>
+                <p class="module-desc">C1/C2 Fluent — Negotiation level.</p>
               </div>
-              <div class="card skill-box">
-                <span class="skill-name">Spanish</span>
-                <p style="font-size: 0.9rem; opacity: 0.6; margin-top: 1rem;">A2 Basic — Foundational language skills.</p>
+
+              <!-- Spanish - Comm Module (1x1) -->
+              <div class="card bento-item bento-1x1" data-module="comm-alt">
+                <div class="bento-header">
+                  <span class="module-id">ID: 0x05</span>
+                  <span class="skill-name">Spanish</span>
+                </div>
+                <div class="visual-container signal-meter" id="spanish-signal">
+                  <div class="sig-bar active"></div><div class="sig-bar active"></div><div class="sig-bar"></div><div class="sig-bar"></div><div class="sig-bar"></div>
+                </div>
+                <p class="module-desc">A2 Basic — Foundational language.</p>
               </div>
-              <div class="card skill-box" style="border-style: dashed; opacity: 0.6;">
-                <span class="skill-name" style="font-size: 1.1rem; letter-spacing: 2px;">MORE COMING SOON...</span>
+
+              <!-- Placeholder (1x1) -->
+              <div class="card bento-item bento-1x1 placeholder-item">
+                <span class="skill-name" style="font-size: 0.8rem; letter-spacing: 2px;">0x06: COMING SOON...</span>
               </div>
             </div>
           </section>
 
           <!-- CONTACT SECTION -->
           <section id="contact">
-            <div class="contact-card">
-              <span class="section-tag">03 / CONTACT</span>
-              <h1 style="margin: 2rem 0; font-family: var(--font-serif); font-weight: 400;">Ready for the next <br>extraordinary challenge.</h1>
-              <div class="contact-links">
-                <a href="mailto:thomashaiden17@gmail.com" class="contact-link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 1rem; vertical-align: middle;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  EMAIL: thomashaiden17@gmail.com
+            <div class="uplink-console">
+              <span class="section-tag">03 / DIRECT UPLINK</span>
+              
+              <div class="uplink-header">
+                <div class="status-indicator">
+                  <div class="status-dot"></div>
+                  <span class="status-label">STATION_READY: ACCEPTING_REQUESTS</span>
+                </div>
+                <h1 class="uplink-title">INITIATE <br>TRANSMISSION.</h1>
+              </div>
+
+              <div class="contact-grid">
+                <a href="mailto:thomashaiden17@gmail.com" class="contact-node" data-label="EMAIL" data-value="thomashaiden17@gmail.com">
+                  <div class="node-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  </div>
+                  <div class="node-content">
+                    <span class="node-label">EMAIL: thomashaiden17@gmail.com</span>
+                    <span class="node-status">STABLE_CONNECTION</span>
+                  </div>
+                  <div class="energy-waves"><span></span><span></span><span></span></div>
                 </a>
-                <a href="https://github.com/tomsliikee" target="_blank" class="contact-link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 1rem; vertical-align: middle;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                  GITHUB: tomsliikee
+
+                <a href="https://github.com/tomsliikee" target="_blank" class="contact-node" data-label="GITHUB" data-value="tomsliikee">
+                  <div class="node-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  </div>
+                  <div class="node-content">
+                    <span class="node-label">GITHUB: tomsliikee</span>
+                    <span class="node-status">ACTIVE_NODE</span>
+                  </div>
+                  <div class="energy-waves"><span></span><span></span><span></span></div>
                 </a>
-                <span class="contact-link" style="border:none; cursor: default;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 1rem; vertical-align: middle;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  LOCATION: Near Wr. Neustadt, Austria
-                </span>
+
+                <div class="contact-node no-link" data-label="LOCATION" data-value="Austria">
+                  <div class="node-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </div>
+                  <div class="node-content">
+                    <span class="node-label">LOCATION: Austria</span>
+                    <span class="node-status">GEO_LOCKED</span>
+                  </div>
+                </div>
               </div>
             </div>
 

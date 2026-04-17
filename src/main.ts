@@ -12,9 +12,25 @@ const fidgetModal = document.getElementById('fidget-modal')!;
 const fidgetClose = document.getElementById('fidget-close')!;
 const waterfall = document.getElementById('waterfall-container')!;
 
+// Bento Skill Elements
+const memBars = document.querySelectorAll('.mem-bar');
+const sqlQuery = document.getElementById('sql-query');
+const sigBars = document.querySelectorAll('.sig-bar.active');
+
 // State Tracking
 let isFocusMode = false;
 const mouse = { x: -1000, y: -1000 };
+let frameCount = 0;
+
+// SQL Queries to cycle
+const queries = [
+  "SELECT * FROM architecture WHERE efficiency > 99;",
+  "INSERT INTO skills (name, level) VALUES ('C++', 'Expert');",
+  "UPDATE system SET performance = 'OPTIMIZED';",
+  "DELETE FROM bugs WHERE existence = true;",
+  "JOIN data_streams ON systems.id = streams.id;"
+];
+let currentQueryIndex = 0;
 
 // Elements for flashlight effect
 const flashlightElements = document.querySelectorAll('.card, .contact-card, .code-section, nav, .theme-toggle, .profile-pic-container');
@@ -103,6 +119,32 @@ window.addEventListener('mousemove', (e) => {
 
 function animate() {
   updateFlashlights();
+  frameCount++;
+
+  // Update Bento Skills every few frames
+  if (frameCount % 60 === 0) {
+    // Memory Allocator: Random scales
+    memBars.forEach(bar => {
+      const scale = Math.random() * 0.8 + 0.2;
+      const opacity = Math.random() * 0.5 + 0.2;
+      (bar as HTMLElement).style.transform = `scaleY(${scale})`;
+      (bar as HTMLElement).style.opacity = opacity.toString();
+    });
+
+    // SQL Query: Cycle text
+    if (sqlQuery) {
+      currentQueryIndex = (currentQueryIndex + 1) % queries.length;
+      sqlQuery.textContent = queries[currentQueryIndex];
+    }
+  }
+
+  // Signal Jitter (more frequent)
+  if (frameCount % 30 === 0) {
+    sigBars.forEach(bar => {
+      const scale = Math.random() * 0.4 + 0.8;
+      (bar as HTMLElement).style.transform = `scaleY(${scale})`;
+    });
+  }
   
   if (width <= 768) {
     // Liquid Gradient Effect (Mobile)
@@ -255,9 +297,28 @@ document.addEventListener('click', (e) => {
   }
 });
 
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('active');
+// 10. CONTACT NODE INTERACTIONS
+const contactNodes = document.querySelectorAll('.contact-node');
+contactNodes.forEach(node => {
+  const label = node.querySelector('.node-label');
+  if (!label) return;
+
+  const originalText = label.textContent || '';
+  let isScrambling = false;
+
+  node.addEventListener('mouseenter', () => {
+    if (isScrambling) return;
+    isScrambling = true;
+
+    // Temporary "Scanning" effect
+    label.textContent = 'CONNECTING...';
+    label.style.opacity = '0.5';
+    
+    setTimeout(() => {
+      label.textContent = originalText;
+      label.style.opacity = '1';
+      isScrambling = false;
+    }, 200);
   });
 });
 
