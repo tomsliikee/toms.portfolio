@@ -106,7 +106,7 @@ function animate() {
   
   if (width <= 768) {
     // Liquid Gradient Effect (Mobile)
-    ctx.fillStyle = '#0a0a0a';
+    ctx.fillStyle = isFocusMode ? '#7d8c7d' : (isDark ? '#0c0d0c' : '#fdfdfc');
     ctx.fillRect(0, 0, width, height);
 
     orbs.forEach(orb => {
@@ -122,8 +122,19 @@ function animate() {
 
       // Draw liquid orb
       const gradient = ctx.createRadialGradient(orb.x, orb.y, 0, orb.x, orb.y, orb.radius);
-      const color = isFocusMode ? '255, 255, 255' : '80, 80, 80';
-      const alpha = isFocusMode ? 0.2 : 0.15;
+      
+      let color;
+      let alpha;
+      if (isFocusMode) {
+        color = '255, 255, 255';
+        alpha = 0.2;
+      } else if (isDark) {
+        color = '80, 80, 80';
+        alpha = 0.15;
+      } else {
+        color = '180, 180, 180'; // soft gray for light mode
+        alpha = 0.3;
+      }
       
       gradient.addColorStop(0, `rgba(${color}, ${alpha})`);
       gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
