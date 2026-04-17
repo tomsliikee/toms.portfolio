@@ -134,7 +134,14 @@ a {
 }
 
 /* FLASHLIGHT EFFECT BASE */
-.card, .contact-card, .code-section, nav, .theme-toggle, .profile-pic-container {
+.card, .contact-card, .code-section, .profile-pic-container {
+  position: relative;
+  overflow: hidden;
+  contain: layout style;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav, .theme-toggle {
   background: var(--card-bg);
   position: relative;
   overflow: hidden;
@@ -318,7 +325,7 @@ nav.scrolled {
 }
 
 @media (max-width: 1024px) {
-  .main-content { padding: 0 1.5rem; }
+  .main-content { padding: 0 1.25rem; }
 }
 
 .hero {
@@ -333,8 +340,8 @@ nav.scrolled {
   .hero {
     flex-direction: column-reverse;
     text-align: center;
-    padding: 6rem 0 4rem;
-    gap: 3rem;
+    padding: 4rem 0 1rem;
+    gap: 2.5rem;
   }
 }
 
@@ -359,8 +366,8 @@ h1 {
   width: 400px;
   height: 400px;
   border-radius: var(--border-radius);
-  overflow: hidden;
   border: 1px solid var(--border-color);
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -393,7 +400,7 @@ section {
 }
 
 @media (max-width: 768px) {
-  section { padding: 6rem 0; }
+  section { padding: 2.5rem 0; }
 }
 
 section.visible {
@@ -412,19 +419,16 @@ section.visible {
 }
 
 .card {
-  padding: 5rem;
-  border-radius: var(--card-radius);
-  border: 1px solid var(--border-color);
-  margin-bottom: 4rem;
+  padding: 2rem 0;
+  margin-bottom: 8rem;
 }
 
 @media (max-width: 768px) {
-  .card { padding: 2.5rem; }
+  .card { padding: 1rem 0; margin-bottom: 4rem; }
 }
 
 .card:hover {
-  border-color: var(--accent-color);
-  transform: translateY(-10px);
+  transform: translateY(-5px);
 }
 
 .timeline-item {
@@ -459,44 +463,267 @@ section.visible {
   display: block;
 }
 
+.exp-sticky-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.4fr; /* Shifting content more to the left by giving it more weight */
+  gap: 6rem;
+  align-items: flex-start;
+}
+
+/* Ensure no clipping occurs when text scales up */
+#about, .exp-sticky-layout, .exp-content {
+  overflow: visible !important;
+}
+
+.exp-visual {
+  position: sticky;
+  top: 10rem;
+  height: 70vh;
+  z-index: 5;
+}
+
+.sticky-image-container {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  position: relative;
+  background: var(--card-bg);
+}
+
+.sticky-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.8s ease;
+}
+
+.exp-sticky-layout:hover .sticky-img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.4));
+  pointer-events: none;
+}
+
+.exp-content {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20rem; /* Extra space for the last item to be hoverable */
+}
+
+.exp-content .card {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  overflow: visible !important;
+}
+
+/* Remove flashlight box from experience cards */
+.exp-content .card::before {
+  display: none !important;
+}
+
+.timeline-item {
+  margin-bottom: 0;
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: padding 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+  will-change: padding;
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+}
+
+.timeline-item .role {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 3rem;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease;
+  display: block;
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.timeline-item .company, .timeline-item .date {
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+  opacity: 0.5;
+}
+
+/* UNIFORM FLUID PUSH */
+.timeline-item:hover {
+  padding: 8rem 0;
+  border-bottom-color: var(--accent-color);
+}
+
+.timeline-item:hover .role {
+  transform: scale(1.8);
+  color: var(--accent-color);
+}
+
+.timeline-item:hover .company {
+  opacity: 1;
+  transform: translateY(2rem);
+}
+
+.timeline-item:hover .date {
+  opacity: 1;
+  transform: translateY(-0.5rem);
+}
+
+@media (max-width: 1024px) {
+  .exp-sticky-layout {
+    display: block;
+  }
+  
+  .exp-visual {
+    display: none; 
+  }
+
+  .exp-content { 
+    padding-bottom: 2rem; 
+    width: 100%;
+    overflow: visible !important;
+  }
+
+  /* REFINED BOUNCY SCROLL FOR MOBILE (SMALLER & NO CLIPPING) */
+  .timeline-item {
+    transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    will-change: padding, transform;
+    width: 100%;
+    padding: 1.5rem 0 !important;
+  }
+
+  .timeline-item .role { 
+    font-size: 1.6rem; /* Much smaller base size */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  .timeline-item.scroll-active {
+    padding: 2.5rem 0 !important; /* Less aggressive padding push */
+    border-bottom-color: var(--accent-color);
+  }
+
+  .timeline-item.scroll-active .role {
+    transform: scale(1.15) !important; /* Subtle scaling to prevent cutoff */
+    color: var(--accent-color);
+  }
+
+  .timeline-item .company {
+    font-size: 1rem;
+    opacity: 0.6;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .timeline-item.scroll-active .company {
+    opacity: 1;
+    transform: translateY(0.8rem);
+  }
+
+  /* Disable hover effects to prioritize scroll interaction */
+  .timeline-item:hover {
+    padding: 2.5rem 0 !important;
+  }
+  .timeline-item:hover .role {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-item .role { 
+    font-size: 1.4rem; /* Even smaller for very small screens */
+  }
+  .timeline-item.scroll-active .role {
+    transform: scale(1.1) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .exp-visual {
+    height: 300px;
+  }
+}
+
 /* SKILLS */
 .skills-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
-}
-
-@media (max-width: 900px) {
-  .skills-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 600px) {
-  .skills-grid { grid-template-columns: 1fr; }
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 6rem;
+  padding-top: 4rem;
 }
 
 .skill-box {
-  padding: 3rem !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  overflow: visible !important;
+}
+
+/* Remove the flashlight box effect from skill boxes */
+.skill-box::before {
+  display: none !important;
+}
+
+.skill-box:nth-child(even) {
+  transform: translateY(60px);
+}
+
+@media (max-width: 900px) {
+  .skills-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+  .skill-box:nth-child(even) { transform: translateY(0); }
+  .skill-box:nth-child(2n) { transform: translateY(40px); }
+}
+
+@media (max-width: 600px) {
+  .skills-grid { grid-template-columns: 1fr; gap: 4rem; }
+  .skill-box { transform: none !important; }
 }
 
 .skill-name {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-bottom: 0.5rem;
 }
 
 /* CONTACT CARD */
 .contact-card {
-  padding: 6rem;
-  border-radius: var(--card-radius);
-  border: 1px solid var(--accent-color);
+  padding: 8rem 0;
 }
 
 @media (max-width: 768px) {
-  .contact-card { padding: 3rem 2rem; }
+  .contact-card { padding: 2rem 0; }
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: -2rem;
+}
+
+@media (max-width: 768px) {
+  .contact-links { align-items: flex-start; margin-top: 2rem; }
 }
 
 .contact-link {
@@ -545,8 +772,12 @@ body.focus-mode .theme-toggle {
 }
 
 @media (max-width: 768px) {
+  .card::before, .contact-card::before, .code-section::before, .profile-pic-container::before {
+    display: none !important;
+  }
+
   .code-section {
-    padding: 2rem;
+    padding: 2.5rem;
     height: 60vh;
     margin-top: 3rem;
   }

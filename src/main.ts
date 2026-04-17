@@ -188,12 +188,25 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') fidgetModal.classList.remove('active'); 
 });
 
-// 7. FOCUS MODE OBSERVER
-const observerOptions = { threshold: [0, 0.2, 0.4, 0.6, 0.8, 1.0] };
+// 7. FOCUS MODE & SCROLL OBSERVER
+const observerOptions = { 
+  threshold: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
+  rootMargin: "-20% 0px -20% 0px" // Focus on the center of the screen
+};
+
 const observer = new IntersectionObserver((entries) => {
   for (const entry of entries) {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
+      
+      // Mobile Scroll Bouncy Effect: Trigger active class when in center
+      if (window.innerWidth <= 1024 && entry.target.classList.contains('timeline-item')) {
+        if (entry.intersectionRatio > 0.5) {
+          entry.target.classList.add('scroll-active');
+        } else {
+          entry.target.classList.remove('scroll-active');
+        }
+      }
     }
     
     if (entry.target.id === 'code-section') {
@@ -210,7 +223,8 @@ const observer = new IntersectionObserver((entries) => {
   }
 }, observerOptions);
 
-document.querySelectorAll('section, .code-section').forEach(sec => observer.observe(sec));
+// Observe sections, code blocks, and individual experience items
+document.querySelectorAll('section, .code-section, .timeline-item').forEach(sec => observer.observe(sec));
 
 // 8. CHAPTER JUMPS
 document.querySelector('.code-chapters')?.addEventListener('click', (e) => {
