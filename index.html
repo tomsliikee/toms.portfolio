@@ -182,48 +182,65 @@
 
           <!-- CONTACT SECTION -->
           <section id="contact">
-            <div class="uplink-console">
-              <span class="section-tag">03 / DIRECT UPLINK</span>
+            <div class="uplink-matrix">
+              <span class="section-tag">03 / ENCRYPTED UPLINK</span>
               
-              <div class="uplink-header">
-                <div class="status-indicator">
-                  <div class="status-dot"></div>
-                  <span class="status-label">STATION_READY: ACCEPTING_REQUESTS</span>
-                </div>
-                <h1 class="uplink-title">INITIATE <br>TRANSMISSION.</h1>
-              </div>
-
-              <div class="contact-grid">
-                <a href="mailto:thomashaiden17@gmail.com" class="contact-node" data-label="EMAIL" data-value="thomashaiden17@gmail.com">
-                  <div class="node-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <div class="uplink-grid">
+                <!-- THE HUB: EMAIL (2x1) -->
+                <a href="mailto:thomashaiden17@gmail.com" class="matrix-item matrix-2x1" data-label="EMAIL" data-value="thomashaiden17@gmail.com">
+                  <div class="matrix-corners"></div>
+                  <div class="matrix-header">
+                    <span class="matrix-id">NODE: 0x01</span>
+                    <span class="matrix-type">UPLINK_HUB</span>
                   </div>
-                  <div class="node-content">
-                    <span class="node-label">EMAIL: thomashaiden17@gmail.com</span>
-                    <span class="node-status">STABLE_CONNECTION</span>
+                  <div class="matrix-visual hex-stream">
+                    <span id="email-text">thomashaiden17@gmail.com</span>
                   </div>
-                  <div class="energy-waves"><span></span><span></span><span></span></div>
+                  <div class="matrix-footer">
+                    <span class="matrix-status">STATUS: STABLE</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  </div>
+                  <div class="scanline"></div>
                 </a>
 
-                <a href="https://github.com/tomsliikee" target="_blank" class="contact-node" data-label="GITHUB" data-value="tomsliikee">
-                  <div class="node-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                <!-- THE REPOSITORY: GITHUB (1x2 Tall) -->
+                <a href="https://github.com/tomsliikee" target="_blank" class="matrix-item matrix-1x2" data-label="GITHUB" data-value="tomsliikee">
+                  <div class="matrix-corners"></div>
+                  <div class="matrix-header">
+                    <span class="matrix-id">NODE: 0x02</span>
+                    <span class="matrix-type">DATA_REPO</span>
                   </div>
-                  <div class="node-content">
-                    <span class="node-label">GITHUB: tomsliikee</span>
-                    <span class="node-status">ACTIVE_NODE</span>
+                  <div class="matrix-visual repo-graph">
+                    <div class="matrix-primary-label">GITHUB / tomsliikee</div>
+                    <svg width="100%" height="60" viewBox="0 0 200 60" preserveAspectRatio="none" style="position: absolute; bottom: 0; opacity: 0.3;">
+                      <path d="M0,50 Q25,10 50,45 T100,20 T150,40 T200,10" fill="none" stroke="var(--accent-color)" stroke-width="2" opacity="0.6">
+                        <animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="3s" repeatCount="indefinite" />
+                      </path>
+                    </svg>
                   </div>
-                  <div class="energy-waves"><span></span><span></span><span></span></div>
+                  <div class="matrix-footer">
+                    <span class="matrix-status">BRANCH: MAIN</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                  </div>
+                  <div class="scanline"></div>
                 </a>
 
-                <div class="contact-node no-link" data-label="LOCATION" data-value="Austria">
-                  <div class="node-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <!-- THE ZONE: LOCATION (1x1) -->
+                <div class="matrix-item matrix-1x1" data-label="LOCATION" data-value="Austria">
+                  <div class="matrix-corners"></div>
+                  <div class="matrix-header">
+                    <span class="matrix-id">NODE: 0x03</span>
+                    <span class="matrix-type">GEO_ZONE</span>
                   </div>
-                  <div class="node-content">
-                    <span class="node-label">LOCATION: Austria</span>
-                    <span class="node-status">GEO_LOCKED</span>
+                  <div class="matrix-visual geo-grid">
+                    <div class="matrix-primary-label">AUSTRIA</div>
+                    <div class="target-reticle" style="position: absolute; z-index: 1;"></div>
                   </div>
+                  <div class="matrix-footer">
+                    <span class="matrix-status">LOC: AT_48.1</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </div>
+                  <div class="scanline"></div>
                 </div>
               </div>
             </div>

@@ -297,28 +297,44 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// 10. CONTACT NODE INTERACTIONS
-const contactNodes = document.querySelectorAll('.contact-node');
-contactNodes.forEach(node => {
-  const label = node.querySelector('.node-label');
-  if (!label) return;
+// 10. UPLINK MATRIX INTERACTIONS
+const matrixItems = document.querySelectorAll('.matrix-item');
+const hexChars = "0123456789ABCDEF";
 
-  const originalText = label.textContent || '';
-  let isScrambling = false;
+matrixItems.forEach(item => {
+  const htmlItem = item as HTMLElement;
+  const emailSpan = htmlItem.querySelector('#email-text') as HTMLElement;
+  
+  if (emailSpan) {
+    const originalText = emailSpan.textContent || '';
+    let scrambleInterval: number | null = null;
 
-  node.addEventListener('mouseenter', () => {
-    if (isScrambling) return;
-    isScrambling = true;
+    htmlItem.addEventListener('mouseenter', () => {
+      let iteration = 0;
+      
+      if (scrambleInterval) clearInterval(scrambleInterval);
+      
+      scrambleInterval = window.setInterval(() => {
+        emailSpan.innerText = originalText
+          .split("")
+          .map((_, index) => {
+            if (index < iteration) return originalText[index];
+            return hexChars[Math.floor(Math.random() * 16)];
+          })
+          .join("");
+        
+        if (iteration >= originalText.length) {
+          if (scrambleInterval) clearInterval(scrambleInterval);
+        }
+        
+        iteration += 1 / 3;
+      }, 30);
+    });
 
-    // Temporary "Scanning" effect
-    label.textContent = 'CONNECTING...';
-    label.style.opacity = '0.5';
-    
-    setTimeout(() => {
-      label.textContent = originalText;
-      label.style.opacity = '1';
-      isScrambling = false;
-    }, 200);
-  });
+    htmlItem.addEventListener('mouseleave', () => {
+      if (scrambleInterval) clearInterval(scrambleInterval);
+      emailSpan.innerText = originalText;
+    });
+  }
 });
 
