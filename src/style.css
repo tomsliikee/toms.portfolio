@@ -3,7 +3,7 @@
    ========================================================================== */
 
 :root {
-  /* Colors */
+  /* Colors (Light Mode) */
   --color-bg-global: #F6F0EA;       /* Warm beige paper background */
   --color-bg-card: #FFFFFF;         /* White dashboard card background */
   --color-bg-badge: #EEF2F6;        /* Ice-blue badge background */
@@ -16,7 +16,11 @@
   --color-accent-green: #429A64;    /* Completed checkmark green */
   
   --color-border: #E2E8F0;          /* Subtle dividing border */
-  --color-path-line: #B8C4D6;        /* Dotted/dashed connection path lines */
+  --color-path-line: #8C9BB0;        /* Dotted/dashed connection path lines (Darker for visibility) */
+
+  /* Wave colors - Darker for visibility */
+  --color-wave-1: rgba(59, 98, 165, 0.1);
+  --color-wave-2: rgba(59, 98, 165, 0.05);
 
   /* Typography */
   --font-serif: 'Lora', 'Playfair Display', 'Georgia', serif;
@@ -34,6 +38,31 @@
 
   /* Layout dimensions */
   --max-width: 1040px;
+}
+
+[data-theme="dark"] {
+  /* Colors (Dark Mode) */
+  --color-bg-global: #0C1824;       /* Deep midnight navy background */
+  --color-bg-card: #142538;         /* Lighter navy for card container */
+  --color-bg-badge: #1A2F47;        /* Muted navy-blue badge background */
+  
+  --color-text-primary: #F6F0EA;    /* Warm cream primary text */
+  --color-text-secondary: #A2B7CF;  /* Slate-blue secondary text */
+  --color-text-muted: #68819F;      /* Gray-blue metadata */
+  
+  --color-accent-blue: #5C93E6;     /* Vibrant readable light-blue accent */
+  --color-accent-green: #59C281;    /* Pulsing green completed */
+  
+  --color-border: #1E3652;          /* Subtle navy border */
+  --color-path-line: #415C7C;        /* Highly visible gray-blue paths */
+
+  /* Wave colors (Vibrant on dark background) */
+  --color-wave-1: rgba(92, 147, 230, 0.14);
+  --color-wave-2: rgba(92, 147, 230, 0.07);
+
+  /* Shadows - Dark-tinted soft shadow */
+  --shadow-soft: 0px 8px 30px rgba(6, 12, 18, 0.25);
+  --shadow-hover: 0px 16px 40px rgba(6, 12, 18, 0.35);
 }
 
 /* ==========================================================================
@@ -91,6 +120,12 @@ h1, h2, h3, h4 {
   color: var(--color-text-primary);
   font-weight: 400;
   line-height: 1.2;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover {
+  transform: translateY(-2px) scale(1.008);
+  color: var(--color-accent-blue);
 }
 
 em, .accent-italic {
@@ -591,7 +626,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background-color: #ffffff;
+  background-color: var(--color-bg-global);
 }
 
 .progress-title {
@@ -612,7 +647,7 @@ nav {
 .progress-track {
   height: 6px;
   width: 100%;
-  background-color: #E0E6ED;
+  background-color: var(--color-border);
   border-radius: var(--radius-pill);
   overflow: hidden;
   margin: 2px 0;
@@ -880,27 +915,26 @@ nav {
 footer {
   width: 100%;
   border-top: 1px solid var(--color-border);
-  padding: 6rem 0 16rem;
+  padding: 6rem 0 22rem;
   text-align: center;
   font-family: var(--font-serif);
   font-size: 1.05rem;
   color: var(--color-text-secondary);
   margin-top: 6rem;
   position: relative;
-  overflow: hidden;
 }
 
 .footer-waves {
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 240px;
+  left: calc(-50vw + 50%);
+  width: 100vw;
+  height: 420px;
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
   opacity: 0;
-  transform: translateY(60px);
+  transform: translateY(120px);
   transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -915,23 +949,267 @@ footer {
 }
 
 .wave-path-1 {
-  fill: rgba(59, 98, 165, 0.05);
-  animation: wave-move-1 20s linear infinite;
+  fill: var(--color-wave-1);
+  animation: wave-move-1 14s ease-in-out infinite alternate;
 }
 
 .wave-path-2 {
-  fill: rgba(59, 98, 165, 0.025);
-  animation: wave-move-2 15s linear infinite;
+  fill: var(--color-wave-2);
+  animation: wave-move-2 18s ease-in-out infinite alternate;
+}
+
+.wave-path-3 {
+  fill: var(--color-wave-2);
+  opacity: 0.6;
+  animation: wave-move-3 10s ease-in-out infinite alternate;
 }
 
 @keyframes wave-move-1 {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-3%); }
-  100% { transform: translateX(0); }
+  0% { transform: translateX(0) scaleY(1); }
+  100% { transform: translateX(-4%) scaleY(1.08); }
 }
 
 @keyframes wave-move-2 {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(3%); }
-  100% { transform: translateX(0); }
+  0% { transform: translateX(-2%) scaleY(1.05); }
+  100% { transform: translateX(2%) scaleY(0.95); }
 }
+
+@keyframes wave-move-3 {
+  0% { transform: translateX(1%) scaleY(0.92); }
+  100% { transform: translateX(-3%) scaleY(1.06); }
+}
+
+/* ==========================================================================
+   THEME TOGGLE BUTTON
+   ========================================================================== */
+
+.theme-toggle {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.08);
+  border-color: var(--color-accent-blue);
+  color: var(--color-accent-blue);
+  box-shadow: var(--shadow-hover);
+}
+
+.theme-toggle svg {
+  transition: transform 0.3s ease;
+  fill: none;
+}
+
+.theme-toggle:hover svg {
+  transform: rotate(20deg);
+}
+
+.theme-toggle .sun-icon {
+  display: none;
+}
+.theme-toggle .moon-icon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+  display: block;
+}
+[data-theme="dark"] .theme-toggle .moon-icon {
+  display: none;
+}
+
+/* Adjust navbar alignment slightly to prevent overlapping with toggle on small widths if needed */
+@media (max-width: 1100px) {
+  nav {
+    margin-left: 4.5rem;
+  }
+}
+@media (max-width: 768px) {
+  nav {
+    margin-left: 0;
+  }
+  .theme-toggle {
+    top: 1.1rem;
+    left: 1.25rem;
+    width: 38px;
+    height: 38px;
+  }
+  .logo {
+    padding-left: 3.5rem;
+  }
+}
+
+/* ==========================================================================
+   CURSOR TRAIL & CLICK RIPPLE EFFECTS
+   ========================================================================== */
+
+.cursor-ripple {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1; /* Render in the background behind main-content (z-index 10) */
+  width: 100px; /* Much larger and softer */
+  height: 100px;
+  margin-top: -50px;
+  margin-left: -50px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent-blue);
+  filter: blur(8px); /* Blur to simulate soft water ripple */
+  opacity: 0.18;
+  animation: cursor-ripple-anim 1.6s cubic-bezier(0.1, 0.4, 0.15, 1) forwards;
+}
+
+@keyframes cursor-ripple-anim {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.25;
+  }
+  100% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
+
+.tactile-click-blur {
+  animation: click-blur-anim 0.4s cubic-bezier(0.1, 0.8, 0.3, 1);
+  will-change: filter, transform;
+}
+
+@keyframes click-blur-anim {
+  0% {
+    filter: blur(0px);
+    transform: scale(1);
+  }
+  30% {
+    filter: blur(3.5px) scale(0.96);
+  }
+  100% {
+    filter: blur(0px);
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   TACTILE INTERACTION DETAILS (CLICK & HOVER)
+   ========================================================================== */
+
+/* Scale transitions for clickable elements */
+a, button, .timeline-item, .feature-col, .logo, .badge, .contact-item, .mobile-menu-toggle {
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+a:active, button:active, .timeline-item:active, .logo:active, .badge:active, .contact-item:active, .mobile-menu-toggle:active {
+  transform: scale(0.96) !important;
+}
+
+/* Paragraphs and list items hover feedback - shifts slightly and highlights text color */
+p, li {
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.25s ease;
+}
+
+p:hover, li:hover {
+  transform: translateY(-0.5px);
+  color: var(--color-text-primary);
+}
+
+/* Micro-hover effects on icons */
+.feature-icon {
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-col {
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-col:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-accent-blue);
+  box-shadow: var(--shadow-soft);
+}
+
+.feature-col:hover .feature-icon {
+  transform: scale(1.12) rotate(3deg);
+  border-color: var(--color-accent-blue);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Timeline card hover interaction */
+.timeline-item {
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item:hover {
+  transform: translateY(-3px) scale(1.005);
+  border-color: var(--color-accent-blue);
+  box-shadow: var(--shadow-hover);
+}
+
+.timeline-item.active-phase-card:hover {
+  transform: translateY(-3px) scale(1.005);
+}
+
+/* Badge hover feedback */
+.badge {
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.25s ease, color 0.25s ease;
+}
+
+.badge:hover {
+  transform: translateY(-1.5px) scale(1.03);
+  background-color: var(--color-accent-blue);
+  color: #ffffff;
+}
+
+/* Contact item hover feedback */
+.contact-item {
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.25s ease;
+}
+
+.contact-item:hover {
+  transform: translateY(-1.5px) scale(1.03);
+  color: var(--color-accent-blue);
+}
+
+/* Profile image container hover scale and tilt */
+.profile-pic-container {
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.profile-pic-container:hover {
+  transform: scale(1.04) rotate(-1deg);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Logo hover bounce and rotation */
+.logo {
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.logo:hover {
+  transform: translateY(-1px) scale(1.03);
+}
+
+/* Menu links hover underline flourish and color highlight */
+.nav-links a {
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.25s ease;
+}
+
+.nav-links a:hover {
+  transform: translateY(-1px) scale(1.02);
+  color: var(--color-accent-blue);
+}
+
+

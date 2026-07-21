@@ -1,5 +1,72 @@
 import './style.css'
 
+// 0. DARK MODE INITIALIZATION & SYSTEM INTEGRATION
+const body = document.body;
+const themeToggleBtn = document.getElementById('theme-toggle');
+
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    body.setAttribute('data-theme', 'dark');
+  } else {
+    body.removeAttribute('data-theme');
+  }
+}
+
+initTheme();
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener('click', () => {
+    const isDark = body.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      body.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+}
+
+// System preference change listener
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  const savedTheme = localStorage.getItem('theme');
+  if (!savedTheme) {
+    if (e.matches) {
+      body.setAttribute('data-theme', 'dark');
+    } else {
+      body.removeAttribute('data-theme');
+    }
+  }
+});
+
+// 0.5. DEGREE PROGRESS DYNAMIC CALCULATION
+function updateDegreeProgress() {
+  const startDate = new Date('2025-09-01T00:00:00');
+  const endDate = new Date('2028-07-31T23:59:59');
+  const now = new Date();
+  
+  const total = endDate.getTime() - startDate.getTime();
+  const elapsed = now.getTime() - startDate.getTime();
+  
+  const percentage = Math.min(Math.max((elapsed / total) * 100, 0), 100);
+  const formattedPct = percentage.toFixed(1) + '%';
+  
+  const pctEl = document.getElementById('degree-progress-pct');
+  const fillEl = document.getElementById('degree-progress-fill') as HTMLElement;
+  
+  if (pctEl) {
+    pctEl.textContent = formattedPct;
+  }
+  if (fillEl) {
+    fillEl.style.width = formattedPct;
+  }
+}
+
+updateDegreeProgress();
+
 // 1. MOBILE MENU TOGGLE
 const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
 const navLinks = document.querySelector('.nav-links');
@@ -105,13 +172,47 @@ if (footerWaves) {
     const clientHeight = window.innerHeight;
     const distanceToBottom = scrollHeight - (scrollTop + clientHeight);
 
-    if (distanceToBottom < 450) {
-      const progress = (450 - distanceToBottom) / 450; // Ranges 0 to 1
-      footerWaves.style.transform = `translateY(${(1 - progress) * 60}px)`;
+    if (distanceToBottom < 600) {
+      const progress = (600 - distanceToBottom) / 600; // Ranges 0 to 1
+      footerWaves.style.transform = `translateY(${(1 - progress) * 120}px)`;
       footerWaves.style.opacity = `${progress * 0.95}`;
     } else {
-      footerWaves.style.transform = 'translateY(60px)';
+      footerWaves.style.transform = 'translateY(120px)';
       footerWaves.style.opacity = '0';
     }
   }, { passive: true });
 }
+
+// 5. MOUSE TRAIL & CLICK RIPPLE EFFECTS
+let lastRippleTime = 0;
+const rippleThrottle = 40; // minimum ms between cursor trail ripples
+
+window.addEventListener('mousemove', (e) => {
+  const now = Date.now();
+  if (now - lastRippleTime < rippleThrottle) return;
+  lastRippleTime = now;
+
+  const ripple = document.createElement('div');
+  ripple.className = 'cursor-ripple';
+  ripple.style.left = `${e.clientX}px`;
+  ripple.style.top = `${e.clientY}px`;
+  document.body.appendChild(ripple);
+
+  // Clean up element after animation ends
+  setTimeout(() => {
+    ripple.remove();
+  }, 1600);
+}, { passive: true });
+
+window.addEventListener('click', (e) => {
+  const target = e.target as HTMLElement;
+  
+  // Find closest interactive element or text element to trigger the blur effect
+  const interactive = target.closest('a, button, .timeline-item, .feature-col, .logo, .badge, .contact-item, h1, h2, h3, h4, p, li, img');
+  if (interactive) {
+    interactive.classList.add('tactile-click-blur');
+    setTimeout(() => {
+      interactive.classList.remove('tactile-click-blur');
+    }, 400);
+  }
+}, { passive: true });
