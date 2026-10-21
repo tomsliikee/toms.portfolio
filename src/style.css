@@ -146,6 +146,8 @@ a.tile.is-lime:hover { background: var(--ink); color: var(--lime); }
 a.tile.is-orange:hover { background: var(--brown); color: var(--orange); }
 a.tile.is-purple:hover { background: var(--purple-ink); color: var(--purple); }
 a.tile.is-outline:hover { color: var(--hover); outline-color: var(--hover); }
+/* Tiles draw their own outline; the focus ring has to win over it. */
+a.tile:focus-visible, a.tile.is-outline:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
 /* ---------- Block: one 40px cell ---------- */
 .block {
@@ -334,14 +336,14 @@ a.repo:hover .go { background: var(--purple-deep); color: var(--lime); outline-c
 .flash.f2 { animation-delay: .4s; } .flash.f3 { animation-delay: .8s; }
 
 /* On load: elements above the fold wipe in, in four steps */
-.rv { animation: pd-wipe 400ms steps(4, end) both; }
+.rv { animation: pd-wipe 400ms steps(4, end) backwards; }
 .d1 { animation-delay: .2s; } .d2 { animation-delay: .45s; } .d3 { animation-delay: .7s; } .d4 { animation-delay: .95s; } .d5 { animation-delay: 1.2s; }
 .hl.is-stamp > span { animation: pd-stamp .21s step-end both; animation-delay: calc(.3s + var(--i, 0) * .21s); }
 
 /* On scroll: hidden only while html.motion is set by the gate in <head> */
 .motion [data-reveal]:not(.is-in) { clip-path: inset(0 100% 0 0); }
 .motion [data-reveal="drop"]:not(.is-in) { clip-path: none; opacity: 0; transform: translateY(40px); }
-.motion [data-reveal].is-in { animation: pd-wipe 400ms steps(4, end) both; animation-delay: var(--delay, 0ms); }
+.motion [data-reveal].is-in { animation: pd-wipe 400ms steps(4, end) backwards; animation-delay: var(--delay, 0ms); }
 .motion [data-reveal="drop"].is-in { animation-name: pd-drop; }
 .motion [data-progress]:not(.is-in) > * { width: 0; }
 .motion [data-progress].is-in > * { animation: pd-fill 1.2s steps(9, end) .2s both; }
