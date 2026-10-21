@@ -16,7 +16,7 @@ export const PAGES: readonly Page[] = [
   { slug: 'tomsllama', path: '/tomsllama/', title: 'tomsllama', label: 'tomsllama', section: 'work', tone: 'lime' },
   { slug: 'gnome', path: '/gnome/', title: 'GNOME extensions', label: 'gnome', section: 'work', tone: 'orange' },
   { slug: 'design', path: '/design/', title: 'Toms Expressive Design', label: 'design', section: 'work', tone: 'pond' },
-  { slug: 'knot', path: '/knot/', title: 'Team Knot', label: 'knot', section: 'work', tone: 'pink' },
+  { slug: 'knot', path: '/knot/', title: 'Knot', label: 'knot', section: 'work', tone: 'pink' },
   { slug: 'journey', path: '/journey/', title: 'Journey', label: 'journey', tone: 'purple' },
   { slug: 'systems', path: '/systems/', title: 'C, C++ and systems', label: 'systems', section: 'skills', tone: 'lime' },
 ]

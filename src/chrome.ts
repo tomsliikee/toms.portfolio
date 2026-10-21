@@ -31,8 +31,8 @@ function tile(text: string, cls: string, href?: string): string {
 
 function homeHeader(): string {
   return `<header class="top wrap">
-  <a class="mark rv" href="#start" aria-label="Thomas Haiden, back to the top"><span>T</span><span>o</span><span>m</span><span>s</span></a>
-  <nav class="row rv d2" aria-label="Main">
+  <a class="mark" href="#start" aria-label="Thomas Haiden, back to the top"><span>T</span><span>o</span><span>m</span><span>s</span></a>
+  <nav class="row top-nav" aria-label="Main">
     ${tile('work', 'is-outline w3', '#work')}
     ${tile('journey', 'is-outline w3', '#journey')}
     ${tile('skills', 'is-outline w3', '#skills')}
@@ -50,9 +50,24 @@ function subHeader(page: Page): string {
   ].join('')
   const forward = next ? tile(`next: ${next.label} →`, 'is-outline', next.path) : tile('back to start ↵', 'is-outline', '/')
   return `<header class="top wrap">
-  <nav class="row rv" aria-label="Breadcrumb">${crumbs}</nav>
-  <div class="row rv d2">${forward}</div>
+  <nav class="row" aria-label="Breadcrumb">${crumbs}</nav>
+  <div class="row top-nav">${forward}</div>
 </header>`
+}
+
+const SECTIONS = ['work', 'journey', 'skills', 'contact']
+
+// The floating bar at the bottom on phones. On the home page it jumps between
+// sections; elsewhere it leads back to them, with the neighbouring pages at the ends.
+function dock(page: Page): string {
+  const home = page.slug === 'home'
+  const links = SECTIONS.map((s) => `<a href="${home ? '' : '/'}#${s}" data-dock="${s}">${s}</a>`)
+  if (!home) {
+    const { prev, next } = neighbours(page.slug)
+    links.unshift(`<a class="step" href="${prev.path}" aria-label="Previous: ${prev.title}">‹</a>`)
+    links.push(`<a class="step" href="${next ? next.path : '/'}" aria-label="Next: ${next ? next.title : 'start'}">›</a>`)
+  }
+  return `<nav class="dock" aria-label="Sections">${links.join('')}</nav>`
 }
 
 const FOOTLINE = `<footer class="foot wrap">
@@ -67,7 +82,7 @@ function subFooter(page: Page): string {
   const nextLink = next ? tile('next →', 'is-lime w5', next.path) : tile('start ↵', 'is-lime w5', '/')
   return `<div class="night">
   <section class="wrap outro">
-    <p class="outro-line" data-reveal>${line}</p>
+    <p class="outro-line">${line}</p>
     <div class="row">${prevLink}${nextLink}</div>
   </section>
   ${FOOTLINE}
@@ -79,7 +94,7 @@ export function renderChrome(slug: string): Chrome {
   const home = page.slug === 'home'
   return {
     head: head(page),
-    header: home ? homeHeader() : subHeader(page),
+    header: (home ? homeHeader() : subHeader(page)) + '\n' + dock(page),
     // The home page ends inside its own night band, so it only needs the line.
     footer: home ? FOOTLINE : subFooter(page),
   }

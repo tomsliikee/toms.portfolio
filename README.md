@@ -27,7 +27,7 @@ flowchart TD
     List["src/pages.ts<br/><b>Order and labels of all pages</b>"]
     Chrome["src/chrome.ts<br/><b>Head, header, footer</b>"]
     Plugin["vite.config.ts<br/><b>chrome plugin, one input per page</b>"]
-    Motion["src/motion.ts<br/><b>Reveals, pixel field, logo</b>"]
+    Motion["src/motion.ts<br/><b>Headline covers, pixel field, dock</b>"]
     Style["src/style.css<br/><b>Pond tokens and components</b>"]
     Dist["dist/<br/><b>Static site</b>"]
 
@@ -43,12 +43,12 @@ flowchart TD
 
 | **Path** | **Content** |
 | :--- | :--- |
-| **/** | Hero with a pixel field, projects, more repos, journey, skills, contact |
+| **/** | Hero with a pixel field, projects, more repos, journey as a tree, skills, contact |
 | **/pulse/** | Pulse, the health app for Android |
 | **/tomsllama/** | tomsllama, the desktop client for local Ollama models |
 | **/gnome/** | Halo, Harbor, Ledge, Tally, Ember and Torch |
 | **/design/** | Toms Expressive Design |
-| **/knot/** | Team Knot and OutAbout |
+| **/knot/** | Knot, the company and its founders |
 | **/journey/** | Five stations, from school to the BSc |
 | **/systems/** | C, C++, memory layout, SQL and hardware |
 
@@ -56,11 +56,12 @@ A new page needs an HTML file with `<body data-page="…">` and an entry in **sr
 
 ## Motion
 
-- **On load:** Elements above the fold wipe in over four steps; headline lines stamp in quarter by quarter.
-- **On scroll:** Sections wipe or drop in as they reach the lower edge of the window. Things that arrive together follow one another, 95 ms apart.
-- **Pixel field:** The home hero draws a **T** and an **H** in 40px cells, then lights one empty cell at a time while it is on screen.
-- **Reduced motion:** With `prefers-reduced-motion: reduce` every element is shown in its final state and nothing moves.
-- **Without JavaScript:** Hidden start states apply only under `html.motion`, which an inline script sets; if the motion module never runs, the class is removed again after 2.5 s.
+- **Headlines:** Each headline starts under a grid of colour tiles; when it reaches the lower edge of the window the tiles go out one by one. Two small tiles stay at its edges.
+- **Everything else:** No scroll animation. Text, cards and images are simply there.
+- **Drawings:** The pixel field draws a **T** and an **H**, the journey tree draws its edges, the Knot logo assembles strand by strand, the struct bytes appear one at a time.
+- **Phone dock:** Below 640px a bar floats at the bottom with work, journey, skills and contact; on subpages it also leads to the previous and next page.
+- **Reduced motion:** With `prefers-reduced-motion: reduce` no tiles cover anything and nothing moves.
+- **Without JavaScript:** Covers are created by the script, so without it every headline is readable; hidden start states apply only under `html.motion`.
 
 ## Assets
 

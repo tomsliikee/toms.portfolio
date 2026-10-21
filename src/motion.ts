@@ -1,19 +1,23 @@
-// Stepped motion in the manner of Pond. Elements opt in through attributes;
-// the hidden start states live in style.css under html.motion, which the gate
-// in <head> sets only when reduced motion is off.
+// Stepped motion in the manner of Pond, kept for the moments that mean
+// something: headlines uncovered tile by tile, the pixel field, a few drawings.
+// Hidden start states live in style.css under html.motion, which the gate in
+// <head> sets only when reduced motion is off.
 
 const STEP_MS = 95
 const MAX_STAGGER = 6
 
-const WATCHED = '[data-reveal], [data-progress], [data-knot], .stations, .bytes'
+const WATCHED = '.hl, [data-progress], [data-knot], .tree, .bytes'
 
 export function initMotion(): void {
   const root = document.documentElement
   indexChildren('.bytes', ':scope > span')
   indexChildren('[data-knot]', '.strand')
   buildPixels()
+  scatterTiles()
+  trackDock()
 
   if (!root.classList.contains('motion')) return
+  buildCovers()
   root.classList.add('motion-ready')
 
   // Checked on scroll rather than with an IntersectionObserver: a fast scroll
@@ -43,6 +47,72 @@ export function initMotion(): void {
   window.addEventListener('scroll', onScroll, { passive: true })
   window.addEventListener('resize', onScroll, { passive: true })
   check()
+}
+
+// ---------- Headlines: covered in colour tiles that clear one by one ----------
+
+const COVER_MS = 700
+
+function buildCovers(): void {
+  document.querySelectorAll<HTMLElement>('.hl > span').forEach((line) => {
+    const cols = Math.max(1, Math.round(line.offsetWidth / 40))
+    const rows = Math.max(1, Math.round(line.offsetHeight / 40))
+    const cover = document.createElement('i')
+    cover.className = 'cover'
+    cover.setAttribute('aria-hidden', 'true')
+    cover.style.gridTemplateColumns = `repeat(${cols}, 1fr)`
+    const order = shuffle([...Array(cols * rows).keys()])
+    for (const n of order) {
+      const cell = cover.appendChild(document.createElement('i'))
+      cell.style.background = pick(PALETTE)
+      cell.style.setProperty('--wait', `${Math.round((n * COVER_MS) / (cols * rows))}ms`)
+    }
+    line.appendChild(cover)
+  })
+}
+
+// A few small tiles stay behind at the edges of each headline, as on Pond.
+function scatterTiles(): void {
+  document.querySelectorAll<HTMLElement>('.hl').forEach((hl) => {
+    const lines = hl.querySelectorAll<HTMLElement>(':scope > span')
+    for (let k = 0; k < 2; k++) {
+      const line = lines[Math.floor(Math.random() * lines.length)]
+      const tile = line.appendChild(document.createElement('i'))
+      tile.className = 'stay'
+      tile.setAttribute('aria-hidden', 'true')
+      tile.style.background = pick(PALETTE)
+      tile.style.left = `${10 + Math.floor(Math.random() * 80)}%`
+      tile.style[k === 0 ? 'top' : 'bottom'] = '-10px'
+    }
+  })
+}
+
+// On the home page the phone dock marks the section in the middle of the screen.
+function trackDock(): void {
+  const links = document.querySelectorAll<HTMLElement>('.dock [data-dock]')
+  if (document.body.dataset.page !== 'home' || links.length === 0) return
+  const watch = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue
+      links.forEach((a) => a.classList.toggle('is-on', a.dataset.dock === entry.target.id))
+    }
+  }, { rootMargin: '-50% 0px -50% 0px' })
+  links.forEach((a) => {
+    const section = document.getElementById(a.dataset.dock ?? '')
+    if (section) watch.observe(section)
+  })
+}
+
+function shuffle<T>(items: T[]): T[] {
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[items[i], items[j]] = [items[j], items[i]]
+  }
+  return items
+}
+
+function pick<T>(items: T[]): T {
+  return items[Math.floor(Math.random() * items.length)]
 }
 
 function indexChildren(parent: string, child: string): void {
@@ -93,7 +163,7 @@ function buildPixels(): void {
   window.setInterval(() => {
     if (!visible || document.hidden) return
     const cell = empty[Math.floor(Math.random() * empty.length)]
-    cell.style.background = PALETTE[Math.floor(Math.random() * PALETTE.length)]
+    cell.style.background = pick(PALETTE)
     window.setTimeout(() => (cell.style.background = ''), 1600)
   }, 900)
 }
