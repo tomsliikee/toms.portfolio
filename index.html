@@ -2,280 +2,190 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thomas Haiden — Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <!-- Theme Toggle Button (Top-Left Floating) -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
-
-    <div id="app">
-      <!-- Background Flourishes (Screenshot Winding Dotted Lines) -->
-      <svg class="bg-flourish" style="top: 8%; left: 2%; width: 140px; height: 320px;" viewBox="0 0 100 300" fill="none">
-        <path d="M10,10 Q90,70 20,150 T80,290" stroke="var(--color-path-line)" stroke-width="1.5" />
-        <circle cx="10" cy="10" r="4" fill="var(--color-accent-blue)" />
-        <circle cx="80" cy="290" r="4" fill="var(--color-accent-blue)" />
-      </svg>
-      
-      <svg class="bg-flourish" style="top: 38%; right: 2%; width: 150px; height: 350px;" viewBox="0 0 100 300" fill="none">
-        <path d="M90,10 Q10,95 80,195 T20,290" stroke="var(--color-path-line)" stroke-width="1.5" />
-        <circle cx="90" cy="10" r="4" fill="var(--color-accent-blue)" />
-        <circle cx="20" cy="290" r="4" fill="var(--color-accent-blue)" />
-      </svg>
-
-      <svg class="bg-flourish" style="top: 65%; left: 3%; width: 120px; height: 300px;" viewBox="0 0 100 300" fill="none">
-        <path d="M15,15 Q80,100 30,200 T85,285" stroke="var(--color-path-line)" stroke-width="1.5" />
-        <circle cx="15" cy="15" r="4" fill="var(--color-accent-blue)" />
-        <circle cx="85" cy="285" r="4" fill="var(--color-accent-blue)" />
-      </svg>
-
-      <svg class="bg-flourish" style="top: 82%; right: 3%; width: 130px; height: 320px;" viewBox="0 0 100 300" fill="none">
-        <path d="M85,15 Q20,110 70,210 T15,285" stroke="var(--color-path-line)" stroke-width="1.5" />
-        <circle cx="85" cy="15" r="4" fill="var(--color-accent-blue)" />
-        <circle cx="15" cy="285" r="4" fill="var(--color-accent-blue)" />
-      </svg>
-
-      <div class="main-content">
-        <!-- HEADER / NAVIGATION -->
-        <nav id="navbar">
-          <div class="logo">Thomas <span class="accent-italic">Haiden</span></div>
-          <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle Navigation">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-          </button>
-          <div class="nav-links">
-            <a href="#about">Experience</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-          </div>
-        </nav>
-
-        <main>
-          <!-- HERO SECTION (Mirroring Screenshot Left Column Style) -->
-          <section class="hero visible">
-            <div class="hero-text">
-              <h1>Building <em>efficient</em> systems. <br>Coding at the <em>metal.</em></h1>
-              
-              <!-- Separator Metadata Row -->
-              <div class="hero-metadata">
-                <span class="meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
-                  FH Wr. Neustadt
-                </span>
-                <span class="meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
-                  C / C++ Developer
-                </span>
-                <span class="meta-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  Austria
-                </span>
-              </div>
-
-              <!-- Horizontal Section Divider -->
-              <div class="section-divider">
-                <div class="divider-line"></div>
-                <div class="divider-node"></div>
-              </div>
-
-              <p class="hero-desc">Computer Science student at FH Wr. Neustadt. Focused on C, C++, and elegant system architecture.</p>
-              <p class="hero-desc">From first steps to systems mastery, <em>learn anything</em> with passion.</p>
-              
-              <!-- Screenshot-Style Pill CTA -->
-              <a href="#contact" class="pill-cta">
-                <span class="cta-circle">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7,7 17,7 17,17"></polyline></svg>
-                </span>
-                <span class="cta-text">thomas.haiden/contact</span>
-              </a>
-            </div>
-            
-            <div style="display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <!-- Profile picture container -->
-              <div class="profile-pic-container">
-                <picture>
-                  <source srcset="./Thomas_Haiden.webp" type="image/webp">
-                  <img src="./Thomas_Haiden.png" alt="Thomas Haiden" class="profile-pic" loading="eager" decoding="async" />
-                </picture>
-              </div>
-            </div>
-          </section>
-
-          <!-- EXPERIENCE SECTION (Typographical Path Flow) -->
-          <section id="about">
-            <div class="section-badge-wrapper">
-              <span class="badge">Experience Path</span>
-            </div>
-            
-            <div class="experience-flow">
-              <!-- ACTIVE PHASE: Floating card with progress bar -->
-              <div class="timeline-item active" data-phase="v3.0">
-                <div class="active-anchor"></div>
-                <div class="active-phase-card">
-                  <div class="active-header">
-                    <span class="active-date">Sept 2025 — 2027</span>
-                    <div class="active-meta">
-                      <span class="active-phase-tag">PHASE v3.0</span>
-                      <span class="active-phase-tag" style="background-color: rgba(59, 98, 165, 0.08); color: var(--color-accent-blue);">BSc Program</span>
-                    </div>
-                  </div>
-                  
-                  <h2 class="active-role">BSc Computer Science</h2>
-                  <p class="active-location">University of Applied Sciences Wr. Neustadt</p>
-                  
-                  <!-- Progress Bar subcard component (Section 4C) -->
-                  <div class="progress-subcard">
-                    <span class="progress-title">Degree progress</span>
-                    <span class="progress-pct" id="degree-progress-pct">45%</span>
-                    <div class="progress-track">
-                      <div class="progress-fill" id="degree-progress-fill" style="width: 45%;"></div>
-                    </div>
-                    <span class="progress-status">• On track</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- COMPLETED STEPS: Flat borderless rows -->
-              <div class="timeline-item flat-step completed" data-phase="v2.5">
-                <div class="step-check">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20,6 9,17 4,12"></polyline></svg>
-                </div>
-                <div class="step-details">
-                  <span class="step-date">Oct 2024 — June 2025</span>
-                  <span class="step-title">Civil Service</span>
-                  <span class="step-location">Immigration & Asylum (Wr. Neustadt)</span>
-                </div>
-              </div>
-
-              <div class="timeline-item flat-step completed" data-phase="v2.2">
-                <div class="step-check">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20,6 9,17 4,12"></polyline></svg>
-                </div>
-                <div class="step-details">
-                  <span class="step-date">Summer 2022 & 2023</span>
-                  <span class="step-title">Front Office Intern</span>
-                  <span class="step-location">Parkhotel Hirschwang</span>
-                </div>
-              </div>
-
-              <div class="timeline-item flat-step completed" data-phase="v2.0">
-                <div class="step-check">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20,6 9,17 4,12"></polyline></svg>
-                </div>
-                <div class="step-details">
-                  <span class="step-date">2019 — 2024</span>
-                  <span class="step-title">Tourism Management</span>
-                  <span class="step-location">Semmering — Event & Sales</span>
-                </div>
-              </div>
-
-              <div class="timeline-item flat-step completed" data-phase="v1.0">
-                <div class="step-check">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><polyline points="20,6 9,17 4,12"></polyline></svg>
-                </div>
-                <div class="step-details">
-                  <span class="step-date">2015 — 2019</span>
-                  <span class="step-title">Middle School</span>
-                  <span class="step-location">NMS Schöllerstraße</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- SKILLS SECTION (Flat Columns, No Cards) -->
-          <section id="skills">
-            <div class="section-badge-wrapper">
-              <span class="badge">Capabilities</span>
-            </div>
-            
-            <div class="features-grid">
-              <!-- C / C++ -->
-              <div class="feature-col">
-                <div class="feature-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
-                </div>
-                <h3 class="feature-title">C / C++ Core Systems</h3>
-                <p class="feature-desc">Low-level systems programming and efficient memory layout control. Architecting directly close to the metal with safety and clean logic structures.</p>
-                <ul class="feature-list">
-                  <li>Memory Diagnostics</li>
-                  <li>Custom Allocation Logic</li>
-                  <li>Hardware Alignment</li>
-                </ul>
-              </div>
-
-              <!-- SQL & Hardware -->
-              <div class="feature-col">
-                <div class="feature-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path></svg>
-                </div>
-                <h3 class="feature-title">SQL & Hardware</h3>
-                <p class="feature-desc">Relational database logic and structural diagnostics. Query alignment, data optimization, and component assembly troubleshooting.</p>
-                <ul class="feature-list">
-                  <li>Query Optimization</li>
-                  <li>Relational Mapping</li>
-                  <li>PC Component Debugging</li>
-                </ul>
-              </div>
-
-              <!-- Languages -->
-              <div class="feature-col">
-                <div class="feature-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                </div>
-                <h3 class="feature-title">Languages</h3>
-                <p class="feature-desc">Clear communication in international teams. Fluent systems translation and collaboration in structured work environments.</p>
-                <ul class="feature-list">
-                  <li>English — C1/C2 Fluent</li>
-                  <li>Spanish — A2 Foundational</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <!-- CONTACT SECTION (Flat Banner) -->
-          <section id="contact">
-            <div class="section-badge-wrapper">
-              <span class="badge">Uplink</span>
-            </div>
-            
-            <div class="contact-banner">
-              <div class="contact-item">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <a href="mailto:thomashaiden17@gmail.com">thomashaiden17@gmail.com</a>
-              </div>
-              <div class="contact-item">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                <a href="https://github.com/tomsliikee" target="_blank">github.com/tomsliikee</a>
-              </div>
-              <div class="contact-item">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span>Austria</span>
-              </div>
-            </div>
-          </section>
-        </main>
-
-        <!-- FOOTER -->
-        <footer>
-          <p>&copy; 2026 Thomas Haiden. Born 17.02.2005. All rights reserved.</p>
-          
-          <!-- Animated Footer Waves (Typographic flourish) -->
-          <div class="footer-waves">
-            <svg viewBox="0 0 1200 420" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0,180 C300,300 600,60 900,280 L1200,180 L1200,420 L0,420 Z" class="wave-path wave-path-1"></path>
-              <path d="M0,240 C400,100 800,380 1200,240 L1200,420 L0,420 Z" class="wave-path wave-path-2"></path>
-              <path d="M0,300 C350,180 700,420 1050,260 L1200,300 L1200,420 L0,420 Z" class="wave-path wave-path-3"></path>
-            </svg>
-          </div>
-        </footer>
-      </div>
-    </div>
+    <!--chrome:head-->
     <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body data-page="home">
+    <!--chrome:header-->
+
+    <main>
+      <section id="start" class="wrap sec is-hero">
+        <div class="split is-end">
+          <div class="main stack is-40">
+            <p class="eyebrow rv d1">Efficient systems. Code close to the hardware<span class="blink" aria-hidden="true">_</span></p>
+            <h1 class="hl is-stamp"><span>Thomas</span><span style="--i: 1">Haiden</span></h1>
+            <div class="row rv d3">
+              <span class="block is-pond">C</span>
+              <span class="tile is-lime w2"><span>C++</span></span>
+              <span class="tile w5"><span>systems design</span></span>
+            </div>
+            <p class="body rv d4" style="max-width: 560px">C and C++ developer in Austria and computer science student at FH Wiener Neustadt. My focus is C, C++ and clear system architecture. Alongside that I build apps, GNOME extensions and a design language of my own.</p>
+            <a class="row rv d5 scroll" href="#work" style="align-items: center; text-decoration: none; color: var(--purple-dark); width: max-content">
+              <span class="block is-ring"></span>
+              <span style="padding: 0 10px; font-size: 20px; line-height: 28px; font-weight: 500; letter-spacing: -.4px">Scroll</span>
+            </a>
+          </div>
+          <div class="hero-art">
+            <div class="flash hero-flash" aria-hidden="true"></div>
+            <div class="pixels rv d2" data-pixels role="img" aria-label="A T and an H drawn in coloured squares"></div>
+            <div class="row rv d4">
+              <span class="tile is-status"><span>Studies 45 %</span></span>
+              <span class="block is-pip"></span>
+              <span class="block is-ring"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="ticker-band" aria-hidden="true">
+        <div class="ticker" data-ticker>
+          <span class="tile is-lime"><span>C</span></span><span class="tile"><span>C++</span></span><span class="tile is-purple"><span>SQL</span></span><span class="tile is-orange"><span>Flutter</span></span><span class="tile is-pond"><span>Dart</span></span><span class="tile is-pink"><span>GNOME Shell 50</span></span><span class="tile"><span>Material 3 Expressive</span></span><span class="tile is-lime"><span>Systems design</span></span>
+          <span class="tile is-lime"><span>C</span></span><span class="tile"><span>C++</span></span><span class="tile is-purple"><span>SQL</span></span><span class="tile is-orange"><span>Flutter</span></span><span class="tile is-pond"><span>Dart</span></span><span class="tile is-pink"><span>GNOME Shell 50</span></span><span class="tile"><span>Material 3 Expressive</span></span><span class="tile is-lime"><span>Systems design</span></span>
+          <span class="tile is-lime"><span>C</span></span><span class="tile"><span>C++</span></span><span class="tile is-purple"><span>SQL</span></span><span class="tile is-orange"><span>Flutter</span></span><span class="tile is-pond"><span>Dart</span></span><span class="tile is-pink"><span>GNOME Shell 50</span></span><span class="tile"><span>Material 3 Expressive</span></span><span class="tile is-lime"><span>Systems design</span></span>
+          <span class="tile is-lime"><span>C</span></span><span class="tile"><span>C++</span></span><span class="tile is-purple"><span>SQL</span></span><span class="tile is-orange"><span>Flutter</span></span><span class="tile is-pond"><span>Dart</span></span><span class="tile is-pink"><span>GNOME Shell 50</span></span><span class="tile"><span>Material 3 Expressive</span></span><span class="tile is-lime"><span>Systems design</span></span>
+        </div>
+      </div>
+
+      <div class="night">
+        <section id="work" class="wrap sec">
+          <div class="stack" data-reveal>
+            <p class="eyebrow">What I work on</p>
+            <h2 class="hl is-plain is-night"><span>Code</span><span>&amp; Shape</span></h2>
+          </div>
+          <div class="grid">
+            <a class="card is-tall" href="/pulse/" data-reveal="drop">
+              <span class="pin"><span class="badge is-on">1</span></span>
+              <span class="row"><span class="tile is-lime"><span>Pulse</span></span></span>
+              <span class="display is-40">Your own pulse, read calmly</span>
+              <span class="body muted grow">A health app for Android in Flutter. It reads Health Connect and keeps every number on the phone. In beta as a GitHub release.</span>
+              <span class="tile is-outline go"><span>view ↵</span></span>
+            </a>
+            <a class="card is-tall" href="/tomsllama/" data-reveal="drop">
+              <span class="pin"><span class="badge">2</span></span>
+              <span class="row"><span class="tile is-purple"><span>tomsllama</span></span></span>
+              <span class="display is-40">Local models, a calm desk</span>
+              <span class="body muted grow">A Flutter desktop client for Ollama, with project workspaces and nothing sent to the cloud</span>
+              <span class="tile is-outline go"><span>view ↵</span></span>
+            </a>
+            <a class="card is-tall" href="/gnome/" data-reveal="drop">
+              <span class="pin"><span class="badge is-pond">3</span></span>
+              <span class="row"><span class="tile is-orange"><span>Halo</span></span><span class="tile is-pink"><span>Harbor</span></span><span class="tile"><span>Ledge</span></span><span class="tile is-lime"><span>Tally</span></span><span class="tile is-purple"><span>Ember</span></span><span class="tile is-pond"><span>Torch</span></span></span>
+              <span class="display is-40">Small helpers in the top bar</span>
+              <span class="body muted grow">Six extensions for GNOME Shell 50, all in one shared design</span>
+              <span class="tile is-outline go"><span>view ↵</span></span>
+            </a>
+            <a class="card is-tall" href="/design/" data-reveal="drop">
+              <span class="pin"><span class="badge">4</span></span>
+              <span class="row"><span class="tile is-pond"><span>Toms Expressive Design</span></span></span>
+              <span class="display is-40">A hand of my own</span>
+              <span class="body muted grow">A design language taken from Pulse, built on Material 3 Expressive</span>
+              <span class="tile is-outline go"><span>view ↵</span></span>
+            </a>
+            <a class="card is-tall" href="/knot/" data-reveal="drop">
+              <span class="pin"><span class="badge">5</span></span>
+              <span class="row"><span class="tile is-purple"><span>Knot</span></span><span class="tile is-outline"><span>OutAbout</span></span></span>
+              <img src="/knot.svg" alt="Knot logo" width="240" height="74" style="width: 240px; max-width: 100%" />
+              <span class="display is-40">What's on outside today</span>
+              <span class="body muted grow">My team Knot and our app for finding things to do nearby</span>
+              <span class="tile is-outline go"><span>view ↵</span></span>
+            </a>
+          </div>
+          <p class="note">(All of it is work in progress. Details change over time.)</p>
+        </section>
+
+        <section class="wrap sec" aria-labelledby="more-repos">
+          <div class="stack" data-reveal>
+            <p class="eyebrow">More on GitHub</p>
+            <h2 id="more-repos" class="display is-64" style="color: var(--slate-light)">Smaller repos</h2>
+          </div>
+          <div class="repo-list">
+            <a class="repo" href="https://github.com/tomsliikee/dungeon-frodos_adventure" data-reveal="drop">
+              <span class="tile is-orange w3"><span>Python</span></span>
+              <span class="display is-40">Frodo's Dungeon</span>
+              <span class="body muted">A terminal dungeon crawler. Every run digs a new maze, and a rival AI hunts for gear on its own side before it meets you in the arena.</span>
+              <span class="tile is-outline go"><span>GitHub ↵</span></span>
+            </a>
+          </div>
+        </section>
+
+        <section id="journey" class="wrap sec is-last">
+          <div class="split">
+            <div class="side stack is-40" data-reveal>
+              <p class="eyebrow">Journey</p>
+              <h2 class="hl is-plain is-night"><span>The way</span><span>so far</span></h2>
+              <div class="stack is-16">
+                <span class="body" style="font-weight: 500; color: var(--lime)">BSc Computer Science, on track</span>
+                <div class="studybar" role="img" aria-label="Studies 45 percent complete" data-progress="45"><div>45 %</div></div>
+              </div>
+              <a class="tile is-lime w6" href="/journey/"><span>full journey ↵</span></a>
+            </div>
+            <div class="main" data-reveal="drop">
+              <dl class="specs" style="--term: 260px">
+                <div class="spec"><dt>Sept 2025 – 2027</dt><dd>BSc Computer Science, FH Wiener Neustadt</dd></div>
+                <div class="spec"><dt>Oct 2024 – June 2025</dt><dd>Civilian service, asylum and immigration office, Wiener Neustadt</dd></div>
+                <div class="spec"><dt>Summers 2022 and 2023</dt><dd>Front office internship, Parkhotel Hirschwang</dd></div>
+              </dl>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section id="skills" class="wrap sec is-last">
+        <div class="stack" data-reveal>
+          <p class="eyebrow">Skills</p>
+          <h2 class="hl is-pond"><span>Close to</span><span>the metal</span></h2>
+        </div>
+        <div class="grid" style="--basis: 440px">
+          <a class="card" href="/systems/" data-reveal="drop">
+            <span class="row"><span class="block is-lime">C</span><span class="tile is-lime"><span>C / C++</span></span></span>
+            <span class="display is-40">Core systems</span>
+            <span class="body grow">Low-level programming, memory layout, memory diagnostics, custom allocators, hardware alignment</span>
+            <span class="tile is-outline go"><span>more ↵</span></span>
+          </a>
+          <a class="card" href="/systems/" data-reveal="drop">
+            <span class="row"><span class="block is-orange">S</span><span class="tile is-orange"><span>SQL &amp; Hardware</span></span></span>
+            <span class="display is-40">Data and parts</span>
+            <span class="body grow">Query optimisation, relational mapping, troubleshooting PC components</span>
+            <span class="tile is-outline go"><span>more ↵</span></span>
+          </a>
+          <a class="card" href="/design/" data-reveal="drop">
+            <span class="row"><span class="block is-purple">F</span><span class="tile is-purple"><span>Apps &amp; Design</span></span></span>
+            <span class="display is-40">Interfaces with form</span>
+            <span class="body grow">Dart and Flutter, GNOME Shell 50, Material 3 Expressive</span>
+            <span class="tile is-outline go"><span>more ↵</span></span>
+          </a>
+          <div class="card" data-reveal="drop">
+            <span class="row"><span class="block is-pond">L</span><span class="tile is-pond"><span>Languages</span></span></span>
+            <span class="display is-40">More than code</span>
+            <span class="row"><span class="tile is-outline"><span>English C1/C2</span></span><span class="tile is-outline"><span>Spanish A2</span></span></span>
+          </div>
+        </div>
+      </section>
+
+      <div class="night">
+        <section id="contact" class="wrap sec is-last">
+          <div class="split is-end">
+            <div class="main stack is-40" data-reveal>
+              <p class="eyebrow">Questions, ideas, feedback</p>
+              <h2 class="hl is-pond"><span>Write</span><span>to me</span></h2>
+              <p class="body muted" style="max-width: 480px">About a project, working together, or just like that</p>
+              <div class="stack" style="--gap: 0">
+                <div class="row"><a class="tile is-orange w3" href="mailto:thomashaiden17@gmail.com"><span>Email</span></a><a class="tile is-outline" href="mailto:thomashaiden17@gmail.com"><span>thomashaiden17@gmail.com</span></a></div>
+                <div class="row"><a class="tile is-lime w3" href="https://github.com/tomsliikee"><span>GitHub</span></a><a class="tile is-outline" href="https://github.com/tomsliikee"><span>tomsliikee</span></a></div>
+                <div class="row"><span class="tile is-status w3"><span>Based in</span></span><span class="tile is-outline"><span>Austria</span></span></div>
+              </div>
+            </div>
+            <div class="contact-art" aria-hidden="true">
+              <span class="block is-box" style="grid-column: 1; grid-row: 1"></span>
+              <div class="flash f2" style="grid-column: 4; grid-row: 2"></div>
+              <span class="block is-pond" style="grid-column: 2; grid-row: 3">@</span>
+              <div class="flash f3" style="grid-column: 5; grid-row: 4"></div>
+            </div>
+          </div>
+        </section>
+        <!--chrome:footer-->
+      </div>
+    </main>
   </body>
 </html>

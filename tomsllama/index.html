@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--chrome:head-->
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body data-page="tomsllama">
+    <!--chrome:header-->
+
+    <main>
+      <section class="wrap sec is-hero">
+        <div class="split is-end">
+          <div class="main stack is-40">
+            <p class="eyebrow rv d1">Project 02, a desktop app<span class="blink" aria-hidden="true">_</span></p>
+            <h1 class="hl is-stamp" style="--hl-size: clamp(56px, 12vw, 180px)"><span>tomsllama</span></h1>
+            <div class="row rv d3">
+              <span class="block is-purple">T</span>
+              <span class="tile is-lime w3"><span>Flutter</span></span>
+              <span class="tile w3"><span>Ollama</span></span>
+              <span class="tile is-orange w3"><span>SQLite</span></span>
+            </div>
+            <p class="lead rv d4">A calm desktop client for local Ollama models. It talks straight to the Ollama daemon on your own machine: no proxy, no analytics, no account. Conversations live in a local SQLite file, project workspaces keep their context, and time estimates come from measuring your own hardware.</p>
+            <div class="row rv d4">
+              <a class="tile is-lime w4" href="https://github.com/tomsliikee/tomsllama"><span>GitHub ↵</span></a>
+              <a class="tile is-outline" href="https://github.com/tomsliikee/tomsllama"><span>tomsliikee/tomsllama</span></a>
+            </div>
+          </div>
+          <div class="app-icon rv d2"><img src="/shots/tomsllama/app_icon_512.png" alt="tomsllama app icon" width="200" height="200" /></div>
+        </div>
+      </section>
+
+      <div class="night">
+        <section class="wrap sec">
+          <div class="split">
+            <div class="side stack" data-reveal>
+              <p class="eyebrow">Fact sheet</p>
+              <h2 class="hl is-plain is-night"><span>In</span><span>short</span></h2>
+            </div>
+            <div class="main" data-reveal="drop">
+              <dl class="specs">
+                <div class="spec"><dt>Kind</dt><dd>Desktop client for local language models</dd></div>
+                <div class="spec"><dt>Framework</dt><dd>Flutter</dd></div>
+                <div class="spec"><dt>Backend</dt><dd>Local Ollama daemon, address configurable, so another machine on the network works too</dd></div>
+                <div class="spec"><dt>Storage</dt><dd>SQLite, on your machine</dd></div>
+                <div class="spec"><dt>Cloud</dt><dd>None. No telemetry, no account</dd></div>
+                <div class="spec"><dt>Platform</dt><dd>Tested on Linux; Windows and macOS untested</dd></div>
+                <div class="spec"><dt>Licence</dt><dd>MIT</dd></div>
+                <div class="spec"><dt>Source</dt><dd><a href="https://github.com/tomsliikee/tomsllama">github.com/tomsliikee/tomsllama</a></dd></div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <section class="wrap sec is-last">
+          <div class="stack" data-reveal>
+            <p class="eyebrow">What it does</p>
+            <h2 class="hl is-plain is-night"><span>Quiet</span><span>by design</span></h2>
+          </div>
+          <div class="grid" style="--basis: 280px">
+            <div class="card is-lit" data-reveal="drop">
+              <span class="pin"><span class="badge is-on">1</span></span>
+              <h3 class="display is-40">Local streaming</h3>
+              <p class="body muted">Answers stream token by token from the Ollama daemon on your own hardware</p>
+            </div>
+            <div class="card" data-reveal="drop">
+              <span class="pin"><span class="badge">2</span></span>
+              <h3 class="display is-40">Answers keep running</h3>
+              <p class="body muted">Each answer belongs to its chat. Switch chats and the first one keeps generating; its row breathes until it is done</p>
+            </div>
+            <div class="card" data-reveal="drop">
+              <span class="pin"><span class="badge">3</span></span>
+              <h3 class="display is-40">Workspaces</h3>
+              <p class="body muted">Projects with their own context, git branch tracking and @-mentions in the composer</p>
+            </div>
+            <div class="card" data-reveal="drop">
+              <span class="pin"><span class="badge">4</span></span>
+              <h3 class="display is-40">Measured time</h3>
+              <p class="body muted">Estimates come from the measured speed of each model on your machine, not from a guess</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="wrap sec is-last">
+        <div class="stack" data-reveal>
+          <p class="eyebrow">A look inside</p>
+          <h2 class="hl is-pond"><span>On the</span><span>desk</span></h2>
+        </div>
+        <figure class="shot" data-reveal="drop">
+          <img src="/shots/tomsllama/screenshot.png" alt="The tomsllama window with the chat list on the left and a conversation on the right" width="1440" height="900" loading="lazy" />
+          <figcaption class="row"><span class="tile is-outline w1"><span>1</span></span><span class="tile is-wide"><span>The main window</span></span></figcaption>
+        </figure>
+      </section>
+    </main>
+
+    <!--chrome:footer-->
+  </body>
+</html>

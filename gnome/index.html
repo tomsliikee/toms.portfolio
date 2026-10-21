@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--chrome:head-->
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body data-page="gnome">
+    <!--chrome:header-->
+
+    <main>
+      <section class="wrap sec is-hero">
+        <p class="eyebrow rv d1">Project 03, GNOME Shell 50<span class="blink" aria-hidden="true">_</span></p>
+        <h1 class="hl is-stamp" style="--hl-size: clamp(52px, 10vw, 140px)"><span>Small helpers</span><span style="--i: 1">in the top bar</span></h1>
+        <div class="row rv d3">
+          <span class="tile is-orange w3"><span>Halo</span></span>
+          <span class="tile is-pink w3"><span>Harbor</span></span>
+          <span class="tile w3"><span>Ledge</span></span>
+          <span class="tile is-lime w3"><span>Tally</span></span>
+          <span class="tile is-purple w3"><span>Ember</span></span>
+          <span class="tile is-pond w3"><span>Torch</span></span>
+        </div>
+        <p class="lead rv d4" style="max-width: 680px">Extensions of my own for GNOME Shell 50 on Wayland. Each one stays small on its own, but they all follow the same rules and wear the same design: Toms Expressive Design, built on Material 3 Expressive and Google Sans Flex. No dependencies to install, no telemetry.</p>
+      </section>
+
+      <div class="night">
+        <section class="wrap sec">
+          <div class="split">
+            <div class="side stack is-40" data-reveal>
+              <p class="eyebrow">Shared rules</p>
+              <h2 class="hl is-plain is-night"><span>One</span><span>family</span></h2>
+              <div class="stack is-16">
+                <span class="callout"><span class="badge is-on">1</span>An icon in the top bar</span>
+                <span class="callout"><span class="badge">2</span>A tile menu, 320px wide</span>
+                <span class="callout"><span class="badge">3</span>Settings unfold inside the menu</span>
+                <span class="callout"><span class="badge">4</span>Saved as settings.json</span>
+              </div>
+            </div>
+            <div class="main menu-art" aria-hidden="true" data-reveal="drop">
+              <div class="bar">
+                <span class="note">top bar</span>
+                <div class="press"><span class="pin"><span class="badge is-on">1</span></span></div>
+              </div>
+              <div class="popup">
+                <span class="pin"><span class="badge">2</span></span>
+                <div class="tiles"><i></i><i></i><i></i><i></i></div>
+                <div class="settings"><span>Settings</span><span style="font-family: var(--font-mono); font-size: 16px">⌄</span><span class="pin"><span class="badge">3</span></span></div>
+                <div class="fold"><i></i><i></i><i style="border: 0"></i></div>
+              </div>
+              <div class="file"><span class="pin"><span class="badge">4</span></span>~/.config/&lt;name&gt;/settings.json</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="wrap sec is-last">
+          <div class="stack" data-reveal>
+            <p class="eyebrow">The extensions</p>
+            <h2 class="hl is-plain is-night"><span>Six</span><span>tools</span></h2>
+          </div>
+          <div class="grid">
+            <a class="card ext" href="https://github.com/tomsliikee/halo" data-reveal="drop">
+              <span class="row"><span class="block is-orange">H</span><span class="tile is-orange"><span>Halo</span></span></span>
+              <img src="/shots/halo/hero.png" alt="Halo: a notification center and calendar opened from the top bar, light and dark" width="2576" height="800" loading="lazy" />
+              <p class="body muted grow">A top bar, a Dynamic Island, a notification center and quick settings, each one switchable on its own</p>
+              <span class="meta">GNOME Shell 50 · MIT</span>
+              <span class="tile is-outline go"><span>GitHub ↵</span></span>
+            </a>
+            <a class="card ext" href="https://github.com/tomsliikee/harbor" data-reveal="drop">
+              <span class="row"><span class="block is-pink">H</span><span class="tile is-pink"><span>Harbor</span></span></span>
+              <img src="/shots/harbor/hero.png" alt="Harbor: a dock with pinned and running apps" width="1280" height="800" loading="lazy" />
+              <p class="body muted grow">A dock with pinned and running apps in ten styles, and its settings in the top bar instead of a window</p>
+              <span class="meta">GNOME Shell 50 · MIT</span>
+              <span class="tile is-outline go"><span>GitHub ↵</span></span>
+            </a>
+            <a class="card ext" href="https://github.com/tomsliikee/ledge" data-reveal="drop">
+              <span class="row"><span class="block">L</span><span class="tile"><span>Ledge</span></span></span>
+              <img src="/shots/ledge/hero.png" alt="Ledge: desktop widgets such as a clock, system load and weather" width="1600" height="1000" loading="lazy" />
+              <p class="body muted grow">Desktop widgets: a clock, the load of the machine, the weather and twenty-three more, placed freely and shown over the windows from the top bar</p>
+              <span class="meta">GNOME Shell 50 · weather from Open-Meteo</span>
+              <span class="tile is-outline go"><span>GitHub ↵</span></span>
+            </a>
+            <a class="card ext" href="https://github.com/tomsliikee/tally" data-reveal="drop">
+              <span class="row"><span class="block is-lime">T</span><span class="tile is-lime"><span>Tally</span></span></span>
+              <img src="/shots/tally/hero.png" alt="Tally: a ring in the top bar and a menu with plan usage" width="760" height="690" loading="lazy" />
+              <p class="body muted grow">Shows how much of the Claude plan is used: the five-hour session as a ring in the top bar, the week and this machine's tokens in a menu</p>
+              <span class="meta">GNOME Shell 50 · data from Claude Code</span>
+              <span class="tile is-outline go"><span>GitHub ↵</span></span>
+            </a>
+            <a class="card ext" href="https://github.com/tomsliikee/ember" data-reveal="drop">
+              <span class="row"><span class="block is-purple">E</span><span class="tile is-purple"><span>Ember</span></span></span>
+              <img src="/shots/ember/hero.png" alt="Ember: its menu in the top bar" width="750" height="740" loading="lazy" />
+              <p class="body muted grow">Keeps Claude working with the lid closed: the screen off, every other program at rest, and the machine asleep as soon as the work is done</p>
+              <span class="meta">GNOME Shell 50 · systemd user unit</span>
+              <span class="tile is-outline go"><span>GitHub ↵</span></span>
+            </a>
+            <a class="card ext" href="https://github.com/tomsliikee/torch" data-reveal="drop">
+              <span class="row"><span class="block is-pond">T</span><span class="tile is-pond"><span>Torch</span></span></span>
+              <img src="/shots/torch/hero.png" alt="Torch: a menu listing programs by power draw" width="784" height="900" loading="lazy" />
+              <p class="body muted grow">Shows which program draws the most power and how busy the machine is. One click puts a power eater to rest</p>
+              <span class="meta">GNOME Shell 50 · no root needed</span>
+              <span class="tile is-outline go"><span>GitHub ↵</span></span>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <section class="wrap sec is-last">
+        <div class="stack" data-reveal>
+          <p class="eyebrow">Up next</p>
+          <h2 class="hl is-pond"><span>What's</span><span>coming</span></h2>
+        </div>
+        <div class="plans">
+          <div class="plan" data-reveal="drop">
+            <span class="tile is-outline w1"><span>1</span></span>
+            <span class="display is-40">A file manager</span>
+            <span class="body">A model for new features in Nautilus, in the same design as the extensions</span>
+          </div>
+        </div>
+        <p class="note">(The dock, the quick settings and the new top bar from the earlier plan now exist as Harbor and Halo.)</p>
+      </section>
+    </main>
+
+    <!--chrome:footer-->
+  </body>
+</html>

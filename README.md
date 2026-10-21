@@ -1,51 +1,87 @@
-# Thomas Haiden | Developer Portfolio
+<div align="center">
+  <img src="public/favicon.svg" width="96" height="96" alt="Toms mark" />
+  <h1>thomas-haiden.com</h1>
+  <p><strong>The personal site of Thomas Haiden: eight static pages in the Pond style, flat tiles on a 40px grid, italic serifs and motion in steps.</strong></p>
 
-A minimalist personal portfolio and digital resume focused on high-performance design and technical clarity. This project is built to showcase my transition from a background in hospitality management to an engineering-focused path in Computer Science.
+  <p>
+    <img src="https://img.shields.io/badge/Build-Vite%208-neutral?style=flat-square" alt="Build" />
+    <img src="https://img.shields.io/badge/Language-TypeScript-neutral?style=flat-square" alt="Language" />
+    <img src="https://img.shields.io/badge/Framework-None-neutral?style=flat-square" alt="No Framework" />
+    <img src="https://img.shields.io/badge/Hosting-Vercel%20(planned)-neutral?style=flat-square" alt="Hosting" />
+  </p>
+</div>
 
-## Project Overview
+---
 
-This site is a custom environment built from scratch using TypeScript and Vite. It avoids heavy frameworks or third-party UI libraries to maintain absolute control over performance and interactive elements. 
+![The home page](docs/screenshot.jpg)
 
-The design is inspired by the technical aesthetic of Nothing.com, featuring a reactive dot-grid background and a minimalist left-aligned navigation system.
+---
 
-## Core Features
+## Architecture
 
-Design and Layout
-The site uses an editorial, left-aligned layout with a custom Sage Green color palette. It includes strict light and dark themes where every container and background is tonally matched to maintain a clean visual flow.
+Every page is a plain HTML file. A small **Vite** plugin fills in the shared head, header and footer at build time, so the navigation works without JavaScript. One **TypeScript** module adds the motion on top.
 
-Interactive Background
-A background dot matrix is rendered via the HTML5 Canvas API. It calculates the distance between the mouse pointer and each dot to create a dynamic "growth" effect as the user moves their cursor across the screen.
+```mermaid
+flowchart TD
+    Pages["Page HTML<br/><b>index.html, pulse/, gnome/, …</b>"]
+    List["src/pages.ts<br/><b>Order and labels of all pages</b>"]
+    Chrome["src/chrome.ts<br/><b>Head, header, footer</b>"]
+    Plugin["vite.config.ts<br/><b>chrome plugin, one input per page</b>"]
+    Motion["src/motion.ts<br/><b>Reveals, pixel field, logo</b>"]
+    Style["src/style.css<br/><b>Pond tokens and components</b>"]
+    Dist["dist/<br/><b>Static site</b>"]
 
-Scroll Progress Indicator
-The left sidebar contains a custom scroll indicator. It uses a 1px vertical track with a moving sage green notch that calculates the precise scroll percentage of the document to show the user's current position.
+    List --> Chrome
+    Chrome --> Plugin
+    Pages --> Plugin
+    Plugin --> Dist
+    Motion --> Dist
+    Style --> Dist
+```
 
-Fidget Mini-game
-A hidden "Pop It" grid is integrated into the footer. It allows users to interact with a set of bubbles that reset automatically, adding a small layer of tactile engagement to the experience.
+## Pages
 
-## Technical Stack
+| **Path** | **Content** |
+| :--- | :--- |
+| **/** | Hero with a pixel field, projects, more repos, journey, skills, contact |
+| **/pulse/** | Pulse, the health app for Android |
+| **/tomsllama/** | tomsllama, the desktop client for local Ollama models |
+| **/gnome/** | Halo, Harbor, Ledge, Tally, Ember and Torch |
+| **/design/** | Toms Expressive Design |
+| **/knot/** | Team Knot and OutAbout |
+| **/journey/** | Five stations, from school to the BSc |
+| **/systems/** | C, C++, memory layout, SQL and hardware |
 
-The project relies on native web APIs rather than external dependencies:
+A new page needs an HTML file with `<body data-page="…">` and an entry in **src/pages.ts**; the build picks it up from there.
 
-Languages: TypeScript, CSS3, HTML5
-Build Tool: Vite
-Animations: Intersection Observer (for scroll reveals), Canvas API (for background)
-Version Control: Git
+## Motion
 
-## Local Development
+- **On load:** Elements above the fold wipe in over four steps; headline lines stamp in quarter by quarter.
+- **On scroll:** Sections wipe or drop in as they reach the lower edge of the window. Things that arrive together follow one another, 95 ms apart.
+- **Pixel field:** The home hero draws a **T** and an **H** in 40px cells, then lights one empty cell at a time while it is on screen.
+- **Reduced motion:** With `prefers-reduced-motion: reduce` every element is shown in its final state and nothing moves.
+- **Without JavaScript:** Hidden start states apply only under `html.motion`, which an inline script sets; if the motion module never runs, the class is removed again after 2.5 s.
 
-To run this repository on your own machine:
+## Assets
 
-1. Clone the repository:
-git clone https://github.com/tomsliikee/portfolio.git
+| **Path** | **Source** |
+| :--- | :--- |
+| **public/fonts/** | Instrument Serif, Onest, IBM Plex Mono, JetBrains Mono (latin subsets, SIL Open Font License) |
+| **public/shots/** | Screenshots from the `readmestuff/` folder of each repository |
+| **public/knot.svg** | The Knot logo, Logo 02 from the Knot design files |
 
-2. Install the necessary packages:
+## Development
+
+```bash
 npm install
-
-3. Launch the local dev server:
 npm run dev
+```
 
-## About the Author
+`npm run check` builds the site and fails if any page links to a local file that is not in `dist/`.
 
-I am currently a second-semester Computer Science student at FH Wr. Neustadt. My work focuses on low-level systems programming in C and C++, as well as relational database architecture using SQL. My previous experience in high-end hospitality management informs my attention to detail and my user-centric approach to software design.
+## Status
 
-Thomas Haiden | 2026
+- **Build and link check:** *tested*, `npm run check` passes.
+- **Desktop (1440px) and phone (375px):** *tested* in the browser, all eight pages, no horizontal scroll.
+- **Reduced motion:** *built*, not yet checked in a browser with the setting on.
+- **Vercel:** *planned*.
