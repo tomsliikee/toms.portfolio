@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import Turtle from '../components/Turtle.astro';
+import NextLink from '../components/NextLink.astro';
+import { pagesNav } from '../lib/nav';
+---
+<Base
+  page="skills"
+  title="Skills – Thomas Haiden"
+  description="C, C++, memory layout, SQL and hardware."
+  nav={pagesNav}
+  navFloat={[
+    { href: '/', label: 'Index' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/path', label: 'Path' },
+  ]}
+>
+<div class="split">
+<Turtle mode="detail" />
+<main id="main" class="col" style="padding-bottom: 0">
+<p class="kick in d1"><span class="num">C, C++, SQL</span></p>
+<h1 class="hx wipe d2">Skills</h1>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(1)</span>Memory layout</p>
+<div>
+<pre class="code sr" tabindex="0">struct Sample &#123;
+    char  a;   <i>// 1 byte</i>
+    int   b;   <i>// 4 bytes</i>
+    short c;   <i>// 2 bytes</i>
+&#125;;             <i>// sizeof = 12</i> <span class="cur"></span></pre>
+<div class="bytes" role="img" aria-label="Layout: a, three padding bytes, four bytes for b, two for c, two padding bytes">
+<span class="b f" style="--i: 0">a</span><span class="b p" style="--i: 1"></span><span class="b p" style="--i: 2"></span><span class="b p" style="--i: 3"></span><span class="b f" style="--i: 4">b</span><span class="b f" style="--i: 5">b</span><span class="b f" style="--i: 6">b</span><span class="b f" style="--i: 7">b</span><span class="b" style="--i: 8">c</span><span class="b" style="--i: 9">c</span><span class="b p" style="--i: 10"></span><span class="b p" style="--i: 11"></span>
+</div>
+<div class="addr" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span></div>
+<p class="body sr" style="margin-top: 20px; font-size: 14px">Striped cells are padding for alignment. A typical example on a 64-bit system.</p>
+</div>
+</section>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(2)</span>C / C++</p>
+<div class="rows">
+<div class="row n sr"><span class="num">01</span><p>Low-level programming</p></div>
+<div class="row n sr"><span class="num">02</span><p>Memory layout control</p></div>
+<div class="row n sr"><span class="num">03</span><p>Memory diagnostics</p></div>
+<div class="row n sr"><span class="num">04</span><p>Custom allocation</p></div>
+<div class="row n sr"><span class="num">05</span><p>Hardware alignment</p></div>
+<div class="row n sr"><span class="num">06</span><p>System architecture</p></div>
+</div>
+</section>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(3)</span>Beyond C</p>
+<div class="rows">
+<div class="row n sr"><span class="num">01</span><p>Query optimization, relational mapping</p></div>
+<div class="row n sr"><span class="num">02</span><p>PC component debugging</p></div>
+<div class="row n sr"><span class="num">03</span><p>English C1/C2, Spanish A2</p></div>
+</div>
+</section>
+
+<NextLink href="/projects" label="Next" title="Projects" />
+</main>
+</div>
+</Base>
+
+<style is:global>
+  [data-page="skills"] .code { margin: 0; padding: 22px 24px; background: var(--fg); color: var(--bg); font-family: var(--font-mono); font-size: 15px; line-height: 1.7; overflow-x: auto; max-width: 600px }
+  [data-page="skills"] .code i { font-style: normal; opacity: .7 }
+  [data-page="skills"] .cur { display: inline-block; width: 9px; height: 17px; background: var(--accent-dark); vertical-align: -3px; animation: blink 1s steps(1) infinite }
+  [data-page="skills"] .bytes { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); margin-top: 20px; max-width: 600px; border-left: 1px solid var(--fg) }
+  [data-page="skills"] .b { height: 48px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 14px; border: 1px solid var(--fg); border-left: 0; opacity: 0; animation: pop .45s var(--ease) both; animation-delay: calc(var(--i) * 110ms + 1.3s) }
+  [data-page="skills"] .b.f { background: var(--accent-text); color: var(--on-accent) }
+  [data-page="skills"] .b.p { color: var(--fg); background: repeating-linear-gradient(135deg, transparent 0 5px, rgba(10, 124, 196, .22) 5px 6px) }
+  [data-page="skills"] .addr { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); max-width: 600px; font-family: var(--font-mono); font-size: 10px; margin-top: 6px }
+  @keyframes pop { from { opacity: 0; transform: translateY(-10px) } to { opacity: 1; transform: none } }
+  @media (max-width: 860px) {
+    [data-page="skills"] .b { height: 34px; font-size: 11px }
+    [data-page="skills"] .addr { font-size: 8px }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-page="skills"] .b, [data-page="skills"] .cur { animation: none; opacity: 1 }
+  }
+</style>

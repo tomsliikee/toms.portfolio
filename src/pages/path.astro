@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import Turtle from '../components/Turtle.astro';
+import NextLink from '../components/NextLink.astro';
+import { pagesNav } from '../lib/nav';
+---
+<Base
+  page="path"
+  title="Path – Thomas Haiden"
+  description="After tourism school, two summers at a hotel front desk and civil service, I now study Computer Science at FH Wr. Neustadt."
+  nav={pagesNav}
+  navFloat={[
+    { href: '/', label: 'Index' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/skills', label: 'Skills' },
+  ]}
+>
+<div class="split">
+<Turtle mode="detail" />
+<main id="main" class="col" style="padding-bottom: 0">
+<p class="kick in d1"><span class="num">2015 – 2027</span><span>From Semmering to Wr. Neustadt</span></p>
+<h1 class="hx wipe d2">Path</h1>
+<p class="lede in d3">After tourism school, two summers at a hotel front desk and civil service, I now study Computer Science at FH Wr. Neustadt.</p>
+<div class="prog in d4" role="img" aria-label="Degree 45 percent complete, on track">
+<div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 14px"><span>BSc Computer Science</span><span class="serif" style="font-size: 34px; letter-spacing: -0.04em">45 %</span></div>
+<div class="bar"><div class="fill"></div></div>
+<div style="display: flex; justify-content: space-between; font-size: 12px"><span class="num" style="font-size: 12px">Sept 2025</span><span>on track</span><span class="num" style="font-size: 12px">2027</span></div>
+</div>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(1)</span>Stations</p>
+<div style="border-top: 1px solid var(--line)">
+<div class="st sr"><span class="num">Sept 2025 – 2027<br>FH Wr. Neustadt</span><div><p class="t">BSc Computer Science</p><p>Focused on C, C++ and system architecture. 45 % complete, on track.</p></div></div>
+<div class="st sr"><span class="num">Oct 2024 – June 2025<br>Wr. Neustadt</span><div><p class="t">Civil service</p><p>At Immigration &amp; Asylum.</p></div></div>
+<div class="st sr"><span class="num">Summers 2022, 2023<br>Parkhotel Hirschwang</span><div><p class="t">Front office intern</p><p>Front office, two summers.</p></div></div>
+<div class="st sr"><span class="num">2019 – 2024<br>Semmering</span><div><p class="t">Tourism management</p><p>Focus on event and sales.</p></div></div>
+<div class="st sr"><span class="num">2015 – 2019<br>NMS Schöllerstraße</span><div><p class="t">Middle school</p><p>NMS Schöllerstraße</p></div></div>
+</div>
+</section>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(2)</span>In the degree</p>
+<div>
+<h2 class="h2 srw">MoodRoute</h2>
+<p class="body sr">A team project in the IT project management course, winter term 2026, exercise project 6.</p>
+<p class="todo sr">[What MoodRoute is about]</p>
+</div>
+</section>
+
+<NextLink href="/skills" label="Next" title="Skills" />
+</main>
+</div>
+</Base>
+
+<style is:global>
+  /* The template called the bar .track, which the home page uses for its scroll track. */
+  [data-page="path"] .prog { margin: 56px 0 0 var(--indent); max-width: 560px }
+  [data-page="path"] .bar { height: 40px; border: 1px solid var(--accent); position: relative; margin: 10px 0 8px; overflow: hidden }
+  [data-page="path"] .fill { position: absolute; inset: 0 auto 0 0; width: 45%; background: var(--accent); transform-origin: left; animation: grow 1.8s var(--ease) 1.1s both }
+  [data-page="path"] .st { display: grid; grid-template-columns: minmax(120px, 190px) minmax(0, 1fr); gap: 8px 28px; padding: 28px 0; border-bottom: 1px solid var(--line) }
+  [data-page="path"] .st .t { font-family: var(--font-serif); font-size: clamp(32px, 3.4vw, 52px); line-height: .95; letter-spacing: -.045em; margin: 0 0 10px }
+  [data-page="path"] .st p { margin: 0; font-size: 16px; line-height: 1.65 }
+  @keyframes grow { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+  @media (max-width: 860px) {
+    [data-page="path"] .prog { margin-left: 0 }
+    [data-page="path"] .st { grid-template-columns: minmax(0, 1fr) }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-page="path"] .fill { animation: none }
+  }
+</style>

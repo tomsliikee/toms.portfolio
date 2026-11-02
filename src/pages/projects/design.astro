@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import Turtle from '../../components/Turtle.astro';
+import NextLink from '../../components/NextLink.astro';
+import { pagesNav, projectFloat } from '../../lib/nav';
+---
+<Base
+  page="design"
+  title="Toms Expressive Design – Thomas Haiden"
+  description="My own design language, derived from the look of Pulse, but not a 1:1 copy of the app."
+  nav={pagesNav}
+  navFloat={projectFloat('/projects/pulse')}
+>
+<div class="split">
+<Turtle mode="detail" />
+<main id="main" class="col" style="padding-bottom: 0">
+<p class="kick in d1"><span class="num">03 / 04</span><span>Design language</span></p>
+<h1 class="hx wipe d2">Toms Expressive</h1>
+<p class="lede in d3">My own design language, derived from the look of Pulse, but not a 1:1 copy of the app.</p>
+<div class="shapes in d4" aria-hidden="true"><div class="shape"></div><div class="shape o s2"></div><div class="shape s3"></div><div class="shape o s4"></div></div>
+<dl class="facts in d4">
+<div><dt>Foundation</dt><dd>Material 3 Expressive</dd></div>
+<div><dt>Typeface</dt><dd>Google Sans Flex</dd></div>
+<div><dt>Origin</dt><dd>The design of Pulse</dd></div>
+<div><dt>In use</dt><dd>Pulse, Tally, Ember, Torch</dd></div>
+</dl>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(1)</span>Origin</p>
+<div>
+<div class="chain sr">
+<div class="link"><span class="num">01</span><p class="t">Pulse</p><p>Origin of the look</p></div>
+<div class="link"><span class="num">02</span><p class="t">The rules</p><p>General rules instead of a copy</p></div>
+<div class="link"><span class="num">03</span><p class="t">GNOME</p><p>Tally, Ember, Torch</p></div>
+<div class="link f"><span class="num">04</span><p class="t">Next app</p><p>A second app is being considered</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(2)</span>Palette</p>
+<p class="todo sr" style="margin: 0">[Palette and components of Toms Expressive Design]</p>
+</section>
+
+<NextLink href="/projects/pulse" label="Next project, 04 / 04" title="Pulse" />
+</main>
+</div>
+</Base>
+
+<style is:global>
+  [data-page="design"] .shapes { display: flex; gap: 10px; margin: 48px 0 0 var(--indent) }
+  [data-page="design"] .shape { width: 56px; height: 56px; background: var(--accent); animation: morph 6s cubic-bezier(.65, 0, .35, 1) infinite }
+  [data-page="design"] .shape.o { background: transparent; border: 1px solid var(--fg) }
+  [data-page="design"] .shape.s2 { animation-delay: .4s }
+  [data-page="design"] .shape.s3 { animation-delay: .8s }
+  [data-page="design"] .shape.s4 { animation-delay: 1.2s }
+  [data-page="design"] .chain { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--fg) }
+  [data-page="design"] .link { padding: 20px 16px 0 0; position: relative }
+  [data-page="design"] .link::before { content: ""; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; background: var(--accent) }
+  [data-page="design"] .link.f::before { background: var(--bg); border: 1px solid var(--fg) }
+  [data-page="design"] .link .t { font-family: var(--font-serif); font-size: clamp(24px, 2.4vw, 34px); line-height: 1; letter-spacing: -.035em; margin: 10px 0 10px }
+  [data-page="design"] .link p { margin: 0; font-size: 14px; line-height: 1.6 }
+  @keyframes morph { 0%, 100% { border-radius: 0 } 33% { border-radius: 50% } 66% { border-radius: 50% 0 50% 0; transform: rotate(90deg) } }
+  @media (max-width: 860px) {
+    [data-page="design"] .shapes { margin-left: 0 }
+    [data-page="design"] .chain { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-page="design"] .shape { animation: none }
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import Turtle from '../../components/Turtle.astro';
+import NextLink from '../../components/NextLink.astro';
+import { pagesNav, projectFloat } from '../../lib/nav';
+---
+<Base
+  page="wanna"
+  title="wanna? – Thomas Haiden"
+  description="Knot is my team. Together we build wanna?, an app for finding events nearby. Its earlier name was OutAbout."
+  nav={pagesNav}
+  navFloat={projectFloat('/projects/design')}
+>
+<div class="split">
+<Turtle mode="detail" />
+<main id="main" class="col" style="padding-bottom: 0">
+<p class="kick in d1"><span class="num">02 / 04</span><span>Team app, built with Knot</span></p>
+<h1 class="hx wipe d2">wanna?</h1>
+<p class="lede in d3">Knot is my team. Together we build wanna?, an app for finding events nearby. Its earlier name was OutAbout.</p>
+<dl class="facts in d4">
+<div><dt>App</dt><dd>wanna?, formerly OutAbout</dd></div>
+<div><dt>Team</dt><dd>Knot</dd></div>
+<div><dt>Stack</dt><dd>Flutter</dd></div>
+<div><dt>Repository</dt><dd>erlebnisplaner</dd></div>
+</dl>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(1)</span>The mark</p>
+<div>
+<div class="mark srw">
+<p class="word">wanna<span class="q">?</span></p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6">Headers and logo in Montserrat Black.</p>
+</div>
+<p class="todo sr">[The main features of wanna?]</p>
+</div>
+</section>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(2)</span>Knot colours</p>
+<div>
+<div class="sw sr">
+<div class="swc" style="background: #202a44; color: #d3d3ff">#202a44</div>
+<div class="swc" style="border: 1px dashed var(--line); font-family: inherit">[more tones]</div>
+<div class="swc" style="background: #d3d3ff; color: #202a44">#d3d3ff</div>
+</div>
+</div>
+</section>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(3)</span>On the screen</p>
+<div class="frames sr">
+<div class="frame" role="img" aria-label="Placeholder for screenshot 1">[Screenshot 1]</div>
+<div class="frame" role="img" aria-label="Placeholder for screenshot 2">[Screenshot 2]</div>
+<div class="frame" role="img" aria-label="Placeholder for screenshot 3">[Screenshot 3]</div>
+</div>
+</section>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(4)</span>The team</p>
+<div class="team sr">
+<div class="mem"><div class="ph" role="img" aria-label="Photo placeholder">[Photo]</div><p>Thomas Haiden<br>[Role]</p></div>
+<div class="mem"><div class="ph" role="img" aria-label="Photo placeholder">[Photo]</div><p>[Name]<br>[Role]</p></div>
+<div class="mem"><div class="ph" role="img" aria-label="Photo placeholder">[Photo]</div><p>[Name]<br>[Role]</p></div>
+<div class="mem"><div class="ph" role="img" aria-label="Photo placeholder">[Photo]</div><p>[Name]<br>[Role]</p></div>
+</div>
+</section>
+
+<NextLink href="/projects/design" label="Next project, 03 / 04" title="Toms Expressive Design" />
+</main>
+</div>
+</Base>
+
+<style is:global>
+  [data-page="wanna"] .mark { background: #202a44; color: #d3d3ff; padding: clamp(24px, 4vw, 48px); display: flex; flex-direction: column; gap: 16px; max-width: 640px }
+  [data-page="wanna"] .word { font-family: var(--font-sans); font-weight: 900; font-size: clamp(56px, 9vw, 132px); line-height: .88; letter-spacing: -.045em; margin: 0 }
+  [data-page="wanna"] .word .q { display: inline-block; transform-origin: 50% 92%; animation: tilt 3s var(--ease) infinite }
+  [data-page="wanna"] .sw { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 640px }
+  [data-page="wanna"] .swc { height: 140px; display: flex; align-items: flex-end; padding: 12px; font-family: var(--font-mono); font-size: 13px }
+  [data-page="wanna"] .team { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px }
+  [data-page="wanna"] .ph { aspect-ratio: 3/4; border: 1px solid var(--line); display: flex; align-items: flex-end; padding: 8px; font-size: 12px }
+  [data-page="wanna"] .mem p { margin: 10px 0 0; font-size: 14px; line-height: 1.45 }
+  @keyframes tilt { 0%, 60%, 100% { transform: rotate(0) } 75% { transform: rotate(14deg) translateY(-4px) } 88% { transform: rotate(-4deg) } }
+  @media (max-width: 860px) {
+    [data-page="wanna"] .team { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+    [data-page="wanna"] .swc { height: 90px }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-page="wanna"] .word .q { animation: none }
+  }
+</style>

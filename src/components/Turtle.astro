@@ -1,0 +1,55 @@
+---
+interface Props {
+  /** home: full stage, the texts orbit the turtle. detail: sticky tank on the right. */
+  mode: 'home' | 'detail';
+}
+const { mode } = Astro.props;
+const label = 'A sea turtle drawn in text characters, swimming';
+---
+{mode === 'home'
+  ? <canvas class="turtle-home" data-turtle="home" role="img" aria-label={label}></canvas>
+  : <div class="tank"><canvas data-turtle="detail" role="img" aria-label={label}></canvas></div>}
+
+<style is:global>
+  .turtle-home { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 10; pointer-events: none }
+  .tank { flex: 1 1 40%; min-width: 320px; height: 100vh; position: sticky; top: 0; order: 2 }
+  .tank canvas { width: 100%; height: 100%; display: block }
+  .nogl .tank canvas { visibility: hidden }
+  @media (max-width: 860px) {
+    .tank { position: relative; height: 34vh; flex-basis: 100%; min-width: 0; order: 1 }
+  }
+</style>
+
+<script>
+  import { hasWebGL } from '../lib/theme';
+  import { startOrbit } from '../lib/orbit';
+  import { startTurtle } from '../lib/turtle-host';
+
+  const html = document.documentElement;
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-turtle]')!;
+  const home = canvas.dataset.turtle === 'home';
+  const gl = hasWebGL();
+
+  // Without WebGL the home texts stay stacked; that layout is the CSS default.
+  let orbit: { stop(): void } | null = null;
+  if (!gl) {
+    html.classList.remove('orbit');
+    html.classList.add('nogl');
+  } else if (home && html.classList.contains('orbit')) orbit = startOrbit(canvas.closest<HTMLElement>('[data-root]')!);
+  else if (home) html.classList.add('still');
+
+  function fail(e: unknown) {
+    console.warn('[turtle] no WebGL, showing the texts without the turtle', e);
+    orbit?.stop();
+    html.classList.remove('orbit', 'still');
+    html.classList.add('nogl');
+  }
+
+  // three.js is only fetched once the page is loaded and the main thread is idle.
+  const load = () => startTurtle(canvas, home ? 'home' : 'detail', fail);
+  const idle = (fn: () => void) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 200));
+  if (gl) {
+    if (document.readyState === 'complete') idle(load);
+    else window.addEventListener('load', () => idle(load), { once: true });
+  }
+</script>

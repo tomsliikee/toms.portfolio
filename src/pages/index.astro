@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import type { NavItem } from '../lib/nav';
+import Turtle from '../components/Turtle.astro';
+
+const nav: NavItem[] = [
+  { href: '/#projects', label: 'Projects', go: 2 },
+  { href: '/#path', label: 'Path', go: 3 },
+  { href: '/#skills', label: 'Skills', go: 4 },
+  { href: '/#contact', label: 'Contact', go: 5 },
+];
+---
+<Base
+  page="home"
+  title="Thomas Haiden"
+  description="Thomas Haiden – Flutter and C# programmer and Computer Science student at FH Wr. Neustadt, Austria."
+  nav={nav}
+  navFloat={nav}
+  solid={false}
+>
+<main id="main" class="track">
+<div class="stage">
+<Turtle mode="home" />
+
+<h1 class="orb giant" data-orb data-ch="0" data-x="-0.475" data-ax="0" data-y="-0.25" data-mx="-0.46" data-my="0.06" data-r="0.18" style="font-size: clamp(84px, 19vw, 340px); color: var(--accent)">Thomas</h1>
+<p class="orb giant" aria-hidden="true" data-orb data-ch="0" data-x="0.475" data-ax="1" data-y="0.27" data-mx="0.46" data-my="0.17" data-r="0.18" style="font-size: clamp(84px, 19vw, 340px); color: var(--accent)">Haiden</p>
+<p class="orb para mono" data-orb data-ch="0" data-x="0.47" data-ax="1" data-y="-0.1" data-mx="-0.46" data-max="0" data-my="0.37" data-r="0.4" style="font-size: 13px; line-height: 1.7; text-align: left; width: max-content">Flutter and C# programmer<br>CS student, FH Wr. Neustadt<br>Austria</p>
+
+<h2 class="orb giant" data-orb data-ch="1" data-x="-0.475" data-ax="0" data-y="-0.17" data-mx="-0.46" data-my="0.08" data-r="0.2" style="font-size: clamp(84px, 16vw, 280px)">About</h2>
+<p class="orb para l" data-orb data-ch="1" data-x="0.47" data-ax="1" data-y="0.24" data-mx="-0.46" data-max="0" data-my="0.3" data-r="0.4" style="width: min(400px, 90vw)">Computer Science student at FH Wr. Neustadt. I build apps with Flutter and C#, GNOME extensions and my own design language.</p>
+
+<a id="projects" class="orb giant big-link" href="/projects" data-orb data-ch="2" data-x="-0.475" data-ax="0" data-y="-0.2" data-mx="-0.46" data-my="0.06" data-r="0.2" style="font-size: clamp(72px, 14vw, 240px); text-decoration: none">Projects<span class="num" style="font-size: 16px; align-self: flex-start; margin-top: 0.6em">(4)</span></a>
+<div class="orb" data-orb data-ch="2" data-x="0.47" data-ax="1" data-y="0.25" data-mx="-0.46" data-max="0" data-my="0.25" data-r="0.4" style="width: min(360px, 90vw)">
+<p class="para l" style="margin-bottom: 18px">Apps, GNOME extensions, a design language and a team app.</p>
+<a class="ul" href="/projects" style="font-size: 15px; font-weight: 400">See all projects →</a>
+</div>
+
+<h2 id="path" class="orb giant" data-orb data-ch="3" data-x="0.475" data-ax="1" data-y="-0.22" data-mx="0.46" data-my="0.04" data-r="0.2" style="font-size: clamp(84px, 16vw, 280px)">Path</h2>
+<div class="orb" data-orb data-ch="3" data-x="-0.47" data-ax="0" data-y="0.17" data-mx="-0.46" data-my="0.25" data-r="0.4" style="width: min(470px, 92vw)">
+<div class="ln"><span class="num">2025 – 27</span><span>BSc Computer Science, FH Wr. Neustadt</span></div>
+<div class="ln"><span class="num">2024 – 25</span><span>Civil service, Immigration &amp; Asylum</span></div>
+<div class="ln"><span class="num">2022, 2023</span><span>Front office intern, Parkhotel Hirschwang</span></div>
+<div class="ln"><span class="num">2019 – 24</span><span>Tourism management, Semmering</span></div>
+<div class="ln"><span class="num">2015 – 19</span><span>Middle school, NMS Schöllerstraße</span></div>
+<a class="ul" href="/path" style="display: inline-block; margin-top: 16px; font-size: 15px; font-weight: 400">The full path →</a>
+</div>
+
+<h2 id="skills" class="orb giant" data-orb data-ch="4" data-x="-0.475" data-ax="0" data-y="-0.22" data-mx="-0.46" data-my="0.04" data-r="0.2" style="font-size: clamp(84px, 16vw, 280px)">Skills</h2>
+<div class="orb" data-orb data-ch="4" data-x="0.47" data-ax="1" data-y="0.2" data-mx="-0.46" data-max="0" data-my="0.26" data-r="0.4" style="width: min(470px, 92vw)">
+<div class="ln"><span class="num">C / C++</span><span>Low-level programming, memory layout control, memory diagnostics, custom allocation, hardware alignment</span></div>
+<div class="ln"><span class="num">SQL, hardware</span><span>Query optimization, relational mapping, PC component debugging</span></div>
+<div class="ln"><span class="num">Languages</span><span>English C1/C2, Spanish A2</span></div>
+<a class="ul" href="/skills" style="display: inline-block; margin-top: 16px; font-size: 15px; font-weight: 400">All skills →</a>
+</div>
+
+<h2 id="contact" class="orb giant" data-orb data-ch="5" data-x="-0.475" data-ax="0" data-y="-0.2" data-mx="-0.46" data-my="0.06" data-r="0.2" style="font-size: clamp(72px, 14vw, 240px)">Say hello</h2>
+<div class="orb" data-orb data-ch="5" data-x="0.47" data-ax="1" data-y="0.24" data-mx="-0.46" data-max="0" data-my="0.27" data-r="0.4" style="width: min(420px, 92vw); display: flex; flex-direction: column; gap: 14px">
+<a class="ul" href="mailto:thomashaiden17@gmail.com" style="font-size: clamp(18px, 1.8vw, 24px); font-weight: 400; align-self: flex-start">thomashaiden17@gmail.com</a>
+<a class="ul" href="https://github.com/tomsliikee" style="font-size: 16px; font-weight: 400; align-self: flex-start">github.com/tomsliikee</a>
+<span style="font-size: 15px">Austria</span>
+</div>
+<p class="orb" data-orb data-ch="5" data-x="-0.47" data-ax="0" data-y="0.44" data-mx="-0.46" data-my="0.4" data-r="0.4" style="margin: 0; font-size: 12px; width: max-content">© 2026 Thomas Haiden</p>
+
+<div class="cue" data-cue aria-hidden="true"><span>Scroll</span><i></i></div>
+</div>
+</main>
+</Base>
+
+<style is:global>
+  /* Orbit layout: a long track with a sticky stage. Set on <html> before paint when motion is allowed. */
+  .orbit .track { position: relative; height: 760vh }
+  .orbit .stage { position: sticky; top: 0; height: 100vh; overflow: hidden }
+  .orbit .orb { position: absolute; left: 50%; top: 50%; opacity: 0; visibility: hidden; will-change: transform, opacity, filter }
+  .orb:not(.giant) { background: var(--bg); padding: 10px 12px; transition: background-color .6s var(--ease) }
+
+  /* Stacked layout: no JavaScript, no WebGL or reduced motion. */
+  html:not(.orbit) .stage { padding: 120px 24px 80px; overflow-x: clip }
+  html:not(.orbit) .orb { margin: 0 0 40px; display: block }
+  html:not(.orbit) .turtle-home, html:not(.orbit) .cue { display: none }
+  html.still .turtle-home { display: block; position: relative; height: min(60vh, 560px); margin: 0 0 40px }
+
+  .giant { font-family: var(--font-serif); font-weight: 400; line-height: .82; letter-spacing: -.055em; margin: 0; white-space: nowrap }
+  .para { font-size: 16px; line-height: 1.65; margin: 0 }
+  .para.l { font-size: clamp(17px, 1.4vw, 20px); line-height: 1.6 }
+  .ln { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.45 }
+  .ln:last-child { border-bottom: 1px solid var(--line) }
+  .ln .num { opacity: .85; padding-top: 2px }
+  .big-link { display: inline-flex; align-items: baseline; gap: 14px; text-decoration: none }
+  .big-link .arr { display: inline-block; transition: transform .5s var(--ease) }
+  .big-link:hover .arr { transform: translateX(12px) }
+  .cue { position: absolute; left: var(--gutter); bottom: 22px; z-index: 30; font-size: 13px; display: flex; gap: 10px; align-items: center }
+  .cue i { display: inline-block; width: 48px; height: 1px; background: currentColor; transform-origin: left; animation: cue 2.2s var(--ease) infinite }
+  @keyframes cue { 0% { transform: scaleX(0) } 50% { transform: scaleX(1); transform-origin: left } 50.1% { transform-origin: right } 100% { transform: scaleX(0); transform-origin: right } }
+
+  @media (max-width: 860px) {
+    .ln { grid-template-columns: 92px minmax(0, 1fr); font-size: 14px }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cue i { animation: none }
+    .big-link .arr { transition: none }
+  }
+</style>

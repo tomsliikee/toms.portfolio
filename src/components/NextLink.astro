@@ -1,0 +1,26 @@
+---
+interface Props {
+  href: string;
+  /** Small mono line above, e.g. "Next" or "Next project, 02 / 04". */
+  label: string;
+  /** The big serif line, without the arrow. */
+  title: string;
+}
+const { href, label, title } = Astro.props;
+---
+<a class="next sr" href={href}><span class="num">{label}</span><span class="big">{title} →</span><span class="foot">© 2026 Thomas Haiden</span></a>
+
+<style is:global>
+  .next { display: block; margin-top: 180px; padding: 56px var(--gutter) 64px; background: var(--fg); color: var(--bg) !important; text-decoration: none; margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter-r)) }
+  .next .num { color: var(--next-num) }
+  .next .big { display: block; font-family: var(--font-serif); font-size: clamp(48px, 7vw, 120px); line-height: .88; letter-spacing: -.05em; margin-top: 18px; transition: transform .6s var(--ease) }
+  .next:hover .big { transform: translateX(18px) }
+  .next .foot { display: block; margin-top: 64px; font-size: 12px; opacity: .85 }
+  .th .next:focus-visible { outline-offset: -6px; outline-color: var(--bg) }
+  @media (max-width: 860px) {
+    .next { margin-top: 120px; padding-bottom: 110px }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .next .big { transition: none }
+  }
+</style>

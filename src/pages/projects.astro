@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Turtle from '../components/Turtle.astro';
+import NextLink from '../components/NextLink.astro';
+---
+<Base
+  page="projects"
+  title="Projects – Thomas Haiden"
+  description="Apps, GNOME extensions, a design language and a team app."
+  nav={[
+    { href: '/', label: 'Index' },
+    { href: '/path', label: 'Path' },
+    { href: '/skills', label: 'Skills' },
+    { href: '/#contact', label: 'Contact' },
+  ]}
+  navFloat={[
+    { href: '/', label: 'Index' },
+    { href: '/path', label: 'Path' },
+    { href: '/skills', label: 'Skills' },
+  ]}
+>
+<div class="split">
+<Turtle mode="detail" />
+<main id="main" class="col" style="padding-bottom: 0">
+<p class="kick in d1"><span class="num">(4)</span><span>Index</span></p>
+<h1 class="hx wipe d2">Projects</h1>
+<p class="lede in d3">Apps, GNOME extensions, a design language and a team app.</p>
+
+<div class="plist in d4" style="margin-top: 72px">
+<a class="prow" href="/projects/gnome"><span class="num">01</span><span class="pn">Tally, Ember, Torch</span><span class="pc">Desktop, GNOME Shell 50</span></a>
+<a class="prow" href="/projects/wanna"><span class="num">02</span><span class="pn">wanna?</span><span class="pc">Team app with Knot</span></a>
+<a class="prow" href="/projects/design"><span class="num">03</span><span class="pn">Toms Expressive</span><span class="pc">Design language</span></a>
+<a class="prow" href="/projects/pulse"><span class="num">04</span><span class="pn">Pulse</span><span class="pc">Health app, Flutter</span></a>
+</div>
+
+<NextLink href="/path" label="Next" title="The path so far" />
+</main>
+</div>
+</Base>
+
+<style is:global>
+  .plist { border-top: 1px solid var(--line); margin-top: 24px }
+  .prow { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 22px 0 20px; border-bottom: 1px solid var(--line); text-decoration: none; position: relative; overflow: hidden }
+  .prow::before { content: ""; position: absolute; inset: 0; background: var(--accent-text); transform: scaleY(0); transform-origin: bottom; transition: transform .5s var(--ease); z-index: 0 }
+  .prow > * { position: relative; z-index: 1; transition: color .5s var(--ease) }
+  .prow:hover::before { transform: scaleY(1) }
+  .prow:hover > * { color: var(--on-accent) }
+  .prow .pn { font-family: var(--font-serif); font-size: clamp(40px, 6vw, 96px); line-height: .9; letter-spacing: -.05em }
+  .prow .pc { font-size: 14px; text-align: right; padding-right: 6px }
+  .th .prow:focus-visible { outline-offset: -2px }
+  @media (max-width: 860px) {
+    .prow { grid-template-columns: 36px minmax(0, 1fr) }
+    .prow .pc { grid-column: 2; text-align: left }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prow::before, .prow > * { transition: none }
+  }
+</style>

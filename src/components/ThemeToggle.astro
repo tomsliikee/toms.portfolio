@@ -1,0 +1,32 @@
+---
+/* Dark mode switch: a plain text button in the nav, underlined while dark mode is on.
+   The head script in Base.astro sets data-theme before paint; this only flips it. */
+---
+<button type="button" class="navl theme-toggle" data-theme-toggle aria-pressed="false">Dark</button>
+
+<style is:global>
+  .theme-toggle[aria-pressed="true"]::after { transform: scaleX(1); transform-origin: left }
+</style>
+
+<script>
+  import { THEMES, baseTheme, type ThemeName } from '../lib/theme';
+
+  const html = document.documentElement;
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
+
+  function show(t: ThemeName) {
+    for (const b of buttons) b.setAttribute('aria-pressed', String(t === 'dark'));
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEMES[t].bg);
+  }
+
+  for (const b of buttons) {
+    b.addEventListener('click', () => {
+      const t: ThemeName = baseTheme() === 'dark' ? 'light' : 'dark';
+      html.dataset.theme = t;
+      try { localStorage.setItem('theme', t); } catch { /* private mode: the choice lasts for this page only */ }
+      show(t);
+      window.dispatchEvent(new CustomEvent('themechange'));
+    });
+  }
+  show(baseTheme());
+</script>

@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+import Turtle from '../../components/Turtle.astro';
+import NextLink from '../../components/NextLink.astro';
+import { pagesNav, projectFloat } from '../../lib/nav';
+---
+<Base
+  page="gnome"
+  title="Tally, Ember, Torch – Thomas Haiden"
+  description="Extensions for GNOME Shell 50. All of them follow the same rules and use Toms Expressive Design, with Material 3 Expressive and Google Sans Flex."
+  nav={pagesNav}
+  navFloat={projectFloat('/projects/wanna')}
+>
+<div class="split">
+<Turtle mode="detail" />
+<main id="main" class="col" style="padding-bottom: 0">
+<p class="kick in d1"><span class="num">01 / 04</span><span>Desktop, GNOME Shell 50</span></p>
+<h1 class="hx wipe d2">Tally, Ember, Torch</h1>
+<p class="lede in d3">Extensions for GNOME Shell 50. All of them follow the same rules and use Toms Expressive Design, with Material 3 Expressive and Google Sans Flex.</p>
+<dl class="facts in d4">
+<div><dt>Platform</dt><dd>GNOME Shell 50</dd></div>
+<div><dt>Extensions</dt><dd>Tally, Ember, Torch</dd></div>
+<div><dt>Design</dt><dd>Toms Expressive Design</dd></div>
+<div><dt>Planned</dt><dd>A dock, quick settings, a top bar, a file explorer</dd></div>
+</dl>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(1)</span>Shared rules</p>
+<div>
+<div class="demo sr" aria-hidden="true">
+<div class="bar"><span>top bar</span><span class="ico"></span></div>
+<div class="pop">
+<div class="tiles"><div class="tile on"></div><div class="tile"></div><div class="tile"></div><div class="tile on"></div></div>
+<div class="sett"><span>Settings</span><span>+</span></div>
+<div class="fold"><div></div><div></div><div></div></div>
+</div>
+<p class="path">~/.config/&lt;name&gt;/settings.json</p>
+</div>
+<div class="rows sr" style="margin-top: 32px">
+<div class="row n"><span class="num">01</span><p>An icon in the top bar opens the extension</p></div>
+<div class="row n"><span class="num">02</span><p>A tile popup, 320 px wide</p></div>
+<div class="row n"><span class="num">03</span><p>Settings fold out inside the menu, no separate window</p></div>
+<div class="row n"><span class="num">04</span><p>Saved in ~/.config/&lt;name&gt;/settings.json</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(2)</span>The extensions</p>
+<div class="rows">
+<div class="row sr"><span class="nm">Tally</span><p class="todo" style="margin: 0">[What Tally does]</p></div>
+<div class="row sr"><span class="nm">Ember</span><p class="todo" style="margin: 0">[What Ember does]</p></div>
+<div class="row sr"><span class="nm">Torch</span><p class="todo" style="margin: 0">[What Torch does]</p></div>
+</div>
+</section>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(3)</span>On the screen</p>
+<div class="shots">
+<figure class="shot sr"><img src="/img/gnome/tally.webp" width="760" height="690" loading="lazy" decoding="async" alt="Tally's popup in dark and light: the share of the 5-hour session and of the week used, and tokens per day on this machine."><figcaption class="num">Tally</figcaption></figure>
+<figure class="shot sr"><img src="/img/gnome/ember.webp" width="750" height="740" loading="lazy" decoding="async" alt="Ember's popup in dark and light: battery draw, what happens when the lid closes, the working Claude sessions and the last run."><figcaption class="num">Ember</figcaption></figure>
+<figure class="shot sr"><img src="/img/gnome/torch.webp" width="784" height="900" loading="lazy" decoding="async" alt="Torch's popup: the power tab with the apps that drain the battery, and the performance tab with processor, memory, graphics, network and disk."><figcaption class="num">Torch</figcaption></figure>
+</div>
+</section>
+
+<section class="sec">
+<p class="sec-h sr"><span class="num">(4)</span>What's next</p>
+<div>
+<div class="rows">
+<div class="row sr"><span class="nm">A dock</span><p>Like Dash to Dock, in the style of the other extensions.</p></div>
+<div class="row sr"><span class="nm">Quick settings</span><p>A new quick settings menu in the Material 3 Expressive style.</p></div>
+<div class="row sr"><span class="nm">Top bar</span><p>A new top bar to match the menu and the extensions.</p></div>
+<div class="row sr"><span class="nm">File explorer</span><p>A feature template for Nautilus, in the same style.</p></div>
+</div>
+</div>
+</section>
+
+<NextLink href="/projects/wanna" label="Next project, 02 / 04" title="wanna?" />
+</main>
+</div>
+</Base>
+
+<style is:global>
+  [data-page="gnome"] .demo { border: 1px solid var(--line); padding: 16px; max-width: 560px }
+  [data-page="gnome"] .bar { height: 36px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-size: 12px }
+  [data-page="gnome"] .ico { width: 20px; height: 20px; border: 1px solid var(--fg); animation: press 7s infinite }
+  [data-page="gnome"] .pop { width: min(320px, 100%); margin: 12px 0 0 auto; border: 1px solid var(--accent); padding: 12px; transform-origin: top right; animation: open 7s var(--ease) infinite }
+  [data-page="gnome"] .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px }
+  [data-page="gnome"] .tile { height: 56px; border: 1px solid var(--line) }
+  [data-page="gnome"] .tile.on { background: var(--accent); border-color: var(--accent) }
+  [data-page="gnome"] .sett { margin-top: 6px; height: 36px; border: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 12px; font-size: 13px }
+  [data-page="gnome"] .fold { overflow: hidden; animation: fold 7s var(--ease) infinite }
+  [data-page="gnome"] .fold div { height: 24px; margin-top: 6px; border-bottom: 1px dashed var(--line) }
+  [data-page="gnome"] .path { margin: 14px 0 0; font-family: var(--font-mono); font-size: 13px }
+  @keyframes press { 0%, 6% { background: transparent } 9%, 86% { background: var(--accent) } 94%, 100% { background: transparent } }
+  @keyframes open { 0%, 8% { clip-path: inset(0 0 100% 0) } 18%, 86% { clip-path: inset(0 0 0 0) } 96%, 100% { clip-path: inset(0 0 100% 0) } }
+  @keyframes fold { 0%, 30% { max-height: 0 } 44%, 78% { max-height: 96px } 90%, 100% { max-height: 0 } }
+  @media (prefers-reduced-motion: reduce) {
+    [data-page="gnome"] .ico, [data-page="gnome"] .pop, [data-page="gnome"] .fold { animation: none }
+    [data-page="gnome"] .fold { max-height: none }
+  }
+</style>

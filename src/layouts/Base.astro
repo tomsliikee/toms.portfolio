@@ -1,0 +1,74 @@
+---
+import '@fontsource/montserrat/latin-300.css';
+import '@fontsource/montserrat/latin-400.css';
+import '@fontsource/montserrat/latin-500.css';
+import '@fontsource/montserrat/latin-900.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '../styles/global.css';
+import geistSerif from '@geist-serif?url';
+import type { NavItem } from '../lib/nav';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+interface Props {
+  /** Page key, used by the page-specific styles as [data-page="…"]. */
+  page: string;
+  title: string;
+  description: string;
+  nav: NavItem[];
+  navFloat: NavItem[];
+  /** Detail pages get the solid header bar. */
+  solid?: boolean;
+}
+
+const { page, title, description, nav, navFloat, solid = true } = Astro.props;
+const home = page === 'home';
+const url = new URL(Astro.url.pathname, Astro.site);
+const here = Astro.url.pathname.replace(/\/$/, '') || '/';
+const current = (href: string) => (href === here ? 'page' : undefined);
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="canonical" href={url}>
+<meta name="theme-color" content="#f4f7f8">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thomas Haiden">
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={url}>
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href={geistSerif} as="font" type="font/woff2" crossorigin>
+<script is:inline>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()</script>
+<style set:html={`@font-face{font-family:"Geist Serif";src:url(${geistSerif}) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}`}></style>
+{home && (
+  /* Orbit only with motion allowed; otherwise the home texts stay stacked. */
+  <script is:inline>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('orbit')</script>
+)}
+</head>
+<body data-page={page}>
+<div class="th" data-root style={home ? 'min-height: 100vh; position: relative' : 'min-height: 100vh'}>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class:list={['hdr', { solid }]}>
+<a class="brand" href="/" data-go={home ? -1 : undefined}>Thomas Haiden</a>
+<nav class="nav-top" aria-label={home ? 'Sections' : 'Pages'}>
+{nav.map((n) => <a class="navl" href={n.href} data-go={n.go} aria-current={current(n.href)}>{n.label}</a>)}
+<ThemeToggle />
+</nav>
+</header>
+<nav class="nav-float" aria-label={home ? 'Sections' : 'Pages'}>
+{navFloat.map((n) => <a class="navl" href={n.href} data-go={n.go} aria-current={current(n.href)}>{n.label}</a>)}
+<ThemeToggle />
+</nav>
+
+<slot />
+
+</div>
+</body>
+</html>
