@@ -21,55 +21,53 @@
         </div>
       </section>
 
-      <div class="night">
-        <section class="wrap sec">
-          <div class="stack">
-            <p class="eyebrow">Memory layout, byte by byte</p>
-            <h2 class="hl is-night"><span>Twelve</span><span>bytes</span></h2>
-          </div>
-          <div class="split" style="gap: 40px">
+      <section class="wrap sec">
+        <div class="stack">
+          <p class="label">01 / Memory layout, byte by byte</p>
+          <h2 class="hl is-night"><span>Twelve</span><span>bytes</span></h2>
+        </div>
+        <div class="split" style="gap: 40px">
 <pre class="code">struct Sample {
-    char  a;   <span class="c1">// 1 byte</span>
-    int   b;   <span class="c2">// 4 bytes</span>
-    short c;   <span class="c3">// 2 bytes</span>
+  char  a;   <span class="c1">// 1 byte</span>
+  int   b;   <span class="c2">// 4 bytes</span>
+  short c;   <span class="c3">// 2 bytes</span>
 };         <span class="c4">// sizeof = 12</span> <span class="cursor"></span></pre>
-            <div class="stack" style="flex: 2 1 520px; min-width: 0; --gap: 20px">
-              <div class="bytes" role="img" aria-label="Memory layout of the struct: a, three padding bytes, four bytes of b, two bytes of c, two padding bytes">
-                <span class="a">a</span><span class="pad">·</span><span class="pad">·</span><span class="pad">·</span><span class="b">b</span><span class="b">b</span><span class="b">b</span><span class="b">b</span><span class="c">c</span><span class="c">c</span><span class="pad">·</span><span class="pad">·</span>
-              </div>
-              <div class="stack" style="--gap: 12px">
-                <span class="callout">One byte for a</span>
-                <span class="callout">Three bytes of padding for alignment</span>
-                <span class="callout">Four bytes for b, two for c, two at the end</span>
-              </div>
-              <p class="note">(Example for a typical 64-bit system.)</p>
+          <div class="stack" style="flex: 2 1 520px; min-width: 0; --gap: 20px">
+            <div class="bytes" role="img" aria-label="Memory layout of the struct: a, three padding bytes, four bytes of b, two bytes of c, two padding bytes">
+              <span class="a">a</span><span class="pad">·</span><span class="pad">·</span><span class="pad">·</span><span class="b">b</span><span class="b">b</span><span class="b">b</span><span class="b">b</span><span class="c">c</span><span class="c">c</span><span class="pad">·</span><span class="pad">·</span>
             </div>
+            <div class="stack" style="--gap: 12px">
+              <span class="callout">One byte for a</span>
+              <span class="callout">Three bytes of padding for alignment</span>
+              <span class="callout">Four bytes for b, two for c, two at the end</span>
+            </div>
+            <p class="note">(Example for a typical 64-bit system.)</p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="wrap sec is-last">
-          <div class="split">
-            <div class="side stack">
-              <p class="eyebrow">Skills in detail</p>
-              <h2 class="hl is-night"><span>What I</span><span>bring</span></h2>
-            </div>
-            <div class="main">
-              <dl class="specs" style="--term: 260px">
-                <div class="spec"><dt>Low level</dt><dd>Programming in C and C++, close to the machine</dd></div>
-                <div class="spec"><dt>Memory layout</dt><dd>Control over how data sits in memory</dd></div>
-                <div class="spec"><dt>Memory diagnostics</dt><dd>Finding leaks and memory errors</dd></div>
-                <div class="spec"><dt>Allocators</dt><dd>Strategies of my own for managing memory</dd></div>
-                <div class="spec"><dt>Alignment</dt><dd>Aligning data to the hardware</dd></div>
-                <div class="spec"><dt>Architecture</dt><dd>Clear system architecture you can follow</dd></div>
-              </dl>
-            </div>
+      <section class="wrap sec is-last">
+        <div class="split">
+          <div class="side stack">
+            <p class="label">02 / Skills in detail</p>
+            <h2 class="hl is-night"><span>What I</span><span>bring</span></h2>
           </div>
-        </section>
-      </div>
+          <div class="main">
+            <dl class="specs" style="--term: 260px">
+              <div class="spec"><dt>Low level</dt><dd>Programming in C and C++, close to the machine</dd></div>
+              <div class="spec"><dt>Memory layout</dt><dd>Control over how data sits in memory</dd></div>
+              <div class="spec"><dt>Memory diagnostics</dt><dd>Finding leaks and memory errors</dd></div>
+              <div class="spec"><dt>Allocators</dt><dd>Strategies of my own for managing memory</dd></div>
+              <div class="spec"><dt>Alignment</dt><dd>Aligning data to the hardware</dd></div>
+              <div class="spec"><dt>Architecture</dt><dd>Clear system architecture you can follow</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
 
       <section class="wrap sec is-last">
         <div class="stack">
-          <p class="eyebrow">Data and parts</p>
+          <p class="label">03 / Data and parts</p>
           <h2 class="hl"><span>Data &amp;</span><span>parts</span></h2>
         </div>
         <div class="grid" style="--basis: 320px">
