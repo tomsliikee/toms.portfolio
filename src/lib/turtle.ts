@@ -43,11 +43,13 @@ interface TurtleState {
   introX?: number;
   introY?: number;
   introYaw?: number;
+  /** Tilt towards the camera; 0.3 is the slight look from above, about 1.2 shows the shell from above (with yaw π the head then points up). */
+  pitch?: number;
 }
 
-/** Home: still in the middle, turning with the scroll. Detail: swims in from the left. */
+/** Home: still in the middle, turning with the scroll. Detail: seen from above, swimming up through the tank. */
 function stateFor(i: TurtleInput): TurtleState {
-  if (i.mode === 'detail') return { yaw: -0.5 + i.p * Math.PI * 1.4, fill: 1.0, maxScale: 0.95, introX: -7, introY: 0.4, introYaw: 2.1 };
+  if (i.mode === 'detail') return { yaw: Math.PI + Math.sin(i.p * Math.PI) * 0.4, y: 0.1 - i.p * 0.2, pitch: 1.2, fill: 1.0, maxScale: 0.95, introY: -6, introYaw: 0 };
   if (!i.orbit) return { yaw: -0.5, fill: i.narrow ? 0.95 : 0.62, maxScale: 1.15 };
   return { yaw: i.p * Math.PI * 2.5, x: i.narrow ? 0 : 0.06, y: i.narrow ? -0.22 : 0.02, fill: i.narrow ? 0.95 : 0.62, maxScale: 1.15 };
 }
@@ -213,7 +215,7 @@ export async function createTurtle(canvas: Canvas2D, input: () => TurtleInput, s
     turtle.position.x = (st.x || 0) * VIS_H * aspect + fromX * (1 - ei);
     turtle.position.y = -(st.y || 0) * VIS_H + fromY * (1 - ei) + Math.sin(t * 0.9) * 0.08 * s;
     turtle.rotation.y = yawS + (st.introYaw || 0) * (1 - ei);
-    turtle.rotation.x = 0.3 + sy * 0.18 + (1 - ei) * -0.5;
+    turtle.rotation.x = (st.pitch ?? 0.3) + sy * 0.18 + (1 - ei) * -0.5;
     turtle.rotation.z = Math.sin(t * 0.9) * 0.05;
     const k = t * 1.9;
     U.fr.rotation.z = Math.sin(k) * 0.5; U.fr.rotation.y = Math.sin(k - 0.7) * 0.28;
