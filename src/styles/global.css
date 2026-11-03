@@ -125,7 +125,8 @@ html, body { margin: 0; background: var(--bg) }
   .sec { grid-template-columns: minmax(0, 1fr); gap: 4px; margin-top: 100px }
   .row { grid-template-columns: minmax(0, 1fr) }
   .row.n { grid-template-columns: 40px minmax(0, 1fr) }
-  
+}
+
 @media (prefers-reduced-motion: reduce) {
   .in, .wipe, .sr, .srw { animation: none }
   .th, .navl::after, .ul { transition: none }
